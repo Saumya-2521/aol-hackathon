@@ -148,6 +148,7 @@ export type TeacherView = {
 export type DemoPeople = {
   participants: { id: string; first: string; area: string }[];
   teachers: { id: string; name: string }[];
+  signedUp: { p: boolean; t: boolean }; // sign-up is shown once per role in a demo run (features.md D0, E0)
 };
 
 export type ActionResult = { ok: true; code?: string; draft?: string } | { ok: false; error: string };

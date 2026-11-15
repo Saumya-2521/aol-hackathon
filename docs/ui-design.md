@@ -135,6 +135,7 @@ Rules that keep it easy to navigate:
 - Nothing is more than two taps from a tab.
 - The **round initial button, top right of every screen**, opens the **Demo menu** (a bottom sheet): the Participant / Teacher switch (A4), a picker for the persona or teacher, "See the sign-up screen", and **Reset demo** (A3).
 - Each sign-up screen links to the other ("Are you a teacher? Sign up as a teacher").
+- Each sign-up screen appears **once per demo run**: the participant's when the app first opens, the teacher's on the first switch to Teacher. There is no back button on that first visit. Afterwards it can only be opened from the Demo menu, and Reset demo starts a new run.
 - Short tasks open as **bottom sheets** instead of new screens: a person's recommendation, add event, add seva, invite, choose a different step, the new join code.
 - Feedback for every action is a short **toast** at the bottom ("Sent to Priya"). Automatic notifications arrive as a **banner** at the top (C3).
 
@@ -171,7 +172,7 @@ Icons: one outline set (for example `lucide-react-native`), 1.8 stroke. Emoji ap
 ## 5. Participant app
 
 ### D0 Sign-up
-Logo, "Join your course group", then: **First name** and **Last name** (side by side), **Course code from your teacher**, **Postal code** (hint: "Used only to show what's happening near you."), one switch ("Use my area to show nearby events"; the follow-up messages switch was removed, team decision 2026-11-15), and **Join my course group**. Below: "Are you a teacher? Sign up as a teacher". This screen is shown the first time the participant view opens after the app loads (no back button then); after that it is reachable from the Demo menu. Joining opens Home and shows the Welcome banner. Demo: no real account is created.
+Logo, "Join your course group", then: **First name** and **Last name** (side by side), **Course code from your teacher**, **Postal code** (hint: "Used only to show what's happening near you."), one switch ("Use my area to show nearby events"; the follow-up messages switch was removed, team decision 2026-11-15), and **Join my course group**. Below: "Are you a teacher? Sign up as a teacher". This screen is shown once per demo run, when the app first opens (no back button then); after that it is reachable from the Demo menu. Joining opens Home. The Welcome banner is off for the demo (`notifications.demo_teacher_sent_only`). Demo: no real account is created.
 
 ### D1 Home
 Logo top left. Then, in the order of the spec:
@@ -212,7 +213,7 @@ Each one is a `Banner` with the wording from `config.notifications.examples`. Ta
 ## 6. Teacher view
 
 ### E0 Teacher sign-up
-Logo, "Set up your teacher account", then **First name**, **Last name**, **Email**, **Areas where you teach** (hint: "Used to suggest places when you add events and seva."), and **Create my account**. Below: "Taking a course, not teaching? Sign up as a participant". Creating the account opens **New course channel**, so the first thing a new teacher does is set up their course group.
+Logo, "Set up your teacher account", then **First name**, **Last name**, **Email**, **Areas where you teach** (hint: "Used to suggest places when you add events and seva."), and **Create my account**. Below: "Taking a course, not teaching? Sign up as a participant". Creating the account opens the **Today** tab (changed 2026-11-15), where **New course channel** is the first button.
 
 ### E1 New course channel
 Opened from the **New course channel** button at the top of Today, or the floating **+ Channel** button in People.

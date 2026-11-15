@@ -52,6 +52,7 @@ Platforms: iOS and Android through Expo Go, plus web for the projector. Stack de
 ### A4. Role switcher
 - A toggle switches between **Participant** (pick a persona; Priya by default) and **Teacher** (Anita by default).
 - Demo tool only, with no real sign-in. Volunteers have the same permissions as teachers for now.
+- **Two devices at once (added 2026-11-15):** a phone shows the participant and the projected laptop browser shows the teacher. Both read the same server store, and each device re-reads its view every 3 seconds, so a message sent by the teacher reaches the participant's phone without a refresh. The role follows the screen's address, so reloading the laptop on a teacher screen stays in the teacher view.
 
 ### A5. Courses come only from the cache
 - The app reads `data/courses.json` only. It never calls the Unity/Harmony API.
@@ -171,6 +172,7 @@ Limits:
 - The course anniversary shows the practice count only as appreciation. **ASSUMPTION:** if there are no practice days, the count is left out.
 - "Course group is going" names only people from the same course channel, by first name.
 - For the demo, push is simulated as an in-app banner. Real push needs installed builds.
+- **Demo setting (team decision, 2026-11-15):** with `notifications.demo_teacher_sent_only` on, a banner appears only for what the teacher sends (invitation, reply, new event nearby, after seva) and for the participant's own first practice and streak milestones. The welcome and the time-based notifications (practice note, event note, course group is going, event reminder, course anniversary) are off, so the participant's first view opens with no banner. They stay in this spec and return when the setting is off.
 
 ### C4. Notifications to the teacher [D]
 - When a participant has logged no practice for `teacher_alert_after_days_without_practice` (3) days, the teacher sees "Jack hasn't logged a practice in 3 days" with a **Send a personal note** button, which opens a draft (C1).
@@ -183,8 +185,9 @@ Limits:
 Tabs: **Home · Daily Practice · Events · Volunteer · Chat.** There is no Settings screen in this version.
 
 ### D0. Sign-up
-- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and one consent switch: location for nearby events (the follow-up messages switch was removed, 2026-11-15). The sign-up screen is shown the first time the participant view opens after the app loads (2026-11-15). (First and last name added 2026-11-15.)
+- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and one consent switch: location for nearby events (the follow-up messages switch was removed, 2026-11-15). (First and last name added 2026-11-15.)
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the persona.
+- **Shown once per demo run (added 2026-11-15):** the app opens on this screen until the participant has joined. After that it opens on Home, and switching roles never brings the screen back. Reset demo starts a new run, so the screen shows again.
 
 ### D1. Home [P][D]
 In this order:
@@ -228,8 +231,9 @@ In this order:
 Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [ui-draft.md](ui-draft.md).
 
 ### E0. Teacher sign-up (added 2026-11-15)
-- Fields: first name, last name, email, and the areas where they teach. After signing up, the teacher lands on "New course channel" (E1).
+- Fields: first name, last name, email, and the areas where they teach. After signing up, the teacher lands on the Today tab (changed 2026-11-15; it used to open "New course channel"). The **New course channel** button is at the top of Today (E1).
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the teacher.
+- **Shown once per demo run (added 2026-11-15):** the first switch to the Teacher role opens this screen. After that the switch opens Today. Reset demo starts a new run, so the screen shows again.
 
 ### E1. Create a course channel and add remarks [P]
 - When a Part 1 course has just finished, the teacher creates a **channel** for it and adds the participants. A **New course channel** button sits at the top of the Today tab (and in People).

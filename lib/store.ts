@@ -97,6 +97,7 @@ export type Store = {
   sevaDone: Record<string, boolean>;
   autoChecked: Record<string, boolean>;
   aiDrafts: Record<string, string>;
+  signedUp: { p: boolean; t: boolean }; // sign-up done in this demo run, per role; Reset demo clears it
   seq: number;
 };
 
@@ -127,6 +128,7 @@ function load(): Store {
     sevaDone: {},
     autoChecked: {},
     aiDrafts: {},
+    signedUp: { p: false, t: false },
     seq: 0,
   };
   for (const p of participants) {

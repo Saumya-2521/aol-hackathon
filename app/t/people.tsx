@@ -5,6 +5,7 @@ import { ScrollView, View } from 'react-native';
 import { PersonRow } from '@/components/PersonRow';
 import { Avatar, Body, Btn, Chip, Empty, Loading, Screen, T } from '@/components/ui';
 import { useApp } from '@/lib/app';
+import { colors } from '@/theme';
 
 export default function People() {
   const { tv } = useApp();
@@ -18,13 +19,10 @@ export default function People() {
   return (
     <Screen title="People">
       <Body>
-        <View className="flex-row items-center gap-2">
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} className="flex-1" contentContainerStyle={{ gap: 6 }}>
-            <Chip label="All" on={chan === 'all'} onPress={() => setChan('all')} />
-            {tv.cohorts.map((c) => <Chip key={c.id} label={c.name} on={chan === c.id} onPress={() => setChan(c.id)} />)}
-          </ScrollView>
-          <Btn sm v="out" icon="plus" label="Channel" onPress={() => router.navigate('/new-channel')} />
-        </View>
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 6 }}>
+          <Chip label="All" on={chan === 'all'} onPress={() => setChan('all')} />
+          {tv.cohorts.map((c) => <Chip key={c.id} label={c.name} on={chan === c.id} onPress={() => setChan(c.id)} />)}
+        </ScrollView>
         {one ? <T v="small">Join code <T v="strong" className="text-[13px]">{one.joinCode}</T></T> : null}
         {total ? (
           <View className="rounded-card border border-line bg-card px-3.5">
@@ -38,7 +36,12 @@ export default function People() {
             ))}
           </View>
         ) : <Empty text="Nobody here yet." />}
+        <View className="h-12" />{/* room so the floating button never covers the last row */}
       </Body>
+      {/* Floating "+ Channel", bottom right, above the tab bar (ui-design.md E3). */}
+      <View className="absolute bottom-4 right-[18px] rounded-button" style={{ shadowColor: colors.brand.DEFAULT, shadowOpacity: 0.35, shadowRadius: 12, shadowOffset: { width: 0, height: 8 }, elevation: 6 }}>
+        <Btn icon="plus" label="Channel" onPress={() => router.navigate('/new-channel')} />
+      </View>
     </Screen>
   );
 }

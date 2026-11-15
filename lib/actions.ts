@@ -21,7 +21,7 @@ export function notify(s: Store, pid: string, title: string, text: string, to: N
 
 // The time-based notifications, checked once per person per demo day: at most one automatic notification a day.
 export function ensureAutomatic(s: Store, p: Participant) {
-  if (s.autoChecked[p.id]) return;
+  if (N.demo_teacher_sent_only || s.autoChecked[p.id]) return; // demo: no banner until the teacher sends something
   s.autoChecked[p.id] = true;
   const going = s.rsvps[p.id] ?? {};
   const tomorrow = addDays(TODAY, N.event_reminder_days_before);
@@ -113,7 +113,8 @@ export function runAction(s: Store, a: A): ActionResult {
     }
     case 'join': {
       if (!p) return fail('Missing participant.');
-      if (N.welcome_on_joining_channel) notify(s, p.id, 'Welcome', fill(ex.welcome, { first_name: p.first_name }), 'home');
+      s.signedUp.p = true;
+      if (N.welcome_on_joining_channel && !N.demo_teacher_sent_only) notify(s, p.id, 'Welcome', fill(ex.welcome, { first_name: p.first_name }), 'home');
       return OK;
     }
     case 'ack': {
@@ -152,6 +153,10 @@ export function runAction(s: Store, a: A): ActionResult {
     }
 
     /* ----- teacher ----- */
+    case 'teacherJoin': {
+      s.signedUp.t = true;
+      return OK;
+    }
     case 'setTags': {
       if (!p || !Array.isArray(a.tags)) return fail('Missing tags.');
       s.tags[p.id] = [...new Set((a.tags as string[]).map((t) => String(t).trim().toLowerCase().replace(/\s+/g, '_')).filter(Boolean))];

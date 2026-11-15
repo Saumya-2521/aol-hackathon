@@ -155,4 +155,5 @@ export function teacherView(s: Store, tid: string): TeacherView | null {
 export const demoPeople = (s: Store): DemoPeople => ({
   participants: s.participants.map((p) => ({ id: p.id, first: p.first_name, area: p.area })),
   teachers: s.teachers.filter((t) => t.role === 'teacher').map((t) => ({ id: t.id, name: t.name })),
+  signedUp: s.signedUp,
 });

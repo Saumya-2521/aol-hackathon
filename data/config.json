@@ -193,6 +193,8 @@
  "notifications": {
   "_ASSUMPTION": "Automatic notifications. Wording follows CLAUDE.md rule 2: no mention of missed days, gaps or price. Triggers and limits are assumptions to confirm with a teacher.",
   "max_automatic_per_day": 1,
+  "demo_teacher_sent_only": true,
+  "_demo_teacher_sent_only_NOTE": "Team decision 2026-11-15, for the two-device demo: banners appear only for what the teacher sends (invitation, reply, new event nearby, seva thank-you) and for the participant's own first practice and streak milestones. The welcome and the time-based notifications stay in the spec and come back when this is false.",
   "welcome_on_joining_channel": true,
   "first_practice_logged": true,
   "practice_note_after_days_without_practice": 3,
