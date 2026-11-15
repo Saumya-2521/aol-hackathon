@@ -190,7 +190,7 @@ Logo top left. Then, in the order of the spec:
 1. **Start guided meditation** "with Gurudev Sri Sri Ravi Shankar": the one big purple button on the screen. Opens the session.
 2. **I practised on my own**: outline button. One tap marks today. Replaced by a "Done for today 🙏" card afterwards.
 3. **This week**: `WeekRow`.
-4. **Your course group today**: "**2 of 4** from your course practised today" and a bar. A count only, never names.
+4. **Your course group today** (changed 2026-11-15): a taller card that can be tapped: "**2 of 4** from your course practised today", a bar, and "See who has practised" with a chevron. Tapping it opens a bottom sheet, "Practised today", with the first names of the course-mates who have practised today (the participant shows as "You"). It never lists who hasn't. Empty: "Today's practices will show here as they are logged."
 
 **Guided session** (full screen): the YouTube player for `config.guided_practice`, then **Begin**. When the video ends (or after `demo_mode_seconds`), the screen becomes a large green tick, "Done for today 🙏", the streak, and **Back to practice**. The app writes no practice instructions of its own.
 
@@ -247,7 +247,7 @@ Kept short on purpose (changed 2026-11-15): practice numbers live in Reports onl
    | Needs support | Below 20 days · check in | sun-tint |
    | App not opened | 5+ days · reach out | mist |
 
-3. The selected group's name with an **Add remarks** link (opens People), then its people. Each row: initials, "Tom W.", "37 of 40 days · practised today", and a **next-step button**: "Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Invite to satsang", "Invite to event", "Check in", "Call" or "Say hello". It always names what the invitation is to. After sending it reads "✓ Sent".
+3. With no tile selected (the default when a course is picked, added 2026-11-15): "Everyone in Part 1 · Sep 2026" and all the course's participants. With a tile selected: the group's name, a **Show everyone** link, and its people; tapping the selected tile again also clears it. An **Add remarks** link (opens People) sits on the same line. Each row: initials, "Tom W.", "37 of 40 days · practised today", and a **next-step button**: "Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Invite to satsang", "Invite to event", "Check in", "Call" or "Say hello". It always names what the invitation is to. After sending it reads "✓ Sent".
 4. The next-step button opens the **recommendation sheet** (the `RecommendationCard` and "Open the full profile"). The name opens the profile.
 
 The button's label comes from the engine's next step for that person (B3), not from the tile.

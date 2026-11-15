@@ -19,11 +19,11 @@ Success: follow-up feels personal rather than broadcast, and fewer people drift 
 3. **Privacy:**
    - Use only the data you need.
    - Keep at most one personal message from the teacher per person every 3 days (`outreach.min_days_between_outreach`).
-   - A participant's practice is visible to their own teacher and to nobody else. The practice-sharing switch was removed (team decision, 2026-11-14).
+   - A participant's practice is visible to their own teacher. The one exception (team decision, 2026-11-15): people in the same course channel can see the first names of those who have practised today. Never who hasn't, and never streaks, counts or history. The practice-sharing switch was removed (team decision, 2026-11-14).
    - Opt-out, "pause messages", quiet hours, the Settings screen and the approval step were removed for the hackathon (team decision, 2026-11-14). Don't build them, and don't remove them from the future-enhancements list.
    - Participant contact details are visible only to the assigned teacher.
    - No phone numbers are shared between participants. Chat shows first names only.
-   - Teacher remarks are never shown to participants. The cohort practice count is a number only, never names.
+   - Teacher remarks are never shown to participants. The cohort practice count shows a number and, on tap, the first names of those who practised today; it never lists who hasn't.
    - The only automatic notifications are the ones listed in `docs/features.md` (C3). They follow rule 2 like every other message, and every text a participant sees goes through the banned-phrase filter.
 4. **Honesty:** never invent participant data, program names or Art of Living facts. Mark assumptions as assumptions. All thresholds live in `data/config.json`.
 5. **Unity/Harmony API is a shared production dependency.** The app must never call it. Use the cached `data/courses.json`. Refresh it only by hand: 3 calls, once.

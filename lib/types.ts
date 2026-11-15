@@ -39,7 +39,7 @@ export type ParticipantView = {
   doneToday: boolean;
   week: boolean[];
   todayIndex: number;
-  cohort: { id: string; name: string; joinCode: string; practised: number; size: number };
+  cohort: { id: string; name: string; joinCode: string; practised: number; size: number; practisedNames: string[] }; // first names of those who practised today; the viewer is "You"
   invitation: null | { from: string; item: Item | null; text: string; answer: string | null };
   nextFollowUp: EventView | null;
   events: EventView[];

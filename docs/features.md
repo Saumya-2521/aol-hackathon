@@ -210,7 +210,7 @@ In this order:
   - **ASSUMPTION:** in the live demo a session can be finished after `demo_mode_seconds` (15), so completing a practice can be shown quickly.
   - **ASSUMPTION:** a one-tap "I practised on my own" button also marks the day, so Priya's live step (34 → 35) takes one tap.
 - **This week:** Monday to Sunday with a tick on completed days and today highlighted. Days not done stay empty, with no cross or red mark.
-- **Your course group today:** "2 of 4 from your course practised today". An anonymous count only, never names. **ASSUMPTION:** the count includes everyone in the course channel.
+- **Your course group today:** "2 of 4 from your course practised today", on a card the participant can tap. Tapping it lists the **first names of the people in their course channel who have practised today** (changed 2026-11-15, team decision; it used to be an anonymous count). It never lists who hasn't practised, and shows no streaks, counts or history. **ASSUMPTION:** the count includes everyone in the course channel.
 
 ### D3. Events (satsang) [P][D]
 - Lists what's happening near the participant's postal code: follow-up meditations, satsangs and community events (for example a games night). It shows events, not courses. Courses reach a participant only as a teacher's invitation (D1).
@@ -274,6 +274,7 @@ For each recommendation the teacher can:
 For each course (channel):
 Changed on 2026-11-15 (the "Sadhana report"):
 - **Groups**, by practice days in the last 40, with definitions in `config.reports` (**ASSUMPTION**, from the team's mock-up): **very regular** 35 to 40 days · **building the habit** 20 to 34 days · **needs support** below 20 days · **app not opened** for 5 or more days. A person can be in "app not opened" and one other group.
+- **Everyone first (added 2026-11-15):** selecting a course lists all its participants. Tapping a group narrows the list to that group; tapping it again, or "Show everyone", lists everyone again.
 - Tapping a group lists its people: name, practice days out of 40, when they last practised, and a button with their next step ("Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Check in", "Call"). An invitation always names what it is to. The button opens the recommendation with its reason, draft and actions (E4). The name opens the profile.
 - The next step always comes from the engine (B3), not from the group: someone "very regular" who has taken every course is invited to seva, not to a course.
 
@@ -294,10 +295,10 @@ Changed on 2026-11-15 (the "Sadhana report"):
 |---|---|
 | Use only the data needed | API responses are shaped per screen. Claude gets only the drafting inputs (C1). |
 | At most 1 personal teacher message every 3 days | Outreach gap (B6) |
-| Practice is seen only by the participant and their own teacher | Teacher APIs return practice only for the teacher's own participants; other participants see just the anonymous count (D2) |
+| Practice is seen by the participant and their own teacher; course-mates see only who has practised today | Teacher APIs return practice only for the teacher's own participants; other participants in the same course channel see the count and the first names of those who practised today, nothing else (D2, changed 2026-11-15) |
 | Contact details only for the assigned teacher | Teacher API returns `contact` only when `teacher_id` matches |
 | No phone numbers shared between participants | Chat shows first names only; participant APIs never return contact details |
-| Cohort practice count is anonymous | D2 shows a number, never names |
+| Cohort practice shows only who has practised today | D2 shows a number and, on tap, first names of those who practised today; never who hasn't (changed 2026-11-15) |
 | Teacher remarks are never shown to participants | E1, B4 |
 | Locations | Area centroid and postal FSA only, never a street address |
 
@@ -368,7 +369,7 @@ With a teacher, where it's about Art of Living:
 
 Within the team:
 5. Invitations count towards the 3-day gap; automatic notifications don't (B6).
-6. The course-group count on Daily Practice includes everyone, anonymously (D2).
+6. The course-group count on Daily Practice includes everyone (D2). Since 2026-11-15 it shows the first names of those who practised today.
 7. Report group definitions (E5).
 8. Smaller ones: fallback stage (B1), demo-mode session length and the one-tap practice button (D2), RSVP not counted as attended (D3), snooze length (E4), thank-you trigger (E6).
 

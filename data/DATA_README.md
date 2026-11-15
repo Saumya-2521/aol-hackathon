@@ -48,7 +48,7 @@ Plain JSON files. The app loads them at startup, so no database is needed.
 - **Privacy:**
   - Participants are stored by area centroid and postal FSA only, never a street address.
   - `contact` is visible only to the assigned teacher.
-  - A participant's practice logs are visible to their own teacher. The practice-sharing switch was removed for the hackathon.
+  - A participant's practice logs are visible to their own teacher. People in the same course channel see only the first names of those who have practised today (team decision, 2026-11-15). The practice-sharing switch was removed for the hackathon.
   - There is no `settings` object any more. Pause, opt-out and reminder time were removed for the hackathon.
 - **Refreshing the course data:** if you need fresher courses before the demo, make **3 calls once**, one each for Part 1, Part 2 and Sahaj. Rebuild `courses.json` with the same fields, and move `demo_today` to the refresh date. Never poll the API from the app.
 

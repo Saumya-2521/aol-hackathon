@@ -1,5 +1,6 @@
 // Builds what each role's screens need (features.md F: use only the data needed).
-// A participant's view never contains contact details, remarks or other people's practice.
+// A participant's view never contains contact details or remarks. Of other people's practice it contains one thing only:
+// the first names of course-mates who have practised today (features.md D2, team decision 2026-11-15). Never who hasn't, no history.
 // A teacher's view contains only their own participants.
 import { addDays, daysBetween, fmtDay, fmtLong, fmtShort, TODAY, weekday } from './clock';
 import { aiAvailable, templateDraft } from './drafter';
@@ -43,8 +44,11 @@ export function participantView(s: Store, pid: string): ParticipantView | null {
     dateLabel: fmtLong(TODAY),
     streak: streak(s, pid), days40: daysInWindow(s, pid, 40), total: days.size, doneToday: doneToday(s, pid),
     week: [0, 1, 2, 3, 4, 5, 6].map((i) => days.has(addDays(monday, i))), todayIndex: (weekday(TODAY) + 6) % 7,
-    // The course-group count is a number only, never names (features.md D2).
-    cohort: { id: c.id, name: c.name, joinCode: c.join_code, practised: c.member_ids.filter((m) => doneToday(s, m)).length, size: c.member_ids.length },
+    // The course group today: a count, and the first names of those who have practised (features.md D2). Never who hasn't.
+    cohort: {
+      id: c.id, name: c.name, joinCode: c.join_code, practised: c.member_ids.filter((m) => doneToday(s, m)).length, size: c.member_ids.length,
+      practisedNames: c.member_ids.filter((m) => doneToday(s, m)).map((m) => (m === pid ? 'You' : person(s, m)!.first_name)),
+    },
     invitation: s.invitations[pid] ?? null,
     nextFollowUp: events.find((e) => e.cat === 'follow_up') ?? null,
     events,

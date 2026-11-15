@@ -20,6 +20,7 @@ export function Sheets() {
   switch (sheet.t) {
     case 'demo': return <DemoMenu />;
     case 'note': return <NoteSheet />;
+    case 'group': return <GroupSheet />;
     case 'rec': return person ? (
       <SheetFrame onClose={close} title="Next step">
         <RecommendationCard key={recKey(person)} person={person} startEditing={sheet.edit} inSheet />
@@ -69,6 +70,30 @@ function NoteSheet() {
     <SheetFrame onClose={close} title={note.title}>
       <T>{note.text}</T>
       <Btn wide v="quiet" label="Close" onPress={close} />
+    </SheetFrame>
+  );
+}
+
+/* Who in the participant's course has practised today (features.md D2): first names only, and never who hasn't. */
+function GroupSheet() {
+  const { pv, setSheet } = useApp();
+  if (!pv) return null;
+  const names = pv.cohort.practisedNames;
+  return (
+    <SheetFrame onClose={() => setSheet(null)} title="Practised today">
+      <T v="meta">{pv.cohort.name}</T>
+      {names.length ? (
+        <View className="rounded-card border border-line bg-card px-3.5">
+          {names.map((n, i) => (
+            <View key={n + i} className={`flex-row items-center gap-3 py-3 ${i === names.length - 1 ? '' : 'border-b border-line'}`}>
+              <View className="h-[30px] w-[30px] items-center justify-center rounded-full bg-green-tint"><Icon name="check" size={16} color={colors.green.deep} /></View>
+              <T v="strong">{n}</T>
+            </View>
+          ))}
+        </View>
+      ) : <T>Today’s practices will show here as they are logged.</T>}
+      <T v="small">Only first names are shown, and only for today.</T>
+      <Btn wide v="quiet" label="Close" onPress={() => setSheet(null)} />
     </SheetFrame>
   );
 }

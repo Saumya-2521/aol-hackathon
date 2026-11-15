@@ -5,11 +5,12 @@ import { get, post } from './api';
 import type { ActionResult, DemoPeople, ParticipantView, TeacherView } from './types';
 
 export type Role = 'p' | 't';
-export type Tile = 'reg' | 'build' | 'support' | 'app';
+export type Tile = 'all' | 'reg' | 'build' | 'support' | 'app'; // 'all' = no group picked: everyone in the course
 export type InviteItem = { key: string; kind: string; title: string; day: string; place: string };
 export type Sheet =
   | null
   | { t: 'demo' }
+  | { t: 'group' } // who in the participant's course has practised today (features.md D2)
   | { t: 'note' } // the participant's latest notification in full (features.md C3)
   | { t: 'rec'; pid: string; edit?: boolean }
   | { t: 'other'; pid: string; back: boolean }
@@ -54,7 +55,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [error, setError] = useState<string | null>(null);
   const [toastText, setToastText] = useState<string | null>(null);
   const [sheet, setSheet] = useState<Sheet>(null);
-  const [report, setReport] = useState<{ cohort: string | null; tile: Tile }>({ cohort: null, tile: 'reg' });
+  const [report, setReport] = useState<{ cohort: string | null; tile: Tile }>({ cohort: null, tile: 'all' });
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const who = useRef({ role, pid, tid });
   who.current = { role, pid, tid };
@@ -114,12 +115,12 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const viewAs = useCallback((id: string) => {
     setSheet(null);
     if (who.current.role === 'p') { setPv(null); setPid(id); router.replace('/p'); }
-    else { setTv(null); setTid(id); setReport({ cohort: null, tile: 'reg' }); router.replace('/t'); }
+    else { setTv(null); setTid(id); setReport({ cohort: null, tile: 'all' }); router.replace('/t'); }
   }, []);
 
   const reset = useCallback(async () => {
     await post('/api/reset').catch(() => {});
-    setSheet(null); setReport({ cohort: null, tile: 'reg' });
+    setSheet(null); setReport({ cohort: null, tile: 'all' });
     await refresh();
     router.replace(home(who.current.role, await loadDemo()));
     toast('Demo reset. Everyone is back where they started.');
