@@ -245,12 +245,10 @@
   "_demo_mode": "ASSUMPTION: in the live demo a session can be finished after this many seconds, so marking the day complete can be shown quickly."
  },
  "reports": {
-  "_ASSUMPTION": "Bucket definitions for the teacher's Reports tab. Confirm with a teacher.",
-  "doing_sadhana_min_practice_days_30": 8,
-  "needs_support_stages": [
-   "drifting",
-   "dormant"
-  ],
-  "not_opened_app_days": 14
+  "_ASSUMPTION": "Groups for the teacher's Sadhana report, by practice days in the last 40. From the team's mock-up of 2026-11-15. Confirm with a teacher.",
+  "window_days": 40,
+  "very_regular_min_practice_days": 35,
+  "building_min_practice_days": 20,
+  "not_opened_app_days": 5
  }
 }

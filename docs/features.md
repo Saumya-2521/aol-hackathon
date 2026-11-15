@@ -183,7 +183,7 @@ Limits:
 Tabs: **Home · Daily Practice · Events · Volunteer · Chat.** There is no Settings screen in this version.
 
 ### D0. Sign-up
-- Fields: course code from the teacher (joins the course channel), postal code (used for everything "near you"), and consent switches: follow-up messages and location for nearby events.
+- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and consent switches: follow-up messages and location for nearby events. (First and last name added 2026-11-15.)
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the persona.
 
 ### D1. Home [P][D]
@@ -227,17 +227,27 @@ In this order:
 
 Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [ui-draft.md](ui-draft.md).
 
+### E0. Teacher sign-up (added 2026-11-15)
+- Fields: first name, last name, email, and the areas where they teach. After signing up, the teacher lands on "New course channel" (E1).
+- **Demo scope:** the screen works but creates no real account. The role switcher picks the teacher.
+
 ### E1. Create a course channel and add remarks [P]
-- When a course ends, the teacher creates a **channel** for it and adds the participants. The channel has a code that participants use at sign-up.
+- When a Part 1 course has just finished, the teacher creates a **channel** for it and adds the participants. A **New course channel** button sits at the top of the Today tab (and in People).
+- When the channel is created, a **join code is generated** and shown with a copy button. Participants enter it at sign-up.
 - While adding each participant, the teacher writes **remarks**:
   - **Skills and interests** as tags. The teacher picks from the suggestions in `tag_vocabulary` (music, singing, dance, cooking…) or **types any other skill**, which is saved on the participant's profile like any other tag (Grace: `photography`).
   - **Free-text note** for practical details. Used only for message wording. Hint text: "Interests and practical details only, no health or personal matters."
 - Remarks can be edited later on the participant's profile. Adding a tag recomputes the recommendation at once.
 
 ### E2. Today [D]
-- **Practised today:** for each channel, how many people completed their practice today ("2 of 4").
+Changed on 2026-11-15: the long queue of cards became a summary, and each person's recommendation opens from the report (E5).
+- **New course channel** button at the top (E1).
+- **Suggested this week**, as summary cards:
+  - **Sadhana**, one card per channel: how many are very regular, building the habit or need support (the groups in E5), how many practised today ("2 of 4"), a note when people haven't opened the app in 5 or more days, and a link to the report.
+  - **Satsang, next up:** the teacher's next event, how many are going and how many of them are from the teacher's own groups, with **Post** to add an event.
+  - **Seva, open:** the next seva opportunity, how full it is, and how many participants tagged `seva` in remarks can be invited, with **Manage**.
+  - **Remarks:** how many participants still have no remarks.
 - **Alerts:** participants with no practice in 3 days (C4), each with "Send a personal note".
-- **Suggested this week:** the recommendation queue (E4).
 - **Needs a personal check-in:** people whose channel is a teacher call or in person.
 
 ### E3. People and the participant profile [P][D]
@@ -258,8 +268,10 @@ For each recommendation the teacher can:
 
 ### E5. Reports [D]
 For each course (channel):
-- **Counts:** doing their sadhana · not doing it · need support · haven't opened the app. Definitions are in `config.reports` (**ASSUMPTION**): "doing" means at least 8 practice days in 30; "need support" means the drifting or dormant stage; "haven't opened the app" means no open in 14 days. A person can be in more than one group.
-- **List:** every participant with their group and suggested next step (from skills and practice), each linking to the profile.
+Changed on 2026-11-15 (the "Sadhana report"):
+- **Groups**, by practice days in the last 40, with definitions in `config.reports` (**ASSUMPTION**, from the team's mock-up): **very regular** 35 to 40 days · **building the habit** 20 to 34 days · **needs support** below 20 days · **app not opened** for 5 or more days. A person can be in "app not opened" and one other group.
+- Tapping a group lists its people: name, practice days out of 40, when they last practised, and a button with their next step ("Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Check in", "Call"). An invitation always names what it is to. The button opens the recommendation with its reason, draft and actions (E4). The name opens the profile.
+- The next step always comes from the engine (B3), not from the group: someone "very regular" who has taken every course is invited to seva, not to a course.
 
 ### E6. Events and seva: add and invite [P]
 - **Add an event or a seva opportunity:** title, type, date and time, place, description, skill tags, and for seva the number of people needed. It appears at once in the participants' Events or Volunteer tab.
