@@ -9,7 +9,7 @@ A participant app (iOS, Android and web) that helps people stay connected after 
 - Agreed design and demo script: [docs/concept.md](docs/concept.md)
 - Demo data and personas: [data/DATA_README.md](data/DATA_README.md)
 
-> **Status:** the app is not scaffolded yet. These are the target setup steps. Keep this file in sync as the build goes on.
+> **Status (2026-11-15):** the app is scaffolded on Expo SDK 58 and every screen in [docs/ui-design.md](docs/ui-design.md) is built. Engine tests, type-check and lint pass. Every screen and the full demo path were checked in a browser at phone width. Expo Go on a real phone has not been run yet.
 
 ## Tech stack
 
@@ -30,6 +30,8 @@ A participant app (iOS, Android and web) that helps people stay connected after 
 - **Git**
 - **Expo Go** on each demo phone, from the App Store or Google Play. It must support the project's Expo SDK version.
 - Optional: an **Anthropic API key**. Without one, messages are written from templates.
+
+Built on **Expo SDK 58** (React Native 0.88, React 19) with NativeWind 4 and Tailwind 3.
 - Optional: Xcode (iOS Simulator, Mac only) or Android Studio (Android Emulator), if you'd rather not use a physical phone.
 
 ## Setup

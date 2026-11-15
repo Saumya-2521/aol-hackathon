@@ -71,7 +71,7 @@ Both are used on the Art of Living sites. Load with `@expo-google-fonts/poppins`
 
 - Spacing scale: 4 · 8 · 12 · 16 · 20 · 24. Screen side padding 18. Gap between cards 14.
 - Radius: inputs 10 · small buttons 11 · buttons 14 (as on the site) · cards 16 · hero and the big practice button 24 · chips and tags fully round.
-- Borders, not shadows: cards have a 1 px `line` border. Shadows only on the notification banner and sheets.
+- Borders, not shadows: cards have a 1 px `line` border. Shadows only on sheets.
 - Touch targets: at least 42 high (34 for the small buttons inside cards).
 
 ### NativeWind setup (`tailwind.config.js`)
@@ -103,26 +103,30 @@ theme: {
 
 ```
 app/
-  _layout.tsx                 fonts, role context, notification banner, toast
-  sign-up.tsx                 D0 participant sign-up
-  teacher-sign-up.tsx         E0 teacher sign-up
-  (participant)/_layout.tsx   bottom tabs: Home · Practice · Events · Volunteer · Chat
-    index.tsx                 D1 Home
-    practice/index.tsx        D2 Daily Practice
-    practice/session.tsx      D2 guided session (full screen, no tabs)
-    events.tsx                D3
-    volunteer.tsx             D4
-    chat/index.tsx            D5 list
-    chat/channel.tsx          D5 course channel
-    chat/teacher.tsx          D5 teacher thread
-  (teacher)/_layout.tsx       bottom tabs: Today · People · Reports · Events · Chat
-    index.tsx                 E2 Today
-    people/index.tsx          E3 list
-    people/[id].tsx           E3 profile + E4 actions
-    new-channel.tsx           E1 (opened from Today and from People)
-    reports.tsx               E5 Sadhana report
-    events.tsx                E6 (add and invite open as sheets)
-    chat/index.tsx, chat/[id].tsx   E7
+  _layout.tsx           fonts, app state, toast, sheets
+  index.tsx             opens the participant app
+  sign-up.tsx           D0 participant sign-up
+  teacher-sign-up.tsx   E0 teacher sign-up
+  p/_layout.tsx         bottom tabs: Home · Practice · Events · Volunteer · Chat
+    index.tsx           D1 Home
+    practice.tsx        D2 Daily Practice
+    events.tsx          D3
+    volunteer.tsx       D4
+    chat.tsx            D5 list
+  session.tsx           D2 guided session (full screen, no tabs)
+  chat/[kind].tsx       a conversation, for both roles: /chat/channel or /chat/thread
+  t/_layout.tsx         bottom tabs: Today · People · Reports · Events · Chat
+    index.tsx           E2 Today
+    people.tsx          E3 list
+    reports.tsx         E5 Sadhana report
+    events.tsx          E6 (add and invite open as sheets)
+    chat.tsx            E7
+  person/[id].tsx       E3 profile + E4 actions
+  new-channel.tsx       E1 (opened from Today and from People)
+  api/                  server routes: participant/[id], teacher/[id], action, draft, reset, demo
+components/             ui.tsx (building blocks), cards, DawnHero, RecommendationCard, PersonRow, TagPicker, Chat, Sheets, TabBar, Player
+lib/                    engine, store, views, actions, drafter, filter, clock (server) · app.tsx, api.ts (app)
+theme.js                the tokens in section 2, used by tailwind.config.js and by icons and gradients
 ```
 
 Rules that keep it easy to navigate:
@@ -131,8 +135,9 @@ Rules that keep it easy to navigate:
 - Nothing is more than two taps from a tab.
 - The **round initial button, top right of every screen**, opens the **Demo menu** (a bottom sheet): the Participant / Teacher switch (A4), a picker for the persona or teacher, "See the sign-up screen", and **Reset demo** (A3).
 - Each sign-up screen links to the other ("Are you a teacher? Sign up as a teacher").
+- Each sign-up screen appears **once per demo run**: the participant's when the app first opens, the teacher's on the first switch to Teacher. There is no back button on that first visit. Afterwards it can only be opened from the Demo menu, and Reset demo starts a new run.
 - Short tasks open as **bottom sheets** instead of new screens: a person's recommendation, add event, add seva, invite, choose a different step, the new join code.
-- Feedback for every action is a short **toast** at the bottom ("Sent to Priya"). Automatic notifications arrive as a **banner** at the top (C3).
+- Feedback for every action is a short **toast** at the bottom ("Sent to Priya"). Notifications appear as a **note card** at the top of the participant's Home (C3); there is no pop-up.
 
 ---
 
@@ -151,13 +156,12 @@ Rules that keep it easy to navigate:
 | `EventCard` | Type label, title, day and time, place and distance, **I'm going** | Going: green "✓ Going"; tap again cancels |
 | `SevaCard` | Title, description, when, where, bar, "3 of 5 signed up", **Sign up** | Signed up · "All spots filled" (disabled) · "Completed. Thank you 💛" |
 | `WeekRow` | M to S circles | Done: green tick · today: orange ring · not done: empty circle |
-| `SummaryCard` | Today tab: small heading, a link on the right (Report, Post, Manage), content | — |
-| `SegmentBar` | Three segments sized by count: brand · accent · sun | Empty segments are left out |
+| `Tile` | Today tab, "This week": small label with icon, title, when, one fact at the bottom; two side by side | Empty: "Nothing posted yet. Tap to add one." |
 | `GroupTile` | Report: big number, group name, one line of meaning | Selected: 2 px brand border |
 | `RecommendationCard` | Person, stage, next step, reason, draft, channel, actions | See section 6, E4 |
 | `TagPicker` | Selected tags, suggestions from `tag_vocabulary`, "Or type any other skill" | — |
 | `ChatBubble`, `Composer` | Others left on white, own right on accent-tint; round send button | Quick replies row above the composer |
-| `Banner` | Simulated push: icon, title, text. Slides down from the top, leaves after 6.5 s or on tap | — |
+| `NoteCard` | Sun-tint card with a sun icon and warm text. Teacher's Today: the cheering note. Participant's Home: the latest notification, with a close button; tapping it opens the detail sheet | Hidden when there is nothing to show |
 | `Toast` | Dark pill above the tab bar, 2.6 s | — |
 | `Sheet` | Bottom sheet over a dimmed screen, close button top right | — |
 
@@ -168,7 +172,7 @@ Icons: one outline set (for example `lucide-react-native`), 1.8 stroke. Emoji ap
 ## 5. Participant app
 
 ### D0 Sign-up
-Logo, "Join your course group", then: **First name** and **Last name** (side by side), **Course code from your teacher**, **Postal code** (hint: "Used only to show what's happening near you."), two switches ("Send me follow-up messages from my teacher", "Use my area to show nearby events"), and **Join my course group**. Below: "Are you a teacher? Sign up as a teacher". Joining opens Home and shows the Welcome banner. Demo: no real account is created.
+Logo, "Join your course group", then: **First name** and **Last name** (side by side), **Course code from your teacher**, **Postal code** (hint: "Used only to show what's happening near you."), one switch ("Use my area to show nearby events"; the follow-up messages switch was removed, team decision 2026-11-15), and **Join my course group**. Below: "Are you a teacher? Sign up as a teacher". This screen is shown once per demo run, when the app first opens (no back button then); after that it is reachable from the Demo menu. Joining opens Home. The Welcome banner is off for the demo (`notifications.demo_teacher_sent_only`). Demo: no real account is created.
 
 ### D1 Home
 Logo top left. Then, in the order of the spec:
@@ -176,8 +180,8 @@ Logo top left. Then, in the order of the spec:
 1. **DawnHero.** Date, "Good morning, Priya", the streak ("**9** days in a row") and "34 practice days in the last 40".
    - Streak of 0: no number. Show "A fresh morning. Begin whenever you're ready."
    - 0 practice days in 40: leave that line out.
-2. **Today's sadhana.** Not done: sunrise icon, "Ready when you are", **Start** (goes to Practice). Done: green tick, "Done for today 🙏", no button.
-3. **Invitation from the teacher** (only when one was sent). Accent-wash card: "From Anita", the item, when and where, the message, **Tell me more** and **Not right now**. After a reply: "You replied: “Tell me more”. Thank you for letting Anita know."
+2. **A note for you** (added 2026-11-15; only when there is a notification). The latest notification (C3) as a sun-tint card with a sun icon, the same style as the teacher's warm note on Today: the warm, personal text (two lines at most) and a small close button. It stays until closed or replaced by a newer one. There is no pop-up banner. **Tapping the card opens the notification in full** in a bottom sheet: the title and the whole text, and **Close**. For an invitation the sheet shows "From Anita", the item with when and where, the teacher's whole message **without the "- Anita" signature**, and **Tell me more** / **Not right now**. After a reply it reads: "You replied: “Tell me more”. Thank you for letting Anita know." There is no separate invitation card on Home (removed 2026-11-15): the invitation lives in the note card and its detail sheet, and in the teacher thread in Chat. Example: "Priya, Anita thought of you and sent an invitation to In-Person Weekly Follow Up."
+3. **Today's sadhana.** Not done: sunrise icon, "Ready when you are", **Start** (goes to Practice). Done: green tick, "Done for today 🙏", no button.
 4. **Next follow-up.** One `EventCard`.
 5. **Seva near you.** Two small cards and "See all" (Volunteer tab).
 6. **Milestones.** 7 · 21 · 40 days, reached ones in green, with "Only you see these".
@@ -186,7 +190,7 @@ Logo top left. Then, in the order of the spec:
 1. **Start guided meditation** "with Gurudev Sri Sri Ravi Shankar": the one big purple button on the screen. Opens the session.
 2. **I practised on my own**: outline button. One tap marks today. Replaced by a "Done for today 🙏" card afterwards.
 3. **This week**: `WeekRow`.
-4. **Your course group today**: "**2 of 4** from your course practised today" and a bar. A count only, never names.
+4. **Your course group today** (changed 2026-11-15): a taller card that can be tapped: "**2 of 4** from your course practised today", a bar, and "See who has practised" with a chevron. Tapping it opens a bottom sheet, "Practised today", with the first names of the course-mates who have practised today (the participant shows as "You"). It never lists who hasn't. Empty: "Today's practices will show here as they are logged."
 
 **Guided session** (full screen): the YouTube player for `config.guided_practice`, then **Begin**. When the video ends (or after `demo_mode_seconds`), the screen becomes a large green tick, "Done for today 🙏", the streak, and **Back to practice**. The app writes no practice instructions of its own.
 
@@ -202,17 +206,17 @@ Title "Seva near L5B". `SevaCard`s, nearest first.
 - **Teacher thread:** the teacher's notes and the participant's replies. When an invitation is waiting, the quick replies **Tell me more** and **Not right now** sit above the composer.
 
 ### C3 Notifications
-Each one is a `Banner` with the wording from `config.notifications.examples`. Tapping it opens the related screen: invitation → Home, reply → the thread, event notes and reminders → Events, practice note → Practice.
+The latest one shows as the orange **note card at the top of Home** (D1) until it is closed or replaced. There is no pop-up banner (team decision, 2026-11-15). Tapping the card opens the notification in full. The wording is warm and personal: it uses the participant's first name and, where it fits, the teacher's (the texts are in `features.md` C3, changed 2026-11-15). Tapping it opens the related screen: invitation → Home, reply → the thread, event notes and reminders → Events, practice note → Practice.
 
 ---
 
 ## 6. Teacher view
 
 ### E0 Teacher sign-up
-Logo, "Set up your teacher account", then **First name**, **Last name**, **Email**, **Areas where you teach** (hint: "Used to suggest places when you add events and seva."), and **Create my account**. Below: "Taking a course, not teaching? Sign up as a participant". Creating the account opens **New course channel**, so the first thing a new teacher does is set up their course group.
+Logo, "Set up your teacher account", then **First name**, **Last name**, **Email**, **Areas where you teach** (hint: "Used to suggest places when you add events and seva."), and **Create my account**. Below: "Taking a course, not teaching? Sign up as a participant". Creating the account opens the **Today** tab (changed 2026-11-15), where **New course channel** is the first button.
 
 ### E1 New course channel
-Opened from the **New course channel** button at the top of Today, or **+ Channel** in People.
+Opened from the **New course channel** button at the top of Today, or the floating **+ Channel** button in People.
 
 1. One line of help: "For a Part 1 course that has just finished. Add the people who took it, and you'll get a code they use to join."
 2. Course, end date and channel name.
@@ -221,17 +225,16 @@ Opened from the **New course channel** button at the top of Today, or **+ Channe
 5. A sheet confirms it: "Your channel is ready", the **join code** in large letters (for example `NOV26-MIS`), **Copy the code** and **Go to the channel**. People then opens with the new channel selected.
 
 ### E2 Today
-Logo and date at the top. Then:
+Kept short on purpose (changed 2026-11-15): practice numbers live in Reports only. Logo and date at the top. Then:
 
-1. "Teacher · 2 groups · 5 participants" and **Good morning, Anita**.
-2. **New course channel** (outline button, full width).
-3. **Suggested this week**, as `SummaryCard`s:
-   - **Sadhana · Part 1 · Sep 2026** (one per channel), link **Report**. A `SegmentBar`, then "1 very regular · 1 building · 2 need support", then "**1 of 4** practised today". When people haven't opened the app for 5 or more days, an orange note: "2 haven't opened the app in 5+ days". The link and the note both open the report on the right group.
-   - **Satsang · next up**, link **Post** (opens the add-event sheet). The teacher's next event, when and where, "**2 going** · 2 from your groups".
-   - **Seva · open**, link **Manage** (Events tab). "Kitchen seva for the community potluck · 3 of 5", a bar, and "1 participant tagged seva in your remarks can be invited".
-   - **Remarks** row: "Remarks · 2 of 5 still to add ›" (opens People).
-4. **A personal note might help** (C4): a row per person, "No practice logged in 3 days", and **Send a personal note**, which opens that person's recommendation sheet with the draft ready to edit.
-5. **Needs a personal check-in**: a row per person whose channel is a call or a hello in person, with a **Call** or **Say hello** button.
+1. **Good morning, Anita**.
+2. **A warm note for the teacher** (sun-tint card, sun icon). One cheering line written from real numbers, for example "Tom has practised on 37 of the last 40 days. Your care is part of that. Thank you for all you do." When the team has added wisdom notes to `config.teacher_note.wisdom_notes`, one is shown below it in italics with its source. The list is empty for now: the app never writes its own wisdom.
+3. **New course channel** (outline button, full width).
+4. **This week**: two tiles side by side. There is no remarks line on Today (removed 2026-11-15); remarks are added from People.
+   - **Next event** tile (accent-tint): title, "Sat, Nov 28 · 6:30 PM", "2 going". Opens Events.
+   - **Open seva** tile (green-tint): title, date, a progress bar and "1 of 2 signed up". Opens Events.
+   - An empty tile reads "Nothing posted yet. Tap to add one."
+5. **Reach out personally** (C4): one card, one row per person. People whose channel is a call or a hello in person come first ("A phone call from you", button **Call** or **Say hello**), then people with no practice for 3 days or more ("No practice · 20 days", button **Write a note**). The button opens that person's recommendation sheet.
 
 ### E5 Reports ("Sadhana report")
 1. **Group** picker: "Part 1 · Sep 2026 · 4 participants".
@@ -244,13 +247,13 @@ Logo and date at the top. Then:
    | Needs support | Below 20 days · check in | sun-tint |
    | App not opened | 5+ days · reach out | mist |
 
-3. The selected group's name with an **Add remarks** link (opens People), then its people. Each row: initials, "Tom W.", "37 of 40 days · practised today", and a **next-step button**: "Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Invite to satsang", "Invite to event", "Check in", "Call" or "Say hello". It always names what the invitation is to. After sending it reads "✓ Sent".
+3. With no tile selected (the default when a course is picked, added 2026-11-15): "Everyone in Part 1 · Sep 2026" and all the course's participants. With a tile selected: the group's name, a **Show everyone** link, and its people; tapping the selected tile again also clears it. An **Add remarks** link (opens People) sits on the same line. Each row: initials, "Tom W.", "37 of 40 days · practised today", and a **next-step button**: "Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Invite to satsang", "Invite to event", "Check in", "Call" or "Say hello". It always names what the invitation is to. After sending it reads "✓ Sent".
 4. The next-step button opens the **recommendation sheet** (the `RecommendationCard` and "Open the full profile"). The name opens the profile.
 
 The button's label comes from the engine's next step for that person (B3), not from the tile.
 
 ### E3 People and profile
-- **List** (changed 2026-11-15): one line at the top with the channel chips (All + each channel, scrolling sideways) and **+ Channel**. **All** is selected by default. Below it is one continuous list with no channel headings. Each person is one row, the same as in the report: initials, "Priya S.", "34 of 40 days · yesterday", and the next-step button, which opens the recommendation sheet. The name opens the profile. When a single channel is selected, its join code shows under the chips.
+- **List** (changed 2026-11-15): one line at the top with the channel chips (All + each channel, scrolling sideways). **+ Channel** is a floating button at the bottom right, above the tab bar. **All** is selected by default. Below it is one continuous list with no channel headings. Each person is one row, the same as in the report: initials, "Priya S.", "34 of 40 days · yesterday", and the next-step button, which opens the recommendation sheet. The name opens the profile. When a single channel is selected, its join code shows under the chips.
 - **Profile**, top to bottom: stage, area, channel and **contact details** ("visible only to you, as the assigned teacher") · **Sadhana** ("35 of the last 40 days · 10 in a row" and a 40-cell heat-map, today outlined in orange) · **Next step** (`RecommendationCard`) · **Remarks** (`TagPicker` and the note, with the hint "Interests and practical details only, no health or personal matters. Remarks are never shown to Priya.") · **Timeline**.
 - Adding or removing a tag updates the next step, the reason and the draft at once.
 
@@ -294,8 +297,8 @@ Course channels, then personal threads (an orange dot marks a new reply). Same b
 | B2 Nearby | Distances and order in Events, Volunteer, Home |
 | B6 Outreach gap | Gap state of `RecommendationCard` and of the invite sheet |
 | C1 Drafts · C2 Banned-phrase filter | Draft and Edit in the card; clay note; chat composer check |
-| C3 Participant notifications | `Banner` |
-| C4 Teacher alert | "A personal note might help" on Today |
+| C3 Participant notifications | The note card at the top of Home, and its detail sheet |
+| C4 Teacher alert | "Reach out personally" on Today |
 | D0–D5 | Section 5 |
 | E0–E7 | Section 6 |
 | F Privacy | Contact details only on the teacher's profile screen; first names in chat; the course-group count has no names; remarks appear only in the teacher view |

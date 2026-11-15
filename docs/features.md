@@ -52,6 +52,7 @@ Platforms: iOS and Android through Expo Go, plus web for the projector. Stack de
 ### A4. Role switcher
 - A toggle switches between **Participant** (pick a persona; Priya by default) and **Teacher** (Anita by default).
 - Demo tool only, with no real sign-in. Volunteers have the same permissions as teachers for now.
+- **Two devices at once (added 2026-11-15):** a phone shows the participant and the projected laptop browser shows the teacher. Both read the same server store, and each device re-reads its view every 3 seconds, so a message sent by the teacher reaches the participant's phone without a refresh. The role follows the screen's address, so reloading the laptop on a teacher screen stays in the teacher view.
 
 ### A5. Courses come only from the cache
 - The app reads `data/courses.json` only. It never calls the Unity/Harmony API.
@@ -147,18 +148,22 @@ All wording follows rule 2 in `CLAUDE.md`: warm, easy to ignore, and never about
 
 | Notification | Trigger | Example |
 |---|---|---|
-| Welcome | The participant joins their course channel | "Welcome, Aisha. Your course group is here whenever you have a question. 🙏" |
-| First practice | The first practice is logged | "Your first practice is logged. A lovely start. 🌿" |
-| Practice note | 3 days with no practice logged | "Hi Priya, even a short practice today counts. 🌿" |
-| Streak milestone | 7, 21 or 40 days in a row | "21 days in a row! That's a real habit now. 🎉" |
-| Event note | No event attended for 3 weeks | "There's a satsang this Thursday, 10 min from you. You'd be very welcome." |
-| Course group is going | 2 or more people from their course channel RSVP to the same event | "Rahul and 2 others from your course are going to Friday's games night. Join them?" |
-| New event nearby | A teacher adds an event within 25 km | "Full moon meditation this Saturday near you. Want a reminder?" |
-| Event reminder | The day before an event they RSVP'd to or asked a reminder for | "Tomorrow: Weekly follow-up, 7:00 PM in Mississauga. See you there." |
-| After seva | Their seva is marked complete | "Thank you for your seva today. You made the event happen. 💛" |
-| Course anniversary | 1, 3, 6 and 12 months after the course | "It's been 1 month since your course. Here's how far you've come: 24 practice days." |
-| Invitation from the teacher | The teacher sends a recommendation or an invite | "Anita has invited you to Sahaj Samadhi Meditation." |
-| Reply | Someone replies to them in chat | "Anita replied to you." |
+| Welcome | The participant joins their course channel | "Welcome, Aisha. We're so glad you're here. Your course group and Anita are close by whenever you have a question. 🙏" |
+| First practice | The first practice is logged | "Aisha, your first practice is logged. A lovely way to begin. 🌿" |
+| Practice note | 3 days with no practice logged | "Hi Priya, a few quiet minutes are here for you whenever you'd like. 🌿" |
+| Streak milestone | 7, 21 or 40 days in a row | "21 days in a row, Priya. That's a real habit taking root. 🎉" |
+| Event note | No event attended for 3 weeks | "Priya, there's a satsang this Thursday, 10 min from you. You'd be very welcome." |
+| Course group is going | 2 or more people from their course channel RSVP to the same event | "Rahul and 2 others from your course are going to Friday's games night. Come along if you'd like, Priya." |
+| New event nearby | A teacher adds an event within 25 km | "Priya, Full moon meditation is happening this Saturday near you. Would you like a reminder?" |
+| Event reminder | The day before an event they RSVP'd to or asked a reminder for | "Priya, tomorrow is Weekly follow-up, 7:00 PM in Mississauga. Looking forward to seeing you." |
+| After seva | Their seva is marked complete | "Thank you for your seva today, Priya. You helped make it happen. 💛" |
+| Course anniversary | 1, 3, 6 and 12 months after the course | "Priya, today marks 1 month since your course. Look how far you've come: 24 practice days. 🙏" |
+| Invitation from the teacher | The teacher sends a recommendation or an invite | "Priya, Anita thought of you and sent an invitation to Sahaj Samadhi Meditation." (a note with no item: "Priya, Anita wrote you a personal note.") |
+| Reply | Someone replies to them in chat | "Anita replied to you, Priya." |
+
+**Warmer, personal wording (changed 2026-11-15):** every notification uses the participant's first name and, where it fits, the teacher's first name. Checked against rule 2 and `config.banned_phrases`. To implement: update `config.notifications.examples` to these texts (new placeholder `{teacher}` in the welcome), and the invitation and reply texts in `lib/actions.ts`. Note for wording: the filter matches parts of words, so "feel like it" is caught by the banned word "fee"; use "whenever you'd like".
+
+**Where they appear (changed 2026-11-15):** the latest notification is shown at the **top of the participant's Home**, as a note card directly under the greeting, the same style as the teacher's warm note on Today. It stays until the participant closes it or a newer one replaces it. There is **no pop-up banner** at the top (team decision, 2026-11-15). **Tapping the card opens the notification in full** in a bottom sheet. For an invitation from the teacher, the sheet shows who it is from, the item with when and where, the teacher's whole message and the two replies (Tell me more, Not right now). The message is shown there **without the "- Anita" signature**, because the sheet already says "From Anita"; the stored message is still signed. The separate invitation card on Home was removed (2026-11-15), so the invitation is not shown twice.
 
 Changes made to the team's example wording, to keep to rule 2:
 - **Practice note:** "it's been a few days" is left out, because it points at the gap.
@@ -170,7 +175,8 @@ Limits:
 - The practice note goes out once per gap, never daily.
 - The course anniversary shows the practice count only as appreciation. **ASSUMPTION:** if there are no practice days, the count is left out.
 - "Course group is going" names only people from the same course channel, by first name.
-- For the demo, push is simulated as an in-app banner. Real push needs installed builds.
+- For the demo, push is simulated in the app as the note card at the top of Home. Real push needs installed builds.
+- **Demo setting (team decision, 2026-11-15):** with `notifications.demo_teacher_sent_only` on, a notification appears only for what the teacher sends (invitation, reply, new event nearby, after seva) and for the participant's own first practice and streak milestones. The welcome and the time-based notifications (practice note, event note, course group is going, event reminder, course anniversary) are off, so the participant's first view opens with no banner. They stay in this spec and return when the setting is off.
 
 ### C4. Notifications to the teacher [D]
 - When a participant has logged no practice for `teacher_alert_after_days_without_practice` (3) days, the teacher sees "Jack hasn't logged a practice in 3 days" with a **Send a personal note** button, which opens a draft (C1).
@@ -183,14 +189,15 @@ Limits:
 Tabs: **Home · Daily Practice · Events · Volunteer · Chat.** There is no Settings screen in this version.
 
 ### D0. Sign-up
-- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and consent switches: follow-up messages and location for nearby events. (First and last name added 2026-11-15.)
+- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and one consent switch: location for nearby events (the follow-up messages switch was removed, 2026-11-15). (First and last name added 2026-11-15.)
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the persona.
+- **Shown once per demo run (added 2026-11-15):** the app opens on this screen until the participant has joined. After that it opens on Home, and switching roles never brings the screen back. Reset demo starts a new run, so the screen shows again.
 
 ### D1. Home [P][D]
 In this order:
 1. **Streak:** how many days in a row they have done their sadhana. Encouraging only; never "streak broken" or missed-day wording.
-2. **Today's practice:** done or not, with a button to the Daily Practice tab.
-3. **Invitation from the teacher**, when there is one: the next step the teacher sent, with "Tell me more" and "Not right now".
+2. **A note for you** (changed 2026-11-15), when there is a notification: the latest one as an orange note card (C3). Tapping it opens the notification in full. An invitation from the teacher is read and answered there ("Tell me more", "Not right now"); the separate invitation card on Home was removed.
+3. **Today's practice:** done or not, with a button to the Daily Practice tab.
 4. **Next follow-up meditation:** when, where and how far, with **I'm going** (RSVP).
 5. **Seva near you:** the next 2–3 opportunities, linking to the Volunteer tab.
 6. **Private milestones** at 7, 21 and 40 practice days. No leaderboards, no points.
@@ -203,7 +210,7 @@ In this order:
   - **ASSUMPTION:** in the live demo a session can be finished after `demo_mode_seconds` (15), so completing a practice can be shown quickly.
   - **ASSUMPTION:** a one-tap "I practised on my own" button also marks the day, so Priya's live step (34 → 35) takes one tap.
 - **This week:** Monday to Sunday with a tick on completed days and today highlighted. Days not done stay empty, with no cross or red mark.
-- **Your course group today:** "2 of 4 from your course practised today". An anonymous count only, never names. **ASSUMPTION:** the count includes everyone in the course channel.
+- **Your course group today:** "2 of 4 from your course practised today", on a card the participant can tap. Tapping it lists the **first names of the people in their course channel who have practised today** (changed 2026-11-15, team decision; it used to be an anonymous count). It never lists who hasn't practised, and shows no streaks, counts or history. **ASSUMPTION:** the count includes everyone in the course channel.
 
 ### D3. Events (satsang) [P][D]
 - Lists what's happening near the participant's postal code: follow-up meditations, satsangs and community events (for example a games night). It shows events, not courses. Courses reach a participant only as a teacher's invitation (D1).
@@ -228,8 +235,9 @@ In this order:
 Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [ui-draft.md](ui-draft.md).
 
 ### E0. Teacher sign-up (added 2026-11-15)
-- Fields: first name, last name, email, and the areas where they teach. After signing up, the teacher lands on "New course channel" (E1).
+- Fields: first name, last name, email, and the areas where they teach. After signing up, the teacher lands on the Today tab (changed 2026-11-15; it used to open "New course channel"). The **New course channel** button is at the top of Today (E1).
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the teacher.
+- **Shown once per demo run (added 2026-11-15):** the first switch to the Teacher role opens this screen. After that the switch opens Today. Reset demo starts a new run, so the screen shows again.
 
 ### E1. Create a course channel and add remarks [P]
 - When a Part 1 course has just finished, the teacher creates a **channel** for it and adds the participants. A **New course channel** button sits at the top of the Today tab (and in People).
@@ -240,15 +248,11 @@ Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [
 - Remarks can be edited later on the participant's profile. Adding a tag recomputes the recommendation at once.
 
 ### E2. Today [D]
-Changed on 2026-11-15: the long queue of cards became a summary, and each person's recommendation opens from the report (E5).
+Changed on 2026-11-15: kept short and easy to read. The report information (practice groups, practised today, app not opened) was removed from Today and lives only in Reports (E5).
 - **New course channel** button at the top (E1).
-- **Suggested this week**, as summary cards:
-  - **Sadhana**, one card per channel: how many are very regular, building the habit or need support (the groups in E5), how many practised today ("2 of 4"), a note when people haven't opened the app in 5 or more days, and a link to the report.
-  - **Satsang, next up:** the teacher's next event, how many are going and how many of them are from the teacher's own groups, with **Post** to add an event.
-  - **Seva, open:** the next seva opportunity, how full it is, and how many participants tagged `seva` in remarks can be invited, with **Manage**.
-  - **Remarks:** how many participants still have no remarks.
-- **Alerts:** participants with no practice in 3 days (C4), each with "Send a personal note".
-- **Needs a personal check-in:** people whose channel is a teacher call or in person.
+- **A warm note for the teacher** (added 2026-11-15): one cheering line written from real numbers (for example a participant's steady practice, or how many practised today). A **wisdom note** can be shown under it once the team adds quotes and their sources to `config.teacher_note.wisdom_notes`; the list is empty for now, because the app never writes its own wisdom (rule 4).
+- **This week:** two tiles, the teacher's next event (when, how many are going) and the open seva (how full it is). The remarks line was removed from Today (2026-11-15); remarks are added from People.
+- **Reach out personally:** one list of people whose channel is a teacher call or in person, and participants with no practice in 3 days (C4), each with one button.
 
 ### E3. People and the participant profile [P][D]
 - **List:** each channel's participants, each with a **quick recommendation** line (stage plus next step), so the teacher can act without opening the profile.
@@ -270,6 +274,7 @@ For each recommendation the teacher can:
 For each course (channel):
 Changed on 2026-11-15 (the "Sadhana report"):
 - **Groups**, by practice days in the last 40, with definitions in `config.reports` (**ASSUMPTION**, from the team's mock-up): **very regular** 35 to 40 days · **building the habit** 20 to 34 days · **needs support** below 20 days · **app not opened** for 5 or more days. A person can be in "app not opened" and one other group.
+- **Everyone first (added 2026-11-15):** selecting a course lists all its participants. Tapping a group narrows the list to that group; tapping it again, or "Show everyone", lists everyone again.
 - Tapping a group lists its people: name, practice days out of 40, when they last practised, and a button with their next step ("Invite to Sahaj", "Invite to Part 2", "Invite to seva", "Invite to follow-up", "Check in", "Call"). An invitation always names what it is to. The button opens the recommendation with its reason, draft and actions (E4). The name opens the profile.
 - The next step always comes from the engine (B3), not from the group: someone "very regular" who has taken every course is invited to seva, not to a course.
 
@@ -290,10 +295,10 @@ Changed on 2026-11-15 (the "Sadhana report"):
 |---|---|
 | Use only the data needed | API responses are shaped per screen. Claude gets only the drafting inputs (C1). |
 | At most 1 personal teacher message every 3 days | Outreach gap (B6) |
-| Practice is seen only by the participant and their own teacher | Teacher APIs return practice only for the teacher's own participants; other participants see just the anonymous count (D2) |
+| Practice is seen by the participant and their own teacher; course-mates see only who has practised today | Teacher APIs return practice only for the teacher's own participants; other participants in the same course channel see the count and the first names of those who practised today, nothing else (D2, changed 2026-11-15) |
 | Contact details only for the assigned teacher | Teacher API returns `contact` only when `teacher_id` matches |
 | No phone numbers shared between participants | Chat shows first names only; participant APIs never return contact details |
-| Cohort practice count is anonymous | D2 shows a number, never names |
+| Cohort practice shows only who has practised today | D2 shows a number and, on tap, first names of those who practised today; never who hasn't (changed 2026-11-15) |
 | Teacher remarks are never shown to participants | E1, B4 |
 | Locations | Area centroid and postal FSA only, never a street address |
 
@@ -364,7 +369,7 @@ With a teacher, where it's about Art of Living:
 
 Within the team:
 5. Invitations count towards the 3-day gap; automatic notifications don't (B6).
-6. The course-group count on Daily Practice includes everyone, anonymously (D2).
+6. The course-group count on Daily Practice includes everyone (D2). Since 2026-11-15 it shows the first names of those who practised today.
 7. Report group definitions (E5).
 8. Smaller ones: fallback stage (B1), demo-mode session length and the one-tap practice button (D2), RSVP not counted as attended (D3), snooze length (E4), thank-you trigger (E6).
 

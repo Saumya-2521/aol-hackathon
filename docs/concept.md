@@ -21,7 +21,7 @@ The app is built around **sadhana** (daily practice), **satsang** (events in goo
 | RSVP and sign-up | Participants tap "I'm going" on events and "Sign up" on seva. Seva cards show how many people have signed up out of how many are needed. |
 | Notifications | Gentle automatic notifications: welcome, practice note after 3 days without practice, streak milestones, event notes, "people from your course are going", new events nearby, event reminders, a thank-you after seva and course anniversaries. None of them mentions missed days or gaps. The teacher is also told when someone hasn't practised for 3 days, so they can send a personal note. |
 | Guided practice | A guided meditation by Gurudev Sri Sri Ravi Shankar, played in the app from YouTube (<https://www.youtube.com/watch?v=TQVbZIfe7Dg>). Finishing it marks the day as done. |
-| Gamification | For now: streak, private milestones (7, 21 and 40 practice days) and an anonymous "how many of your course practised today" count. No leaderboards, no points that count toward course fees. Rewards for daily and monthly goals are a future enhancement. |
+| Gamification | For now: streak, private milestones (7, 21 and 40 practice days) and a "how many of your course practised today" count that opens the first names of those who have (changed 2026-11-15). No leaderboards, no points that count toward course fees. Rewards for daily and monthly goals are a future enhancement. |
 | Limits | At most 1 personal message from the teacher every 3 days. For the hackathon there are no quiet hours, no pause or opt-out, no Settings screen and no approval step. |
 | Data | JSON dummy data plus the real cached courses. No database. |
 | Demo | 5 minutes, live. |
