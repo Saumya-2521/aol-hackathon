@@ -252,5 +252,9 @@
   "very_regular_min_practice_days": 35,
   "building_min_practice_days": 20,
   "not_opened_app_days": 5
+ },
+ "teacher_note": {
+  "_NOTE": "The warm note on the teacher's Today tab (features.md E2). wisdom_notes is empty on purpose: the app never writes its own wisdom. The team adds entries as {\"text\": \"...\", \"source\": \"...\"}.",
+  "wisdom_notes": []
  }
 }

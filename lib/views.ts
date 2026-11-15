@@ -141,12 +141,24 @@ export function teacherView(s: Store, tid: string): TeacherView | null {
   }));
   const upcoming = (e: { id: string }, list: CommunityEvent[]) => (list.find((x) => x.id === e.id)?.date ?? '') >= TODAY;
 
+  // A warm note for the teacher (features.md E2): one cheering line from real numbers, never invented.
+  const win = config.stages.ready_window_days;
+  const star = people.slice().sort((a, b) => b.days40 - a.days40)[0];
+  const practised = people.filter((p) => p.doneToday).length;
+  const cheer = star && star.days40 >= config.stages.ready_min_practice_days
+    ? `${star.first} has practised on ${star.days40} of the last ${win} days. Your care is part of that. Thank you for all you do.`
+    : practised
+      ? `${practised} of your ${people.length} participants ${practised === 1 ? 'has' : 'have'} already practised today. Thank you for walking with them.`
+      : 'Thank you for holding the space for the people on this journey with you.';
+  const wisdomNotes = config.teacher_note.wisdom_notes as { text: string; source: string }[];
+
   return {
     id: t.id, first: firstName(t), last: t.name.split(' ').slice(1).join(' '), email: t.email, areas: t.areas, dateLabel: fmtDay(TODAY),
     cohorts: cohortViews, people,
     nextEvent: events.find((e) => upcoming(e, s.events)) ?? null,
     openSeva: seva.find((e) => !e.done && upcoming(e, s.seva)) ?? null,
     remarksLeft: people.filter((p) => !p.tags.length && !p.note).length,
+    cheer, wisdom: wisdomNotes[0] ?? null,
     events, seva,
     tagVocabulary: config.tag_vocabulary, bannedPhrases: config.banned_phrases, maxSentences: config.message_rules.max_sentences, aiDrafts: aiAvailable(),
   };

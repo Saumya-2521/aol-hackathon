@@ -137,6 +137,8 @@ export type TeacherView = {
   nextEvent: TeacherEvent | null;
   openSeva: TeacherSeva | null;
   remarksLeft: number;
+  cheer: string; // the warm note for the teacher, written from real numbers (features.md E2)
+  wisdom: { text: string; source: string } | null; // only from config.teacher_note.wisdom_notes; the app never writes its own
   events: TeacherEvent[];
   seva: TeacherSeva[];
   tagVocabulary: string[];
