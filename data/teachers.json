@@ -1,0 +1,51 @@
+{
+ "teachers": [
+  {
+   "id": "T1",
+   "name": "Anita Desai",
+   "role": "teacher",
+   "areas": [
+    "Mississauga",
+    "Etobicoke"
+   ],
+   "email": "anita.desai@example.com"
+  },
+  {
+   "id": "T2",
+   "name": "Rohan Kapoor",
+   "role": "teacher",
+   "areas": [
+    "Downtown Toronto",
+    "Midtown Toronto",
+    "Leslieville",
+    "Scarborough",
+    "North York"
+   ],
+   "email": "rohan.kapoor@example.com"
+  },
+  {
+   "id": "T3",
+   "name": "Sarah Mitchell",
+   "role": "teacher",
+   "areas": [
+    "Brampton",
+    "Vaughan",
+    "Markham",
+    "Oakville"
+   ],
+   "email": "sarah.mitchell@example.com"
+  },
+  {
+   "id": "V1",
+   "name": "Kiran Rao",
+   "role": "volunteer",
+   "areas": [
+    "Mississauga",
+    "Etobicoke"
+   ],
+   "assists": "T1",
+   "email": "kiran.rao@example.com",
+   "note": "Volunteers currently have the same permissions as teachers (team decision; to be restricted later)."
+  }
+ ]
+}

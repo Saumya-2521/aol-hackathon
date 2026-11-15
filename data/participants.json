@@ -1,0 +1,991 @@
+{
+ "participants": [
+  {
+   "id": "P01",
+   "first_name": "Priya",
+   "last_name": "Sharma",
+   "area": "Mississauga",
+   "postal_fsa": "L5B",
+   "home_lat": 43.589,
+   "home_lng": -79.644,
+   "teacher_id": "T1",
+   "joined_app_on": "2026-09-21",
+   "contact": {
+    "email": "priya.sharma@example.com",
+    "phone": "416-555-0110",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-09-20",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-05",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Mississauga"
+    },
+    {
+     "date": "2026-11-02",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Mississauga"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-09-21"
+   },
+   "teacher_notes": [
+    {
+     "id": "P01-N1",
+     "author_id": "T1",
+     "date": "2026-10-25",
+     "tags": [],
+     "text": "Very regular since her course. Has asked a couple of times how to go deeper with meditation."
+    }
+   ]
+  },
+  {
+   "id": "P02",
+   "first_name": "Rahul",
+   "last_name": "Mehta",
+   "area": "Etobicoke",
+   "postal_fsa": "M9B",
+   "home_lat": 43.62,
+   "home_lng": -79.514,
+   "teacher_id": "T1",
+   "joined_app_on": "2026-08-27",
+   "contact": {
+    "email": "rahul.mehta@example.com",
+    "phone": "416-555-0111",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-26",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-09-15",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Etobicoke"
+    },
+    {
+     "date": "2026-09-30",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Etobicoke"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-10-25",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-08-27"
+   },
+   "teacher_notes": [
+    {
+     "id": "P02-N1",
+     "author_id": "V1",
+     "date": "2026-10-01",
+     "tags": [
+      "weekends_only"
+     ],
+     "text": "Works rotating shifts; weekends are easier for him."
+    }
+   ]
+  },
+  {
+   "id": "P03",
+   "first_name": "Daniel",
+   "last_name": "Okafor",
+   "area": "Scarborough",
+   "postal_fsa": "M1P",
+   "home_lat": 43.773,
+   "home_lng": -79.257,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-06-18",
+   "contact": {
+    "email": "daniel.okafor@example.com",
+    "phone": "416-555-0112",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-06-17",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-07-17",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Scarborough"
+    },
+    {
+     "date": "2026-08-16",
+     "category": "community_event",
+     "title": "Community celebration",
+     "city": "Scarborough"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-09-21",
+    "push_enabled": false
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-06-18"
+   },
+   "teacher_notes": [
+    {
+     "id": "P03-N1",
+     "author_id": "T2",
+     "date": "2026-08-06",
+     "tags": [
+      "prefers_call"
+     ],
+     "text": "Enjoyed the group a lot. Mentioned starting a busy new job."
+    }
+   ]
+  },
+  {
+   "id": "P04",
+   "first_name": "Mei",
+   "last_name": "Lin",
+   "area": "North York",
+   "postal_fsa": "M2N",
+   "home_lat": 43.761,
+   "home_lng": -79.411,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-08-07",
+   "contact": {
+    "email": "mei.lin@example.com",
+    "phone": "416-555-0113",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-06",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-09-05",
+     "category": "community_event",
+     "title": "Community celebration",
+     "city": "North York"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-10-05",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-08-07"
+   },
+   "teacher_notes": [
+    {
+     "id": "P04-N1",
+     "author_id": "T2",
+     "date": "2026-09-05",
+     "tags": [
+      "community_events"
+     ],
+     "text": "Came to the community celebration with her sister and loved it."
+    }
+   ]
+  },
+  {
+   "id": "P05",
+   "first_name": "Aisha",
+   "last_name": "Khan",
+   "area": "Brampton",
+   "postal_fsa": "L6Y",
+   "home_lat": 43.731,
+   "home_lng": -79.762,
+   "teacher_id": "T3",
+   "joined_app_on": "2026-11-09",
+   "contact": {
+    "email": "aisha.khan@example.com",
+    "phone": "416-555-0114",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-11-08",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [],
+   "app": {
+    "last_opened": "2026-11-14",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-11-09"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P06",
+   "first_name": "Lucas",
+   "last_name": "Martin",
+   "area": "Downtown Toronto",
+   "postal_fsa": "M5V",
+   "home_lat": 43.653,
+   "home_lng": -79.383,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-11-02",
+   "contact": {
+    "email": "lucas.martin@example.com",
+    "phone": "416-555-0115",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-11-01",
+     "format": "online"
+    }
+   ],
+   "events_attended": [],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-11-02"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P07",
+   "first_name": "Sofia",
+   "last_name": "Rossi",
+   "area": "Vaughan",
+   "postal_fsa": "L4L",
+   "home_lat": 43.837,
+   "home_lng": -79.508,
+   "teacher_id": "T3",
+   "joined_app_on": "2026-10-27",
+   "contact": {
+    "email": "sofia.rossi@example.com",
+    "phone": "416-555-0116",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-10-26",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-11-09",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Vaughan"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-12",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-10-27"
+   },
+   "teacher_notes": [
+    {
+     "id": "P07-N1",
+     "author_id": "T3",
+     "date": "2026-10-28",
+     "tags": [
+      "yoga"
+     ],
+     "text": "Interested in yoga as well as the breath practice."
+    }
+   ]
+  },
+  {
+   "id": "P08",
+   "first_name": "Arjun",
+   "last_name": "Patel",
+   "area": "Markham",
+   "postal_fsa": "L3R",
+   "home_lat": 43.856,
+   "home_lng": -79.337,
+   "teacher_id": "T3",
+   "joined_app_on": "2026-09-06",
+   "contact": {
+    "email": "arjun.patel@example.com",
+    "phone": "416-555-0117",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-09-05",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-08",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Markham"
+    },
+    {
+     "date": "2026-11-05",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Markham"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-11",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-09-06"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P09",
+   "first_name": "Emily",
+   "last_name": "Chen",
+   "area": "Oakville",
+   "postal_fsa": "L6J",
+   "home_lat": 43.467,
+   "home_lng": -79.687,
+   "teacher_id": "T3",
+   "joined_app_on": "2026-08-17",
+   "contact": {
+    "email": "emily.chen@example.com",
+    "phone": "416-555-0118",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-16",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-11-04",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Oakville"
+    },
+    {
+     "date": "2026-11-11",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Oakville"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-12",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": false,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-08-17"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P10",
+   "first_name": "Kwame",
+   "last_name": "Asante",
+   "area": "Midtown Toronto",
+   "postal_fsa": "M4S",
+   "home_lat": 43.704,
+   "home_lng": -79.398,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-09-11",
+   "contact": {
+    "email": "kwame.asante@example.com",
+    "phone": "416-555-0119",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-09-10",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-31",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Midtown Toronto"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-09-11"
+   },
+   "teacher_notes": [
+    {
+     "id": "P10-N1",
+     "author_id": "T2",
+     "date": "2026-10-15",
+     "tags": [
+      "music"
+     ],
+     "text": "Plays guitar; enjoyed the singing at satsang."
+    }
+   ]
+  },
+  {
+   "id": "P11",
+   "first_name": "Neha",
+   "last_name": "Gupta",
+   "area": "Brampton",
+   "postal_fsa": "L6Y",
+   "home_lat": 43.731,
+   "home_lng": -79.762,
+   "teacher_id": "T3",
+   "joined_app_on": "2026-04-29",
+   "contact": {
+    "email": "neha.gupta@example.com",
+    "phone": "416-555-0120",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-04-28",
+     "format": "in_person"
+    },
+    {
+     "category": "sahaj",
+     "title": "Sahaj Samadhi Meditation",
+     "completed_on": "2026-07-17",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-16",
+     "category": "satsang",
+     "title": "Satsang",
+     "city": "Brampton"
+    },
+    {
+     "date": "2026-10-30",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Brampton"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-14",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-04-29"
+   },
+   "teacher_notes": [
+    {
+     "id": "P11-N1",
+     "author_id": "T3",
+     "date": "2026-10-20",
+     "tags": [
+      "deeper_practice",
+      "silence_retreat"
+     ],
+     "text": "Has asked twice about Part 2 and a quieter, longer course."
+    }
+   ]
+  },
+  {
+   "id": "P12",
+   "first_name": "Tom",
+   "last_name": "Wilson",
+   "area": "Etobicoke",
+   "postal_fsa": "M9B",
+   "home_lat": 43.62,
+   "home_lng": -79.514,
+   "teacher_id": "T1",
+   "joined_app_on": "2026-09-01",
+   "contact": {
+    "email": "tom.wilson@example.com",
+    "phone": "416-555-0121",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-31",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-26",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Etobicoke"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-09-01"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P13",
+   "first_name": "Meera",
+   "last_name": "Iyer",
+   "area": "Mississauga",
+   "postal_fsa": "L5B",
+   "home_lat": 43.589,
+   "home_lng": -79.644,
+   "teacher_id": "T1",
+   "joined_app_on": "2025-10-11",
+   "contact": {
+    "email": "meera.iyer@example.com",
+    "phone": "416-555-0122",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2025-10-10",
+     "format": "in_person"
+    },
+    {
+     "category": "sahaj",
+     "title": "Sahaj Samadhi Meditation",
+     "completed_on": "2026-01-18",
+     "format": "in_person"
+    },
+    {
+     "category": "part2",
+     "title": "Art of Living Part 2",
+     "completed_on": "2026-05-18",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-09",
+     "category": "community_event",
+     "title": "Community celebration",
+     "city": "Mississauga"
+    },
+    {
+     "date": "2026-10-23",
+     "category": "satsang",
+     "title": "Satsang",
+     "city": "Mississauga"
+    },
+    {
+     "date": "2026-11-06",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Mississauga"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-12",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2025-10-11"
+   },
+   "teacher_notes": [
+    {
+     "id": "P13-N1",
+     "author_id": "T1",
+     "date": "2026-10-09",
+     "tags": [
+      "seva",
+      "cooking"
+     ],
+     "text": "Loves helping in the kitchen at events."
+    }
+   ]
+  },
+  {
+   "id": "P14",
+   "first_name": "Carlos",
+   "last_name": "Mendes",
+   "area": "North York",
+   "postal_fsa": "M2N",
+   "home_lat": 43.761,
+   "home_lng": -79.411,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-07-28",
+   "contact": {
+    "email": "carlos.mendes@example.com",
+    "phone": "416-555-0123",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-07-27",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-14",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "North York"
+    },
+    {
+     "date": "2026-11-04",
+     "category": "satsang",
+     "title": "Satsang",
+     "city": "North York"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-10",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-07-28"
+   },
+   "teacher_notes": [
+    {
+     "id": "P14-N1",
+     "author_id": "T2",
+     "date": "2026-11-04",
+     "tags": [
+      "seva",
+      "music"
+     ],
+     "text": "Offered to help with music at satsang."
+    }
+   ]
+  },
+  {
+   "id": "P15",
+   "first_name": "Hannah",
+   "last_name": "Lee",
+   "area": "Leslieville",
+   "postal_fsa": "M4M",
+   "home_lat": 43.662,
+   "home_lng": -79.333,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-07-18",
+   "contact": {
+    "email": "hannah.lee@example.com",
+    "phone": "416-555-0124",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-07-17",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-08-26",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Leslieville"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-07-18"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P16",
+   "first_name": "Vikram",
+   "last_name": "Singh",
+   "area": "Mississauga",
+   "postal_fsa": "L5B",
+   "home_lat": 43.589,
+   "home_lng": -79.644,
+   "teacher_id": "T1",
+   "joined_app_on": "2026-08-12",
+   "contact": {
+    "email": "vikram.singh@example.com",
+    "phone": "416-555-0125",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-11",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-09-25",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Mississauga"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-10-20",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": "2026-12-10",
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-08-12"
+   },
+   "teacher_notes": []
+  },
+  {
+   "id": "P17",
+   "first_name": "Grace",
+   "last_name": "Thompson",
+   "teacher_id": "T3",
+   "settings": {
+    "opted_out": true,
+    "opted_out_on": "2026-10-05"
+   },
+   "note": "Opted out: only the minimum needed to honour the opt-out is kept."
+  },
+  {
+   "id": "P18",
+   "first_name": "Omar",
+   "last_name": "Haddad",
+   "area": "Scarborough",
+   "postal_fsa": "M1P",
+   "home_lat": 43.773,
+   "home_lng": -79.257,
+   "teacher_id": "T2",
+   "joined_app_on": "2026-10-01",
+   "contact": {
+    "email": "omar.haddad@example.com",
+    "phone": "416-555-0127",
+    "visible_to": "assigned_teacher_only"
+   },
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-09-30",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-15",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Scarborough"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-10-29",
+    "push_enabled": true
+   },
+   "settings": {
+    "reminder_time": "07:00",
+    "share_practice_with_teacher": true,
+    "messages_paused_until": null,
+    "opted_out": false
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-10-01"
+   },
+   "teacher_notes": [
+    {
+     "id": "P18-N1",
+     "author_id": "T2",
+     "date": "2026-10-15",
+     "tags": [
+      "no_car",
+      "online_ok"
+     ],
+     "text": "Takes transit; online sessions may suit him better."
+    }
+   ]
+  }
+ ]
+}

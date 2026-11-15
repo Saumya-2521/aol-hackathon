@@ -1,0 +1,117 @@
+{
+ "_note": "Entered in the app by teachers/volunteers (not in the Unity API). Dummy data.",
+ "seva": [
+  {
+   "id": "S1",
+   "title": "Welcome desk at an Art of Living Part 1 course",
+   "date": "2026-11-21",
+   "time": "9:00 AM - 10:00 AM",
+   "is_online": false,
+   "city": "Mississauga",
+   "lat": 43.589,
+   "lng": -79.644,
+   "created_by": "T1",
+   "spots": 3,
+   "tags": [
+    "welcoming"
+   ],
+   "description": "Greet new participants and help them sign in."
+  },
+  {
+   "id": "S2",
+   "title": "Set-up and tea for the weekly follow-up",
+   "date": "2026-11-19",
+   "time": "6:30 PM - 7:00 PM",
+   "is_online": false,
+   "city": "Etobicoke",
+   "lat": 43.62,
+   "lng": -79.514,
+   "created_by": "V1",
+   "spots": 2,
+   "tags": [
+    "setup"
+   ],
+   "description": "Arrange mats and chairs and make tea before the session."
+  },
+  {
+   "id": "S3",
+   "title": "Kitchen seva for the community potluck",
+   "date": "2026-12-05",
+   "time": "4:00 PM - 6:00 PM",
+   "is_online": false,
+   "city": "Mississauga",
+   "lat": 43.589,
+   "lng": -79.644,
+   "created_by": "T1",
+   "spots": 5,
+   "tags": [
+    "cooking"
+   ],
+   "description": "Help prepare and serve food for the community potluck."
+  },
+  {
+   "id": "S4",
+   "title": "Music for Sunday satsang",
+   "date": "2026-11-29",
+   "time": "10:00 AM - 11:30 AM",
+   "is_online": false,
+   "city": "North York",
+   "lat": 43.761,
+   "lng": -79.411,
+   "created_by": "T2",
+   "spots": 3,
+   "tags": [
+    "music"
+   ],
+   "description": "Play an instrument or sing with the satsang group."
+  },
+  {
+   "id": "S5",
+   "title": "Winter food drive volunteering",
+   "date": "2026-12-12",
+   "time": "10:00 AM - 1:00 PM",
+   "is_online": false,
+   "city": "Scarborough",
+   "lat": 43.773,
+   "lng": -79.257,
+   "created_by": "T2",
+   "spots": 8,
+   "tags": [
+    "community"
+   ],
+   "description": "Sort and pack donations with the local community team."
+  },
+  {
+   "id": "S6",
+   "title": "Online seva: design posters for community events",
+   "date": "2026-11-30",
+   "time": "Flexible",
+   "is_online": true,
+   "city": "Online",
+   "lat": null,
+   "lng": null,
+   "created_by": "T3",
+   "spots": 2,
+   "tags": [
+    "design"
+   ],
+   "description": "Create simple posters for upcoming local events."
+  },
+  {
+   "id": "S7",
+   "title": "Welcome desk at the Brampton follow-up",
+   "date": "2026-11-22",
+   "time": "5:30 PM - 6:00 PM",
+   "is_online": false,
+   "city": "Brampton",
+   "lat": 43.731,
+   "lng": -79.762,
+   "created_by": "T3",
+   "spots": 2,
+   "tags": [
+    "welcoming"
+   ],
+   "description": "Welcome people as they arrive and help newcomers feel at home."
+  }
+ ]
+}

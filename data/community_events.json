@@ -1,0 +1,65 @@
+{
+ "_note": "Entered in the app by teachers/volunteers. Dummy data. Real follow-ups/satsangs also come from courses.json.",
+ "events": [
+  {
+   "id": "E1",
+   "title": "Community games night",
+   "category": "community_event",
+   "date": "2026-11-28",
+   "time": "6:30 PM - 9:00 PM",
+   "is_online": false,
+   "city": "Mississauga",
+   "lat": 43.589,
+   "lng": -79.644,
+   "created_by": "T1"
+  },
+  {
+   "id": "E2",
+   "title": "Community potluck and satsang",
+   "category": "community_event",
+   "date": "2026-12-05",
+   "time": "6:00 PM - 9:00 PM",
+   "is_online": false,
+   "city": "Mississauga",
+   "lat": 43.589,
+   "lng": -79.644,
+   "created_by": "T1"
+  },
+  {
+   "id": "E3",
+   "title": "Full moon meditation",
+   "category": "meditation_event",
+   "date": "2026-11-24",
+   "time": "7:30 PM - 8:30 PM",
+   "is_online": false,
+   "city": "Midtown Toronto",
+   "lat": 43.704,
+   "lng": -79.398,
+   "created_by": "T2"
+  },
+  {
+   "id": "E4",
+   "title": "Satsang evening",
+   "category": "satsang",
+   "date": "2026-11-27",
+   "time": "7:00 PM - 8:30 PM",
+   "is_online": false,
+   "city": "North York",
+   "lat": 43.761,
+   "lng": -79.411,
+   "created_by": "T2"
+  },
+  {
+   "id": "E5",
+   "title": "Online Sunday satsang",
+   "category": "satsang",
+   "date": "2026-11-22",
+   "time": "10:00 AM - 11:00 AM",
+   "is_online": true,
+   "city": "Online",
+   "lat": null,
+   "lng": null,
+   "created_by": "T3"
+  }
+ ]
+}

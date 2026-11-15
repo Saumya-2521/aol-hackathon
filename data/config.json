@@ -1,0 +1,166 @@
+{
+ "demo_today": "2026-11-14",
+ "_note": "All thresholds are ASSUMPTIONS for the hackathon. Teachers can change them in settings.",
+ "stages": {
+  "new_days_after_part1": 21,
+  "practising_min_practice_days_30": 8,
+  "ready_min_practice_days_30": 20,
+  "drifting_inactive_days": 14,
+  "dormant_inactive_days": 30,
+  "returning_active_within_days": 7,
+  "returning_min_gap_days": 14
+ },
+ "activity_signals": [
+  "practice_log (only if shared with teacher)",
+  "event_attended",
+  "app_opened"
+ ],
+ "stage_order": [
+  "opted_out",
+  "paused",
+  "returning",
+  "dormant",
+  "drifting",
+  "new",
+  "ready_to_deepen",
+  "seva_inclined",
+  "practising"
+ ],
+ "seva_inclined": {
+  "tag": "seva",
+  "or_min_events_60_days": 3
+ },
+ "course_categories": {
+  "part1": [
+   "1",
+   "58",
+   "517",
+   "736",
+   "737",
+   "759",
+   "1301"
+  ],
+  "part2": [
+   "2",
+   "802",
+   "1302",
+   "1502"
+  ],
+  "sahaj": [
+   "3",
+   "1303"
+  ],
+  "follow_up": [
+   "1006",
+   "1018"
+  ],
+  "satsang": [
+   "1008"
+  ],
+  "community_event": [
+   "1003",
+   "1015"
+  ],
+  "meditation_event": [
+   "1012"
+  ],
+  "intro_session": [
+   "1007",
+   "1011"
+  ],
+  "yoga": [
+   "1024"
+  ],
+  "retreat": [
+   "5038"
+  ]
+ },
+ "next_courses_after": {
+  "_ASSUMPTION": "Confirm eligibility with a teacher before the demo.",
+  "part1": [
+   "sahaj",
+   "part2"
+  ],
+  "sahaj": [
+   "part2"
+  ],
+  "part2": []
+ },
+ "interest_to_course": {
+  "meditation": "sahaj",
+  "deeper_practice": "part2",
+  "silence_retreat": "part2"
+ },
+ "tie_break_without_interest": "earliest_start_in_person_nearby_then_online",
+ "nearby_radius_km": 25,
+ "min_days_notice_for_courses": 2,
+ "milestones_practice_days": [
+  7,
+  21,
+  40
+ ],
+ "tag_vocabulary": [
+  "meditation",
+  "deeper_practice",
+  "silence_retreat",
+  "seva",
+  "music",
+  "cooking",
+  "yoga",
+  "community_events",
+  "design",
+  "weekends_only",
+  "weekdays_only",
+  "no_car",
+  "online_ok",
+  "prefers_call"
+ ],
+ "outreach": {
+  "min_days_between_outreach": 14,
+  "quiet_hours": {
+   "start": "21:00",
+   "end": "08:00"
+  },
+  "requires_approval": true
+ },
+ "channels": {
+  "new": "feed_card",
+  "practising": "feed_card_and_push",
+  "ready_to_deepen": "in_app_message",
+  "seva_inclined": "in_app_message",
+  "drifting": "in_app_message",
+  "dormant": "teacher_call",
+  "returning": "in_app_message",
+  "_overrides": {
+   "push_disabled_or_no_open_30d": "teacher_call",
+   "tag_prefers_call": "teacher_call",
+   "dormant_with_tag_community_events": "in_person"
+  }
+ },
+ "banned_phrases": [
+  "last chance",
+  "limited seats",
+  "only a few spots",
+  "don't miss",
+  "hurry",
+  "act now",
+  "register today",
+  "discount",
+  "deal",
+  "you missed",
+  "you haven't",
+  "why haven't",
+  "we noticed you stopped",
+  "streak broken"
+ ],
+ "message_rules": {
+  "max_sentences": 4,
+  "signed_by": "teacher_first_name",
+  "must_include_easy_decline": true,
+  "never_mention": [
+   "price",
+   "missed days",
+   "inactivity"
+  ]
+ }
+}

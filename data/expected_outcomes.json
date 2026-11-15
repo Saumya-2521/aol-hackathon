@@ -1,0 +1,29 @@
+{
+ "_note": "Test oracle for the recommendation engine, computed with config.json as of demo_today 2026-11-14. If a threshold changes, re-check these.",
+ "outcomes": [
+  {"id": "P01", "name": "Priya", "stage": "practising", "practice_30": 19, "next_step": "nearby follow-up", "channel": "feed_card_and_push",
+   "demo": "Log today's practice live -> 20 days -> stage becomes ready_to_deepen -> nearest Sahaj Samadhi Meditation (Brampton East). Teacher adds tag 'meditation' -> the reason now cites her interest."},
+  {"id": "P02", "name": "Rahul", "stage": "drifting", "idle_days": 20, "next_step": "re-engagement: weekend follow-up nearby (tag weekends_only)", "channel": "in_app_message"},
+  {"id": "P03", "name": "Daniel", "stage": "dormant", "idle_days": 54, "next_step": "re-engagement", "channel": "teacher_call", "why_channel": "push disabled + tag prefers_call"},
+  {"id": "P04", "name": "Mei", "stage": "dormant", "idle_days": 40, "next_step": "re-engagement: community event or satsang", "channel": "in_person", "why_channel": "dormant + tag community_events"},
+  {"id": "P05", "name": "Aisha", "stage": "new", "next_step": "practice habit + nearest follow-up", "channel": "feed_card"},
+  {"id": "P06", "name": "Lucas", "stage": "new", "next_step": "practice habit + nearest follow-up", "channel": "feed_card"},
+  {"id": "P07", "name": "Sofia", "stage": "new", "next_step": "practice habit + nearest follow-up", "channel": "feed_card"},
+  {"id": "P08", "name": "Arjun", "stage": "practising", "next_step": "nearby follow-up", "channel": "feed_card_and_push",
+   "demo": "Outreach is CAPPED: last message 5 days ago (limit 14). The teacher queue shows 'next outreach possible on 2026-11-23'."},
+  {"id": "P09", "name": "Emily", "stage": "practising", "next_step": "nearby follow-up", "channel": "feed_card_and_push",
+   "demo": "Practice sharing is OFF: the teacher sees 'practice not shared'; the stage comes from events and app activity only."},
+  {"id": "P10", "name": "Kwame", "stage": "practising", "next_step": "nearby follow-up or satsang (tag music)", "channel": "feed_card_and_push"},
+  {"id": "P11", "name": "Neha", "stage": "ready_to_deepen", "practice_30": 24, "next_step": "Art of Living Part 2 (in person, Brampton East)", "channel": "in_app_message",
+   "why": "Sahaj already completed; tags deeper_practice + silence_retreat"},
+  {"id": "P12", "name": "Tom", "stage": "ready_to_deepen", "practice_30": 21, "next_step": "Sahaj Samadhi Meditation (earliest in person nearby, no interest tags)", "channel": "in_app_message",
+   "demo": "Teacher adds tag 'silence_retreat' -> recommendation switches to Art of Living Part 2."},
+  {"id": "P13", "name": "Meera", "stage": "seva_inclined", "next_step": "seva S3 Kitchen seva for the community potluck (tag cooking)", "channel": "in_app_message",
+   "why": "Has completed Part 1, Sahaj and Part 2, so no next course is eligible"},
+  {"id": "P14", "name": "Carlos", "stage": "seva_inclined", "next_step": "seva S4 Music for Sunday satsang (tag music)", "channel": "in_app_message"},
+  {"id": "P15", "name": "Hannah", "stage": "returning", "next_step": "welcome back + nearby follow-up", "channel": "in_app_message"},
+  {"id": "P16", "name": "Vikram", "stage": "paused", "next_step": "none until 2026-12-10", "channel": "none"},
+  {"id": "P17", "name": "Grace", "stage": "opted_out", "next_step": "none", "channel": "none"},
+  {"id": "P18", "name": "Omar", "stage": "drifting", "idle_days": 16, "next_step": "re-engagement: online follow-up (tags no_car, online_ok)", "channel": "in_app_message"}
+ ]
+}

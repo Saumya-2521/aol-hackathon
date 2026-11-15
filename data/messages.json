@@ -1,0 +1,72 @@
+{
+ "messages": [
+  {
+   "id": "M1",
+   "participant_id": "P01",
+   "sender_id": "T1",
+   "sent_on": "2026-10-05",
+   "channel": "in_app_message",
+   "stage_at_send": "new",
+   "status": "read",
+   "text": "Hi Priya, it was lovely having you on the course. Our weekly follow-up meets on Thursday evenings in Mississauga if you'd like to practise together. Only if it suits you. - Anita"
+  },
+  {
+   "id": "M2",
+   "participant_id": "P02",
+   "sender_id": "V1",
+   "sent_on": "2026-09-30",
+   "channel": "in_app_message",
+   "stage_at_send": "practising",
+   "status": "read",
+   "text": "Hi Rahul, so nice to see you at follow-up. You're always welcome. - Kiran"
+  },
+  {
+   "id": "M3",
+   "participant_id": "P03",
+   "sender_id": "T2",
+   "sent_on": "2026-09-25",
+   "channel": "push",
+   "stage_at_send": "practising",
+   "status": "not_opened",
+   "text": "Hi Daniel, hope the new job is going well. The weekly follow-up is on whenever you'd like to drop in. - Rohan"
+  },
+  {
+   "id": "M4",
+   "participant_id": "P15",
+   "sender_id": "T2",
+   "sent_on": "2026-10-15",
+   "channel": "in_app_message",
+   "stage_at_send": "drifting",
+   "status": "replied",
+   "text": "Hi Hannah, just thinking of you and hoping all is well. No need to reply. - Rohan",
+   "reply": {
+    "on": "2026-11-08",
+    "text": "Thank you Rohan, that was kind. Life got busy, I'll try to come back to it."
+   }
+  },
+  {
+   "id": "M5",
+   "participant_id": "P08",
+   "sender_id": "T3",
+   "sent_on": "2026-11-09",
+   "channel": "in_app_message",
+   "stage_at_send": "practising",
+   "status": "read",
+   "text": "Hi Arjun, good to see you at follow-up last week. The Markham group meets again next Wednesday if you'd like to join. - Sarah"
+  },
+  {
+   "id": "M6",
+   "participant_id": "P11",
+   "sender_id": "T3",
+   "sent_on": "2026-10-20",
+   "channel": "in_app_message",
+   "stage_at_send": "practising",
+   "status": "replied",
+   "text": "Hi Neha, lovely to see your practice so steady. Happy to chat any time about what might come next for you. - Sarah",
+   "reply": {
+    "on": "2026-10-21",
+    "text": "Thank you! I'd love to hear more about Part 2 when there's one nearby."
+   }
+  }
+ ]
+}
