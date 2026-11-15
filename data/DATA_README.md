@@ -69,7 +69,7 @@ Plain JSON files. The app loads them at startup, so no database is needed.
 | P11 | Neha | Brampton | CH8 | ready to deepen (37 of 40) | **Part 2** (Sahaj already done, asked about it) | in-app message |
 | P12 | Tom | Etobicoke | CH1 | ready to deepen (37 of 40, already practised today) | Sahaj; add the tag `silence_retreat` → switches to **Part 2** | in-app message |
 | P13 | Meera | Mississauga | CH2 | seva-inclined | Kitchen seva (tag `cooking`) | in-app message |
-| P14 | Carlos | North York | CH3 | seva-inclined | Music for satsang (tag `music`) | in-app message |
+| P14 | Carlos | North York | CH3 | seva-inclined (last practised 3 days ago, so he opens with the **practice note**) | Music for satsang (tag `music`) | in-app message |
 | P15 | Hannah | Leslieville | CH3 | returning | Welcome back + follow-up | in-app message |
 | P16 | Vikram | Mississauga | CH1 | drifting (25 days quiet) | Follow-up or satsang nearby | in-app message |
 | P17 | Grace | Oakville | CH6 | practising | Follow-up; has the typed-in skill `photography` | feed + push |

@@ -2,6 +2,7 @@
 import { router, usePathname } from 'expo-router';
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { get, post } from './api';
+import { onNotificationTap, showSystemNotification } from './notify';
 import type { ActionResult, DemoPeople, ParticipantView, TeacherView } from './types';
 
 export type Role = 'p' | 't';
@@ -107,6 +108,18 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return res;
   }, [refresh, toast, loadDemo]);
 
+  // A new note for the participant also goes out as a real system notification (expo-notifications; native only).
+  // It fires once per note: when it arrives, or when the persona who has it is chosen.
+  const notified = useRef<string | null>(null);
+  useEffect(() => {
+    const note = role === 'p' && pv && pv.id === pid ? pv.note : null;
+    if (!note || notified.current === note.id) return;
+    notified.current = note.id;
+    showSystemNotification(note);
+  }, [pv, role, pid]);
+  // Tapping the system notification opens the note in full on Home.
+  useEffect(() => onNotificationTap(() => { if (who.current.role === 'p') { router.navigate('/p'); setSheet({ t: 'note' }); } }), []);
+
   const switchRole = useCallback((r: Role) => {
     setSheet(null); setRole(r);
     router.replace(home(r));
@@ -120,6 +133,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   const reset = useCallback(async () => {
     await post('/api/reset').catch(() => {});
+    notified.current = null; // note ids start again after a reset
     setSheet(null); setReport({ cohort: null, tile: 'all' });
     await refresh();
     router.replace(home(who.current.role, await loadDemo()));
