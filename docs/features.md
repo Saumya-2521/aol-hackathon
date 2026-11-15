@@ -148,18 +148,22 @@ All wording follows rule 2 in `CLAUDE.md`: warm, easy to ignore, and never about
 
 | Notification | Trigger | Example |
 |---|---|---|
-| Welcome | The participant joins their course channel | "Welcome, Aisha. Your course group is here whenever you have a question. 🙏" |
-| First practice | The first practice is logged | "Your first practice is logged. A lovely start. 🌿" |
-| Practice note | 3 days with no practice logged | "Hi Priya, even a short practice today counts. 🌿" |
-| Streak milestone | 7, 21 or 40 days in a row | "21 days in a row! That's a real habit now. 🎉" |
-| Event note | No event attended for 3 weeks | "There's a satsang this Thursday, 10 min from you. You'd be very welcome." |
-| Course group is going | 2 or more people from their course channel RSVP to the same event | "Rahul and 2 others from your course are going to Friday's games night. Join them?" |
-| New event nearby | A teacher adds an event within 25 km | "Full moon meditation this Saturday near you. Want a reminder?" |
-| Event reminder | The day before an event they RSVP'd to or asked a reminder for | "Tomorrow: Weekly follow-up, 7:00 PM in Mississauga. See you there." |
-| After seva | Their seva is marked complete | "Thank you for your seva today. You made the event happen. 💛" |
-| Course anniversary | 1, 3, 6 and 12 months after the course | "It's been 1 month since your course. Here's how far you've come: 24 practice days." |
-| Invitation from the teacher | The teacher sends a recommendation or an invite | "Anita has invited you to Sahaj Samadhi Meditation." |
-| Reply | Someone replies to them in chat | "Anita replied to you." |
+| Welcome | The participant joins their course channel | "Welcome, Aisha. We're so glad you're here. Your course group and Anita are close by whenever you have a question. 🙏" |
+| First practice | The first practice is logged | "Aisha, your first practice is logged. A lovely way to begin. 🌿" |
+| Practice note | 3 days with no practice logged | "Hi Priya, a few quiet minutes are here for you whenever you'd like. 🌿" |
+| Streak milestone | 7, 21 or 40 days in a row | "21 days in a row, Priya. That's a real habit taking root. 🎉" |
+| Event note | No event attended for 3 weeks | "Priya, there's a satsang this Thursday, 10 min from you. You'd be very welcome." |
+| Course group is going | 2 or more people from their course channel RSVP to the same event | "Rahul and 2 others from your course are going to Friday's games night. Come along if you'd like, Priya." |
+| New event nearby | A teacher adds an event within 25 km | "Priya, Full moon meditation is happening this Saturday near you. Would you like a reminder?" |
+| Event reminder | The day before an event they RSVP'd to or asked a reminder for | "Priya, tomorrow is Weekly follow-up, 7:00 PM in Mississauga. Looking forward to seeing you." |
+| After seva | Their seva is marked complete | "Thank you for your seva today, Priya. You helped make it happen. 💛" |
+| Course anniversary | 1, 3, 6 and 12 months after the course | "Priya, today marks 1 month since your course. Look how far you've come: 24 practice days. 🙏" |
+| Invitation from the teacher | The teacher sends a recommendation or an invite | "Priya, Anita thought of you and sent an invitation to Sahaj Samadhi Meditation." (a note with no item: "Priya, Anita wrote you a personal note.") |
+| Reply | Someone replies to them in chat | "Anita replied to you, Priya." |
+
+**Warmer, personal wording (changed 2026-11-15):** every notification uses the participant's first name and, where it fits, the teacher's first name. Checked against rule 2 and `config.banned_phrases`. To implement: update `config.notifications.examples` to these texts (new placeholder `{teacher}` in the welcome), and the invitation and reply texts in `lib/actions.ts`. Note for wording: the filter matches parts of words, so "feel like it" is caught by the banned word "fee"; use "whenever you'd like".
+
+**Where they appear (changed 2026-11-15):** the latest notification is shown at the **top of the participant's Home**, as a note card directly under the greeting, the same style as the teacher's warm note on Today. It stays until the participant closes it or a newer one replaces it. There is **no pop-up banner** at the top (team decision, 2026-11-15). **Tapping the card opens the notification in full** in a bottom sheet. For an invitation from the teacher, the sheet shows who it is from, the item with when and where, the teacher's whole message and the two replies (Tell me more, Not right now). The message is shown there **without the "- Anita" signature**, because the sheet already says "From Anita"; the stored message is still signed. The separate invitation card on Home was removed (2026-11-15), so the invitation is not shown twice.
 
 Changes made to the team's example wording, to keep to rule 2:
 - **Practice note:** "it's been a few days" is left out, because it points at the gap.
@@ -171,8 +175,8 @@ Limits:
 - The practice note goes out once per gap, never daily.
 - The course anniversary shows the practice count only as appreciation. **ASSUMPTION:** if there are no practice days, the count is left out.
 - "Course group is going" names only people from the same course channel, by first name.
-- For the demo, push is simulated as an in-app banner. Real push needs installed builds.
-- **Demo setting (team decision, 2026-11-15):** with `notifications.demo_teacher_sent_only` on, a banner appears only for what the teacher sends (invitation, reply, new event nearby, after seva) and for the participant's own first practice and streak milestones. The welcome and the time-based notifications (practice note, event note, course group is going, event reminder, course anniversary) are off, so the participant's first view opens with no banner. They stay in this spec and return when the setting is off.
+- For the demo, push is simulated in the app as the note card at the top of Home. Real push needs installed builds.
+- **Demo setting (team decision, 2026-11-15):** with `notifications.demo_teacher_sent_only` on, a notification appears only for what the teacher sends (invitation, reply, new event nearby, after seva) and for the participant's own first practice and streak milestones. The welcome and the time-based notifications (practice note, event note, course group is going, event reminder, course anniversary) are off, so the participant's first view opens with no banner. They stay in this spec and return when the setting is off.
 
 ### C4. Notifications to the teacher [D]
 - When a participant has logged no practice for `teacher_alert_after_days_without_practice` (3) days, the teacher sees "Jack hasn't logged a practice in 3 days" with a **Send a personal note** button, which opens a draft (C1).
@@ -192,8 +196,8 @@ Tabs: **Home · Daily Practice · Events · Volunteer · Chat.** There is no Set
 ### D1. Home [P][D]
 In this order:
 1. **Streak:** how many days in a row they have done their sadhana. Encouraging only; never "streak broken" or missed-day wording.
-2. **Today's practice:** done or not, with a button to the Daily Practice tab.
-3. **Invitation from the teacher**, when there is one: the next step the teacher sent, with "Tell me more" and "Not right now".
+2. **A note for you** (changed 2026-11-15), when there is a notification: the latest one as an orange note card (C3). Tapping it opens the notification in full. An invitation from the teacher is read and answered there ("Tell me more", "Not right now"); the separate invitation card on Home was removed.
+3. **Today's practice:** done or not, with a button to the Daily Practice tab.
 4. **Next follow-up meditation:** when, where and how far, with **I'm going** (RSVP).
 5. **Seva near you:** the next 2–3 opportunities, linking to the Volunteer tab.
 6. **Private milestones** at 7, 21 and 40 practice days. No leaderboards, no points.

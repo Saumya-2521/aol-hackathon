@@ -71,7 +71,7 @@ Both are used on the Art of Living sites. Load with `@expo-google-fonts/poppins`
 
 - Spacing scale: 4 · 8 · 12 · 16 · 20 · 24. Screen side padding 18. Gap between cards 14.
 - Radius: inputs 10 · small buttons 11 · buttons 14 (as on the site) · cards 16 · hero and the big practice button 24 · chips and tags fully round.
-- Borders, not shadows: cards have a 1 px `line` border. Shadows only on the notification banner and sheets.
+- Borders, not shadows: cards have a 1 px `line` border. Shadows only on sheets.
 - Touch targets: at least 42 high (34 for the small buttons inside cards).
 
 ### NativeWind setup (`tailwind.config.js`)
@@ -103,7 +103,7 @@ theme: {
 
 ```
 app/
-  _layout.tsx           fonts, app state, notification banner, toast, sheets
+  _layout.tsx           fonts, app state, toast, sheets
   index.tsx             opens the participant app
   sign-up.tsx           D0 participant sign-up
   teacher-sign-up.tsx   E0 teacher sign-up
@@ -137,7 +137,7 @@ Rules that keep it easy to navigate:
 - Each sign-up screen links to the other ("Are you a teacher? Sign up as a teacher").
 - Each sign-up screen appears **once per demo run**: the participant's when the app first opens, the teacher's on the first switch to Teacher. There is no back button on that first visit. Afterwards it can only be opened from the Demo menu, and Reset demo starts a new run.
 - Short tasks open as **bottom sheets** instead of new screens: a person's recommendation, add event, add seva, invite, choose a different step, the new join code.
-- Feedback for every action is a short **toast** at the bottom ("Sent to Priya"). Automatic notifications arrive as a **banner** at the top (C3).
+- Feedback for every action is a short **toast** at the bottom ("Sent to Priya"). Notifications appear as a **note card** at the top of the participant's Home (C3); there is no pop-up.
 
 ---
 
@@ -161,7 +161,7 @@ Rules that keep it easy to navigate:
 | `RecommendationCard` | Person, stage, next step, reason, draft, channel, actions | See section 6, E4 |
 | `TagPicker` | Selected tags, suggestions from `tag_vocabulary`, "Or type any other skill" | — |
 | `ChatBubble`, `Composer` | Others left on white, own right on accent-tint; round send button | Quick replies row above the composer |
-| `Banner` | Simulated push: icon, title, text. Slides down from the top, leaves after 6.5 s or on tap | — |
+| `NoteCard` | Sun-tint card with a sun icon and warm text. Teacher's Today: the cheering note. Participant's Home: the latest notification, with a close button; tapping it opens the detail sheet | Hidden when there is nothing to show |
 | `Toast` | Dark pill above the tab bar, 2.6 s | — |
 | `Sheet` | Bottom sheet over a dimmed screen, close button top right | — |
 
@@ -180,8 +180,8 @@ Logo top left. Then, in the order of the spec:
 1. **DawnHero.** Date, "Good morning, Priya", the streak ("**9** days in a row") and "34 practice days in the last 40".
    - Streak of 0: no number. Show "A fresh morning. Begin whenever you're ready."
    - 0 practice days in 40: leave that line out.
-2. **Today's sadhana.** Not done: sunrise icon, "Ready when you are", **Start** (goes to Practice). Done: green tick, "Done for today 🙏", no button.
-3. **Invitation from the teacher** (only when one was sent). Accent-wash card: "From Anita", the item, when and where, the message, **Tell me more** and **Not right now**. After a reply: "You replied: “Tell me more”. Thank you for letting Anita know."
+2. **A note for you** (added 2026-11-15; only when there is a notification). The latest notification (C3) as a sun-tint card with a sun icon, the same style as the teacher's warm note on Today: the warm, personal text (two lines at most) and a small close button. It stays until closed or replaced by a newer one. There is no pop-up banner. **Tapping the card opens the notification in full** in a bottom sheet: the title and the whole text, and **Close**. For an invitation the sheet shows "From Anita", the item with when and where, the teacher's whole message **without the "- Anita" signature**, and **Tell me more** / **Not right now**. After a reply it reads: "You replied: “Tell me more”. Thank you for letting Anita know." There is no separate invitation card on Home (removed 2026-11-15): the invitation lives in the note card and its detail sheet, and in the teacher thread in Chat. Example: "Priya, Anita thought of you and sent an invitation to In-Person Weekly Follow Up."
+3. **Today's sadhana.** Not done: sunrise icon, "Ready when you are", **Start** (goes to Practice). Done: green tick, "Done for today 🙏", no button.
 4. **Next follow-up.** One `EventCard`.
 5. **Seva near you.** Two small cards and "See all" (Volunteer tab).
 6. **Milestones.** 7 · 21 · 40 days, reached ones in green, with "Only you see these".
@@ -206,7 +206,7 @@ Title "Seva near L5B". `SevaCard`s, nearest first.
 - **Teacher thread:** the teacher's notes and the participant's replies. When an invitation is waiting, the quick replies **Tell me more** and **Not right now** sit above the composer.
 
 ### C3 Notifications
-Each one is a `Banner` with the wording from `config.notifications.examples`. Tapping it opens the related screen: invitation → Home, reply → the thread, event notes and reminders → Events, practice note → Practice.
+The latest one shows as the orange **note card at the top of Home** (D1) until it is closed or replaced. There is no pop-up banner (team decision, 2026-11-15). Tapping the card opens the notification in full. The wording is warm and personal: it uses the participant's first name and, where it fits, the teacher's (the texts are in `features.md` C3, changed 2026-11-15). Tapping it opens the related screen: invitation → Home, reply → the thread, event notes and reminders → Events, practice note → Practice.
 
 ---
 
@@ -297,7 +297,7 @@ Course channels, then personal threads (an orange dot marks a new reply). Same b
 | B2 Nearby | Distances and order in Events, Volunteer, Home |
 | B6 Outreach gap | Gap state of `RecommendationCard` and of the invite sheet |
 | C1 Drafts · C2 Banned-phrase filter | Draft and Edit in the card; clay note; chat composer check |
-| C3 Participant notifications | `Banner` |
+| C3 Participant notifications | The note card at the top of Home, and its detail sheet |
 | C4 Teacher alert | "Reach out personally" on Today |
 | D0–D5 | Section 5 |
 | E0–E7 | Section 6 |
