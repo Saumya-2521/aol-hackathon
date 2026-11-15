@@ -181,12 +181,17 @@ label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:60
 .prow{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);width:100%}
 .prow:last-child{border-bottom:0}
 .prow>span.avatar{flex:none;display:grid;place-items:center}
-.shortcut{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);width:100%;text-align:left;color:var(--ink3)}
-.shortcut.last{border-bottom:0}
-.shortcut .sico{width:36px;height:36px;border-radius:50%;background:var(--brand-tint);color:var(--brand);display:grid;place-items:center;flex:none}
-.shortcut .stext{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;color:var(--ink)}
-.shortcut small{font-size:12.5px;font-weight:600;color:var(--ink2)}
-.shortcut b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cheer{display:flex;gap:12px;padding:16px;border-radius:var(--r);background:var(--sun-tint);color:var(--sun-deep);flex:none}
+.cheer p{color:var(--ink);line-height:1.45}
+.tiles{display:flex;gap:12px;flex:none}
+.tile{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px;padding:14px;border-radius:var(--r);text-align:left}
+.tile.acc{background:var(--accent-tint);color:var(--accent-deep)}.tile.grn{background:var(--green-tint);color:var(--green-deep)}
+.tile .tl{display:flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;letter-spacing:1px;text-transform:uppercase}
+.tile .tb{flex:1;display:flex;flex-direction:column;gap:2px}
+.tile b{font:600 16.5px/1.3 var(--display);color:var(--ink)}
+.tile small{font-size:13.5px;color:var(--ink2)}
+.tile .tf{font-size:13.5px;font-weight:600}
+.tile .bar{display:block;width:100%}
 .btn.fab{position:sticky;bottom:4px;align-self:flex-end;margin-top:auto;flex:none;box-shadow:0 8px 18px -6px rgba(60,40,95,.5)}
 .prow>span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .prow .l1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
@@ -521,18 +526,19 @@ function recCard(p){const r=rec(p),g=gapUntil(p),sent=S.sent[p.id],k='draft:'+p.
     '<p class="step"><b>'+(r.habit?'Practice habit + ':'')+esc(r.it.title)+'</b>'+(r.it.kind==='practice'?'':'<span>'+esc(whereOf(r.it))+' · '+whenOf(r.it)+'</span>')+'</p><p class="why">'+r.why+'</p>'+mid+(acts?'<div class="acts">'+acts+'</div>':'')+'</article>'}
 const shortRec=(p,r)=>r.ch==='teacher_call'?'Call '+p.first:r.ch==='in_person'?'Say hello in person':r.it.kind==='course'?'Invite to '+r.it.title:(r.habit?'Practice habit + ':'')+r.it.title;
 function tToday(){const ps=mine(),T=tfirst(S.tid);
-  const sc=(icon,label,text,tab,last)=>'<button class="shortcut'+(last?' last':'')+'" data-a="ttab" data-v="'+tab+'"><span class="sico">'+ic(icon,17)+'</span><span class="stext"><small>'+esc(label)+'</small><b>'+esc(text)+'</b></span>'+ic('next',18)+'</button>';
   const ev=S.events.filter(e=>ownItem(e)&&e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date))[0];
   const se=S.seva.filter(s=>ownItem(s)&&!S.sevaDone[s.id]&&s.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date))[0];
-  const left=ps.filter(p=>!S.tags[p.id].length&&!S.note[p.id]).length;
   const isDirect=p=>{const c=rec(p).ch;return c==='teacher_call'||c==='in_person'};
   const reach=ps.filter(isDirect).map(p=>{const r=rec(p);return[p,r.ch==='teacher_call'?'A phone call from you':'A hello in person',actLabel(r),'recsheet']})
     .concat(ps.filter(p=>!isDirect(p)&&!doneToday(p)&&p.lastPractice&&days(p.lastPractice)>=3).map(p=>[p,'No practice · '+days(p.lastPractice)+' days','Write a note','note']));
-  return'<h1 class="greet">Good morning, '+esc(T)+'</h1><button class="btn sec2 wide" data-a="sub" data-v="newchannel">'+ic('plus',16)+' New course channel</button>'+
-    '<div class="sec"><h3>This week</h3></div><div class="card list">'+
-      sc('events',ev?'Next event · '+fmt(ev.date):'Next satsang or event',ev?ev.title:'Nothing posted yet','events')+
-      sc('seva',se?'Open seva · '+sevaCount(se.id)+' of '+se.spots+' signed up':'Open seva',se?se.title:'No open seva right now','events')+
-      sc('people','Remarks',left?left+' of '+ps.length+' still to add':'Added for everyone','people',1)+'</div>'+
+  const star=ps.slice().sort((a,b)=>c40(b)-c40(a))[0],dn=ps.filter(doneToday).length;
+  const cheer=star&&c40(star)>=35?star.first+' has practised on '+c40(star)+' of the last 40 days. Your care is part of that. Thank you for all you do.':dn?dn+' of your '+ps.length+' participants '+(dn===1?'has':'have')+' already practised today. Thank you for walking with them.':'Thank you for holding the space for the people on this journey with you.';
+  const going=ev?D.people.filter(p=>S.rsvp[p.id]?.['e:'+ev.id]).length:0,sn=se?sevaCount(se.id):0;
+  const tile=(tone,icon,label,title,when,foot,empty)=>'<button class="tile '+tone+'" data-a="ttab" data-v="events"><span class="tl">'+ic(icon,15)+' '+label+'</span>'+(title?'<span class="tb"><b>'+esc(title)+'</b><small>'+esc(when)+'</small></span>'+foot:'<span class="tb"><small>'+empty+'</small></span>')+'</button>';
+  return'<h1 class="greet">Good morning, '+esc(T)+'</h1><div class="cheer">'+ic('practice',20)+'<p>'+esc(cheer)+'</p></div><button class="btn sec2 wide" data-a="sub" data-v="newchannel">'+ic('plus',16)+' New course channel</button>'+
+    '<div class="sec"><h3>This week</h3></div><div class="tiles">'+
+      tile('acc','events','Next event',ev&&ev.title,ev&&fmt(ev.date)+' · '+ev.time.split(' - ')[0],'<span class="tf">'+going+' going</span>','Nothing posted yet. Tap to add one.')+
+      tile('grn','seva','Open seva',se&&se.title,se&&fmt(se.date),se?'<span class="bar"><i style="width:'+Math.min(100,sn/se.spots*100)+'%"></i></span><span class="tf">'+sn+' of '+se.spots+' signed up</span>':'','No open seva right now. Tap to add one.')+'</div>'+
     (reach.length?'<div class="sec"><h3>Reach out personally</h3><span class="n">'+reach.length+'</span></div><div class="card list">'+reach.map(([p,why,label,a])=>'<div class="prow">'+avatar(p)+'<span><b>'+esc(p.first)+'</b><span class="l2">'+esc(why)+'</span></span><button class="btn sm tint" data-a="'+a+'" data-v="'+p.id+'">'+esc(label)+'</button></div>').join('')+'</div>':'')}
 const lastTxt=p=>doneToday(p)?'practised today':!p.lastPractice?'no practice logged yet':days(p.lastPractice)===1?'yesterday':'last on '+fmtS(p.lastPractice);
 function tPeople(){const cs=S.cohorts.filter(c=>c.teacher_id===S.tid),show=cs.filter(c=>S.chan==='all'||c.id===S.chan),one=S.chan!=='all'&&show[0];

@@ -246,7 +246,8 @@ Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [
 ### E2. Today [D]
 Changed on 2026-11-15: kept short and easy to read. The report information (practice groups, practised today, app not opened) was removed from Today and lives only in Reports (E5).
 - **New course channel** button at the top (E1).
-- **This week**, three one-line rows: the teacher's next event, the open seva and how full it is, and how many participants still have no remarks.
+- **A warm note for the teacher** (added 2026-11-15): one cheering line written from real numbers (for example a participant's steady practice, or how many practised today). A **wisdom note** can be shown under it once the team adds quotes and their sources to `config.teacher_note.wisdom_notes`; the list is empty for now, because the app never writes its own wisdom (rule 4).
+- **This week:** two tiles, the teacher's next event (when, how many are going) and the open seva (how full it is). The remarks line was removed from Today (2026-11-15); remarks are added from People.
 - **Reach out personally:** one list of people whose channel is a teacher call or in person, and participants with no practice in 3 days (C4), each with one button.
 
 ### E3. People and the participant profile [P][D]

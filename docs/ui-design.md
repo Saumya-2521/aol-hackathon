@@ -156,7 +156,7 @@ Rules that keep it easy to navigate:
 | `EventCard` | Type label, title, day and time, place and distance, **I'm going** | Going: green "✓ Going"; tap again cancels |
 | `SevaCard` | Title, description, when, where, bar, "3 of 5 signed up", **Sign up** | Signed up · "All spots filled" (disabled) · "Completed. Thank you 💛" |
 | `WeekRow` | M to S circles | Done: green tick · today: orange ring · not done: empty circle |
-| `Shortcut` row | Today tab: icon, small label, one bold line, chevron; three rows in one card | — |
+| `Tile` | Today tab, "This week": small label with icon, title, when, one fact at the bottom; two side by side | Empty: "Nothing posted yet. Tap to add one." |
 | `GroupTile` | Report: big number, group name, one line of meaning | Selected: 2 px brand border |
 | `RecommendationCard` | Person, stage, next step, reason, draft, channel, actions | See section 6, E4 |
 | `TagPicker` | Selected tags, suggestions from `tag_vocabulary`, "Or type any other skill" | — |
@@ -228,12 +228,13 @@ Opened from the **New course channel** button at the top of Today, or the floati
 Kept short on purpose (changed 2026-11-15): practice numbers live in Reports only. Logo and date at the top. Then:
 
 1. **Good morning, Anita**.
-2. **New course channel** (outline button, full width).
-3. **This week**: one card with three one-line rows, each with an icon and a chevron:
-   - "Next event · Sat, Nov 28" / the event title (opens Events).
-   - "Open seva · 1 of 2 signed up" / the seva title (opens Events).
-   - "Remarks" / "2 of 5 still to add" (opens People).
-4. **Reach out personally** (C4): one card, one row per person. People whose channel is a call or a hello in person come first ("A phone call from you", button **Call** or **Say hello**), then people with no practice for 3 days or more ("No practice · 20 days", button **Write a note**). The button opens that person's recommendation sheet.
+2. **A warm note for the teacher** (sun-tint card, sun icon). One cheering line written from real numbers, for example "Tom has practised on 37 of the last 40 days. Your care is part of that. Thank you for all you do." When the team has added wisdom notes to `config.teacher_note.wisdom_notes`, one is shown below it in italics with its source. The list is empty for now: the app never writes its own wisdom.
+3. **New course channel** (outline button, full width).
+4. **This week**: two tiles side by side. There is no remarks line on Today (removed 2026-11-15); remarks are added from People.
+   - **Next event** tile (accent-tint): title, "Sat, Nov 28 · 6:30 PM", "2 going". Opens Events.
+   - **Open seva** tile (green-tint): title, date, a progress bar and "1 of 2 signed up". Opens Events.
+   - An empty tile reads "Nothing posted yet. Tap to add one."
+5. **Reach out personally** (C4): one card, one row per person. People whose channel is a call or a hello in person come first ("A phone call from you", button **Call** or **Say hello**), then people with no practice for 3 days or more ("No practice · 20 days", button **Write a note**). The button opens that person's recommendation sheet.
 
 ### E5 Reports ("Sadhana report")
 1. **Group** picker: "Part 1 · Sep 2026 · 4 participants".
