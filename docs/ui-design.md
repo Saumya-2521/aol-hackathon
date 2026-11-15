@@ -103,26 +103,30 @@ theme: {
 
 ```
 app/
-  _layout.tsx                 fonts, role context, notification banner, toast
-  sign-up.tsx                 D0 participant sign-up
-  teacher-sign-up.tsx         E0 teacher sign-up
-  (participant)/_layout.tsx   bottom tabs: Home · Practice · Events · Volunteer · Chat
-    index.tsx                 D1 Home
-    practice/index.tsx        D2 Daily Practice
-    practice/session.tsx      D2 guided session (full screen, no tabs)
-    events.tsx                D3
-    volunteer.tsx             D4
-    chat/index.tsx            D5 list
-    chat/channel.tsx          D5 course channel
-    chat/teacher.tsx          D5 teacher thread
-  (teacher)/_layout.tsx       bottom tabs: Today · People · Reports · Events · Chat
-    index.tsx                 E2 Today
-    people/index.tsx          E3 list
-    people/[id].tsx           E3 profile + E4 actions
-    new-channel.tsx           E1 (opened from Today and from People)
-    reports.tsx               E5 Sadhana report
-    events.tsx                E6 (add and invite open as sheets)
-    chat/index.tsx, chat/[id].tsx   E7
+  _layout.tsx           fonts, app state, notification banner, toast, sheets
+  index.tsx             opens the participant app
+  sign-up.tsx           D0 participant sign-up
+  teacher-sign-up.tsx   E0 teacher sign-up
+  p/_layout.tsx         bottom tabs: Home · Practice · Events · Volunteer · Chat
+    index.tsx           D1 Home
+    practice.tsx        D2 Daily Practice
+    events.tsx          D3
+    volunteer.tsx       D4
+    chat.tsx            D5 list
+  session.tsx           D2 guided session (full screen, no tabs)
+  chat/[kind].tsx       a conversation, for both roles: /chat/channel or /chat/thread
+  t/_layout.tsx         bottom tabs: Today · People · Reports · Events · Chat
+    index.tsx           E2 Today
+    people.tsx          E3 list
+    reports.tsx         E5 Sadhana report
+    events.tsx          E6 (add and invite open as sheets)
+    chat.tsx            E7
+  person/[id].tsx       E3 profile + E4 actions
+  new-channel.tsx       E1 (opened from Today and from People)
+  api/                  server routes: participant/[id], teacher/[id], action, draft, reset, demo
+components/             ui.tsx (building blocks), cards, DawnHero, RecommendationCard, PersonRow, TagPicker, Chat, Sheets, TabBar, Player
+lib/                    engine, store, views, actions, drafter, filter, clock (server) · app.tsx, api.ts (app)
+theme.js                the tokens in section 2, used by tailwind.config.js and by icons and gradients
 ```
 
 Rules that keep it easy to navigate:

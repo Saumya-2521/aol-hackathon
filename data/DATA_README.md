@@ -42,6 +42,7 @@ Plain JSON files. The app loads them at startup, so no database is needed.
   - "X of Y practised today" counts the channel's members. On the demo date only Tom has practised so far, so Priya's channel shows 1 of 4, then 2 of 4 once she logs hers.
 - **RSVPs (`rsvps.json`):** `item_type` is `course` (an `id` in `courses.json`) or `community_event` (an `id` in `community_events.json`). An RSVP is not attendance.
 - **Seva:** `spots` is how many people are needed. `signed_up_count` is the total signed up, and `signed_up_ids` lists the demo personas among them. S7 is full.
+- **Event tags:** `community_events.json` has a `tags` list on each event (added 2026-11-15, **ASSUMPTION**). They are matched to participants' skill tags for "People who might enjoy this" and for skill-based next steps.
 - **Skills:** tags on `teacher_notes`. `config.tag_vocabulary` is a list of suggestions; a teacher can type any other skill (Grace has `photography`).
 - **Outreach gap:** at most one personal teacher message per person every `outreach.min_days_between_outreach` (3) days, counted from `messages.json`.
 - **Privacy:**

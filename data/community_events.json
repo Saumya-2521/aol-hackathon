@@ -1,5 +1,5 @@
 {
- "_note": "Entered in the app by teachers/volunteers. Dummy data. Real follow-ups/satsangs also come from courses.json.",
+ "_note": "Entered in the app by teachers/volunteers. Dummy data. Real follow-ups/satsangs also come from courses.json. 'tags' are skill and interest tags used to suggest who to invite (ASSUMPTION, added 2026-11-15).",
  "events": [
   {
    "id": "E1",
@@ -11,7 +11,10 @@
    "city": "Mississauga",
    "lat": 43.589,
    "lng": -79.644,
-   "created_by": "T1"
+   "created_by": "T1",
+   "tags": [
+    "community_events"
+   ]
   },
   {
    "id": "E2",
@@ -23,7 +26,13 @@
    "city": "Mississauga",
    "lat": 43.589,
    "lng": -79.644,
-   "created_by": "T1"
+   "created_by": "T1",
+   "tags": [
+    "cooking",
+    "music",
+    "singing",
+    "community_events"
+   ]
   },
   {
    "id": "E3",
@@ -35,7 +44,10 @@
    "city": "Midtown Toronto",
    "lat": 43.704,
    "lng": -79.398,
-   "created_by": "T2"
+   "created_by": "T2",
+   "tags": [
+    "meditation"
+   ]
   },
   {
    "id": "E4",
@@ -47,7 +59,12 @@
    "city": "North York",
    "lat": 43.761,
    "lng": -79.411,
-   "created_by": "T2"
+   "created_by": "T2",
+   "tags": [
+    "music",
+    "singing",
+    "community_events"
+   ]
   },
   {
    "id": "E5",
@@ -59,7 +76,11 @@
    "city": "Online",
    "lat": null,
    "lng": null,
-   "created_by": "T3"
+   "created_by": "T3",
+   "tags": [
+    "music",
+    "singing"
+   ]
   }
  ]
 }

@@ -43,4 +43,9 @@ Success: follow-up feels personal rather than broadcast, and fewer people drift 
 - `aol-copy-check`: check any participant-facing text against the tone rules and the banned phrases.
 
 ## Commands
-(Fill in once the project is scaffolded: dev, test, lint.)
+- `npx expo start` — dev server, API routes and QR code (`w` for web)
+- `npm test` — Jest: engine, drafts and filter against `data/expected_outcomes.json`
+- `npm run lint` — ESLint
+- `npm run typecheck` — TypeScript
+
+Layout: `app/` screens and `app/api/` routes, `components/`, `lib/` (engine, store, views, actions, drafter, filter), `theme.js` (design tokens).
