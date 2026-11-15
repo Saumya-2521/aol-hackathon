@@ -16,7 +16,7 @@
    "sender_id": "V1",
    "sent_on": "2026-09-30",
    "channel": "in_app_message",
-   "stage_at_send": "practising",
+   "stage_at_send": "new",
    "status": "read",
    "text": "Hi Rahul, so nice to see you at follow-up. You're always welcome. - Kiran"
   },
@@ -48,7 +48,7 @@
    "id": "M5",
    "participant_id": "P08",
    "sender_id": "T3",
-   "sent_on": "2026-11-09",
+   "sent_on": "2026-11-12",
    "channel": "in_app_message",
    "stage_at_send": "practising",
    "status": "read",

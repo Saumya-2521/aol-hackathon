@@ -1,0 +1,111 @@
+{
+ "_note": "Course channels (cohorts). Dummy data. One channel per Part 1 course, created by the teacher when the course ends. Members are the demo personas who took that course; a channel with one member stands for a course whose other participants are not in the demo data.",
+ "cohorts": [
+  {
+   "id": "CH1",
+   "name": "Part 1 · Sep 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-09-20",
+   "teacher_id": "T1",
+   "created_on": "2026-09-20",
+   "join_code": "SEP26-MIS",
+   "member_ids": [
+    "P01",
+    "P02",
+    "P12",
+    "P16"
+   ]
+  },
+  {
+   "id": "CH2",
+   "name": "Part 1 · Oct 2025",
+   "course_category": "part1",
+   "course_ended_on": "2025-10-10",
+   "teacher_id": "T1",
+   "created_on": "2025-10-10",
+   "join_code": "OCT25-MIS",
+   "member_ids": [
+    "P13"
+   ]
+  },
+  {
+   "id": "CH3",
+   "name": "Part 1 · Jul 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-07-17",
+   "teacher_id": "T2",
+   "created_on": "2026-07-17",
+   "join_code": "JUL26-TOR",
+   "member_ids": [
+    "P03",
+    "P04",
+    "P14",
+    "P15"
+   ]
+  },
+  {
+   "id": "CH4",
+   "name": "Part 1 · Sep 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-09-10",
+   "teacher_id": "T2",
+   "created_on": "2026-09-10",
+   "join_code": "SEP26-TOR",
+   "member_ids": [
+    "P10",
+    "P18"
+   ]
+  },
+  {
+   "id": "CH5",
+   "name": "Part 1 · Nov 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-11-01",
+   "teacher_id": "T2",
+   "created_on": "2026-11-01",
+   "join_code": "NOV26-TOR",
+   "member_ids": [
+    "P06"
+   ]
+  },
+  {
+   "id": "CH6",
+   "name": "Part 1 · Aug 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-08-16",
+   "teacher_id": "T3",
+   "created_on": "2026-08-16",
+   "join_code": "AUG26-OAK",
+   "member_ids": [
+    "P08",
+    "P09",
+    "P17"
+   ]
+  },
+  {
+   "id": "CH7",
+   "name": "Part 1 · Oct 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-10-26",
+   "teacher_id": "T3",
+   "created_on": "2026-10-26",
+   "join_code": "OCT26-BRA",
+   "member_ids": [
+    "P05",
+    "P07"
+   ]
+  },
+  {
+   "id": "CH8",
+   "name": "Part 1 · Apr 2026",
+   "course_category": "part1",
+   "course_ended_on": "2026-04-28",
+   "teacher_id": "T3",
+   "created_on": "2026-04-28",
+   "join_code": "APR26-BRA",
+   "member_ids": [
+    "P11"
+   ]
+  }
+ ]
+}

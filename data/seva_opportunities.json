@@ -1,5 +1,5 @@
 {
- "_note": "Entered in the app by teachers/volunteers (not in the Unity API). Dummy data.",
+ "_note": "Entered in the app by teachers/volunteers (not in the Unity API). Dummy data. 'spots' is how many people are needed; 'signed_up_count' is how many have signed up in total, and 'signed_up_ids' lists the demo personas among them.",
  "seva": [
   {
    "id": "S1",
@@ -15,7 +15,9 @@
    "tags": [
     "welcoming"
    ],
-   "description": "Greet new participants and help them sign in."
+   "description": "Greet new participants and help them sign in.",
+   "signed_up_count": 1,
+   "signed_up_ids": []
   },
   {
    "id": "S2",
@@ -31,7 +33,11 @@
    "tags": [
     "setup"
    ],
-   "description": "Arrange mats and chairs and make tea before the session."
+   "description": "Arrange mats and chairs and make tea before the session.",
+   "signed_up_count": 1,
+   "signed_up_ids": [
+    "P12"
+   ]
   },
   {
    "id": "S3",
@@ -47,7 +53,9 @@
    "tags": [
     "cooking"
    ],
-   "description": "Help prepare and serve food for the community potluck."
+   "description": "Help prepare and serve food for the community potluck.",
+   "signed_up_count": 3,
+   "signed_up_ids": []
   },
   {
    "id": "S4",
@@ -63,7 +71,11 @@
    "tags": [
     "music"
    ],
-   "description": "Play an instrument or sing with the satsang group."
+   "description": "Play an instrument or sing with the satsang group.",
+   "signed_up_count": 1,
+   "signed_up_ids": [
+    "P10"
+   ]
   },
   {
    "id": "S5",
@@ -79,7 +91,11 @@
    "tags": [
     "community"
    ],
-   "description": "Sort and pack donations with the local community team."
+   "description": "Sort and pack donations with the local community team.",
+   "signed_up_count": 5,
+   "signed_up_ids": [
+    "P15"
+   ]
   },
   {
    "id": "S6",
@@ -95,7 +111,9 @@
    "tags": [
     "design"
    ],
-   "description": "Create simple posters for upcoming local events."
+   "description": "Create simple posters for upcoming local events.",
+   "signed_up_count": 0,
+   "signed_up_ids": []
   },
   {
    "id": "S7",
@@ -111,7 +129,11 @@
    "tags": [
     "welcoming"
    ],
-   "description": "Welcome people as they arrive and help newcomers feel at home."
+   "description": "Welcome people as they arrive and help newcomers feel at home.",
+   "signed_up_count": 2,
+   "signed_up_ids": [
+    "P11"
+   ]
   }
  ]
 }

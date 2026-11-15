@@ -1,0 +1,138 @@
+{
+ "_note": "Course channel messages. Dummy data. Participant messages are dated on days they logged a practice, so they add no new activity.",
+ "messages": [
+  {
+   "id": "C1",
+   "cohort_id": "CH1",
+   "sender_id": "T1",
+   "sent_on": "2026-09-21",
+   "text": "Welcome, everyone. This is our group for the September course. Ask anything about your practice here. - Anita"
+  },
+  {
+   "id": "C2",
+   "cohort_id": "CH1",
+   "sender_id": "P01",
+   "sent_on": "2026-09-23",
+   "text": "Thank you, Anita. I did my first practice at home this morning."
+  },
+  {
+   "id": "C3",
+   "cohort_id": "CH1",
+   "sender_id": "P12",
+   "sent_on": "2026-09-21",
+   "text": "Is the Thursday follow-up open to all of us?"
+  },
+  {
+   "id": "C4",
+   "cohort_id": "CH1",
+   "sender_id": "T1",
+   "sent_on": "2026-09-21",
+   "text": "Yes, everyone from the course is welcome on Thursday evenings. Come whenever it suits you. - Anita"
+  },
+  {
+   "id": "C5",
+   "cohort_id": "CH1",
+   "sender_id": "V1",
+   "sent_on": "2026-11-10",
+   "text": "There's a community games night on Nov 28 in Mississauga, if anyone would like to come along. - Kiran"
+  },
+  {
+   "id": "C6",
+   "cohort_id": "CH1",
+   "sender_id": "P12",
+   "sent_on": "2026-11-12",
+   "text": "I'm going to the games night. It would be nice to see familiar faces there."
+  },
+  {
+   "id": "C7",
+   "cohort_id": "CH2",
+   "sender_id": "T1",
+   "sent_on": "2025-10-11",
+   "text": "Welcome, everyone. This is our group for the October course. - Anita"
+  },
+  {
+   "id": "C8",
+   "cohort_id": "CH3",
+   "sender_id": "T2",
+   "sent_on": "2026-07-18",
+   "text": "Welcome, everyone. This is our group for the July course. Questions about your practice are always welcome here. - Rohan"
+  },
+  {
+   "id": "C9",
+   "cohort_id": "CH3",
+   "sender_id": "P15",
+   "sent_on": "2026-07-18",
+   "text": "Thank you, Rohan. It was a lovely course."
+  },
+  {
+   "id": "C10",
+   "cohort_id": "CH3",
+   "sender_id": "T2",
+   "sent_on": "2026-11-10",
+   "text": "Satsang evening in North York on Nov 27, 7:00 PM. All are welcome. - Rohan"
+  },
+  {
+   "id": "C11",
+   "cohort_id": "CH4",
+   "sender_id": "T2",
+   "sent_on": "2026-09-11",
+   "text": "Welcome, everyone. This is our group for the September course. - Rohan"
+  },
+  {
+   "id": "C12",
+   "cohort_id": "CH4",
+   "sender_id": "P10",
+   "sent_on": "2026-09-12",
+   "text": "Thanks, Rohan. Happy to help with music at a satsang sometime."
+  },
+  {
+   "id": "C13",
+   "cohort_id": "CH5",
+   "sender_id": "T2",
+   "sent_on": "2026-11-02",
+   "text": "Welcome, everyone. This is our group for the November course. - Rohan"
+  },
+  {
+   "id": "C14",
+   "cohort_id": "CH6",
+   "sender_id": "T3",
+   "sent_on": "2026-08-17",
+   "text": "Welcome, everyone. This is our group for the August course. - Sarah"
+  },
+  {
+   "id": "C15",
+   "cohort_id": "CH6",
+   "sender_id": "P08",
+   "sent_on": "2026-09-09",
+   "text": "Is there a follow-up near Markham?"
+  },
+  {
+   "id": "C16",
+   "cohort_id": "CH6",
+   "sender_id": "T3",
+   "sent_on": "2026-09-09",
+   "text": "Yes, the Markham group meets on Wednesdays. You're welcome any week. - Sarah"
+  },
+  {
+   "id": "C17",
+   "cohort_id": "CH7",
+   "sender_id": "T3",
+   "sent_on": "2026-10-27",
+   "text": "Welcome, everyone. This is our group for the October course. - Sarah"
+  },
+  {
+   "id": "C18",
+   "cohort_id": "CH7",
+   "sender_id": "P07",
+   "sent_on": "2026-10-27",
+   "text": "Thank you, Sarah!"
+  },
+  {
+   "id": "C19",
+   "cohort_id": "CH8",
+   "sender_id": "T3",
+   "sent_on": "2026-04-29",
+   "text": "Welcome, everyone. This is our group for the April course. - Sarah"
+  }
+ ]
+}

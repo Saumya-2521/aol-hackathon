@@ -41,12 +41,6 @@
     "last_opened": "2026-11-13",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -71,7 +65,7 @@
    "home_lat": 43.62,
    "home_lng": -79.514,
    "teacher_id": "T1",
-   "joined_app_on": "2026-08-27",
+   "joined_app_on": "2026-09-21",
    "contact": {
     "email": "rahul.mehta@example.com",
     "phone": "416-555-0111",
@@ -81,17 +75,11 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-08-26",
+     "completed_on": "2026-09-20",
      "format": "in_person"
     }
    ],
    "events_attended": [
-    {
-     "date": "2026-09-15",
-     "category": "follow_up",
-     "title": "Weekly SKY follow-up",
-     "city": "Etobicoke"
-    },
     {
      "date": "2026-09-30",
      "category": "follow_up",
@@ -103,16 +91,10 @@
     "last_opened": "2026-10-25",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
-    "given_on": "2026-08-27"
+    "given_on": "2026-09-21"
    },
    "teacher_notes": [
     {
@@ -135,7 +117,7 @@
    "home_lat": 43.773,
    "home_lng": -79.257,
    "teacher_id": "T2",
-   "joined_app_on": "2026-06-18",
+   "joined_app_on": "2026-07-18",
    "contact": {
     "email": "daniel.okafor@example.com",
     "phone": "416-555-0112",
@@ -145,17 +127,11 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-06-17",
+     "completed_on": "2026-07-17",
      "format": "in_person"
     }
    ],
    "events_attended": [
-    {
-     "date": "2026-07-17",
-     "category": "follow_up",
-     "title": "Weekly SKY follow-up",
-     "city": "Scarborough"
-    },
     {
      "date": "2026-08-16",
      "category": "community_event",
@@ -167,16 +143,10 @@
     "last_opened": "2026-09-21",
     "push_enabled": false
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
-    "given_on": "2026-06-18"
+    "given_on": "2026-07-18"
    },
    "teacher_notes": [
     {
@@ -209,7 +179,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-08-06",
+     "completed_on": "2026-07-17",
      "format": "in_person"
     }
    ],
@@ -224,12 +194,6 @@
    "app": {
     "last_opened": "2026-10-05",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -267,7 +231,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-11-08",
+     "completed_on": "2026-10-26",
      "format": "in_person"
     }
    ],
@@ -275,12 +239,6 @@
    "app": {
     "last_opened": "2026-11-14",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -316,12 +274,6 @@
    "app": {
     "last_opened": "2026-11-13",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -365,12 +317,6 @@
     "last_opened": "2026-11-12",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -407,7 +353,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-09-05",
+     "completed_on": "2026-08-16",
      "format": "in_person"
     }
    ],
@@ -428,12 +374,6 @@
    "app": {
     "last_opened": "2026-11-11",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -483,12 +423,6 @@
     "last_opened": "2026-11-12",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": false,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -530,12 +464,6 @@
    "app": {
     "last_opened": "2026-11-13",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -601,12 +529,6 @@
     "last_opened": "2026-11-14",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -634,7 +556,7 @@
    "home_lat": 43.62,
    "home_lng": -79.514,
    "teacher_id": "T1",
-   "joined_app_on": "2026-09-01",
+   "joined_app_on": "2026-09-21",
    "contact": {
     "email": "tom.wilson@example.com",
     "phone": "416-555-0121",
@@ -644,7 +566,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-08-31",
+     "completed_on": "2026-09-20",
      "format": "in_person"
     }
    ],
@@ -657,19 +579,13 @@
     }
    ],
    "app": {
-    "last_opened": "2026-11-13",
+    "last_opened": "2026-11-14",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
-    "given_on": "2026-09-01"
+    "given_on": "2026-09-21"
    },
    "teacher_notes": []
   },
@@ -732,12 +648,6 @@
     "last_opened": "2026-11-12",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -775,7 +685,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-07-27",
+     "completed_on": "2026-07-17",
      "format": "in_person"
     }
    ],
@@ -796,12 +706,6 @@
    "app": {
     "last_opened": "2026-11-10",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,
@@ -856,12 +760,6 @@
     "last_opened": "2026-11-13",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
@@ -878,7 +776,7 @@
    "home_lat": 43.589,
    "home_lng": -79.644,
    "teacher_id": "T1",
-   "joined_app_on": "2026-08-12",
+   "joined_app_on": "2026-09-21",
    "contact": {
     "email": "vikram.singh@example.com",
     "phone": "416-555-0125",
@@ -888,7 +786,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-08-11",
+     "completed_on": "2026-09-20",
      "format": "in_person"
     }
    ],
@@ -904,16 +802,10 @@
     "last_opened": "2026-10-20",
     "push_enabled": true
    },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": "2026-12-10",
-    "opted_out": false
-   },
    "consent": {
     "followup_messages": true,
     "location_for_nearby_events": true,
-    "given_on": "2026-08-12"
+    "given_on": "2026-09-21"
    },
    "teacher_notes": []
   },
@@ -921,12 +813,53 @@
    "id": "P17",
    "first_name": "Grace",
    "last_name": "Thompson",
+   "area": "Oakville",
+   "postal_fsa": "L6J",
+   "home_lat": 43.467,
+   "home_lng": -79.687,
    "teacher_id": "T3",
-   "settings": {
-    "opted_out": true,
-    "opted_out_on": "2026-10-05"
+   "joined_app_on": "2026-08-17",
+   "contact": {
+    "email": "grace.thompson@example.com",
+    "phone": "416-555-0126",
+    "visible_to": "assigned_teacher_only"
    },
-   "note": "Opted out: only the minimum needed to honour the opt-out is kept."
+   "courses_completed": [
+    {
+     "category": "part1",
+     "title": "Art of Living Part 1",
+     "completed_on": "2026-08-16",
+     "format": "in_person"
+    }
+   ],
+   "events_attended": [
+    {
+     "date": "2026-10-28",
+     "category": "follow_up",
+     "title": "Weekly SKY follow-up",
+     "city": "Oakville"
+    }
+   ],
+   "app": {
+    "last_opened": "2026-11-13",
+    "push_enabled": true
+   },
+   "consent": {
+    "followup_messages": true,
+    "location_for_nearby_events": true,
+    "given_on": "2026-08-17"
+   },
+   "teacher_notes": [
+    {
+     "id": "P17-N1",
+     "author_id": "T3",
+     "date": "2026-10-29",
+     "tags": [
+      "photography"
+     ],
+     "text": "Enjoys photography and offered to take pictures at a community event."
+    }
+   ]
   },
   {
    "id": "P18",
@@ -947,7 +880,7 @@
     {
      "category": "part1",
      "title": "Art of Living Part 1",
-     "completed_on": "2026-09-30",
+     "completed_on": "2026-09-10",
      "format": "in_person"
     }
    ],
@@ -962,12 +895,6 @@
    "app": {
     "last_opened": "2026-10-29",
     "push_enabled": true
-   },
-   "settings": {
-    "reminder_time": "07:00",
-    "share_practice_with_teacher": true,
-    "messages_paused_until": null,
-    "opted_out": false
    },
    "consent": {
     "followup_messages": true,

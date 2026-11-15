@@ -1,0 +1,47 @@
+{
+ "_note": "RSVPs ('I'm going'). Dummy data. item_type 'course' points to an id in courses.json (real follow-ups); 'community_event' points to community_events.json. An RSVP is not counted as attendance.",
+ "rsvps": [
+  {
+   "id": "R1",
+   "participant_id": "P12",
+   "item_type": "community_event",
+   "item_id": "E1",
+   "created_on": "2026-11-12"
+  },
+  {
+   "id": "R2",
+   "participant_id": "P02",
+   "item_type": "community_event",
+   "item_id": "E1",
+   "created_on": "2026-10-25"
+  },
+  {
+   "id": "R3",
+   "participant_id": "P13",
+   "item_type": "community_event",
+   "item_id": "E2",
+   "created_on": "2026-11-12"
+  },
+  {
+   "id": "R4",
+   "participant_id": "P10",
+   "item_type": "course",
+   "item_id": 1703329,
+   "created_on": "2026-11-13"
+  },
+  {
+   "id": "R5",
+   "participant_id": "P09",
+   "item_type": "course",
+   "item_id": 1450675,
+   "created_on": "2026-11-12"
+  },
+  {
+   "id": "R6",
+   "participant_id": "P14",
+   "item_type": "community_event",
+   "item_id": "E4",
+   "created_on": "2026-11-10"
+  }
+ ]
+}

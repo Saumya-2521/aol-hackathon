@@ -1,8 +1,10 @@
 # Art of Living follow-up app (hackathon MVP)
 
-A participant app (iOS, Android and web) that helps people stay connected after their first course. For each participant it suggests a fitting next step, with a one-line reason, a personal message draft and a channel. The teacher reviews and approves every message before it goes out.
+A participant app (iOS, Android and web) that helps people stay connected after their first course, built around sadhana (daily practice), satsang (events) and seva (volunteering). For each participant it suggests a fitting next step, with a one-line reason, a personal message draft and a channel. The teacher can edit each personal message and sends it with one tap.
 
 - Problem statement and working rules: [CLAUDE.md](CLAUDE.md)
+- Feature spec, open decisions and future enhancements: [docs/features.md](docs/features.md)
+- Screen sketches: [docs/ui-draft.md](docs/ui-draft.md)
 - Agreed design and demo script: [docs/concept.md](docs/concept.md)
 - Demo data and personas: [data/DATA_README.md](data/DATA_README.md)
 
