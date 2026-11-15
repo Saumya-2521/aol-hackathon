@@ -1,8 +1,8 @@
-// App state shared by every screen: who we're viewing as, that role's data, sheets, toast and the notification banner.
+// App state shared by every screen: who we're viewing as, that role's data, sheets and the toast.
 import { router, usePathname } from 'expo-router';
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { get, post } from './api';
-import type { ActionResult, DemoPeople, Notice, ParticipantView, TeacherView } from './types';
+import type { ActionResult, DemoPeople, ParticipantView, TeacherView } from './types';
 
 export type Role = 'p' | 't';
 export type Tile = 'reg' | 'build' | 'support' | 'app';
@@ -10,6 +10,7 @@ export type InviteItem = { key: string; kind: string; title: string; day: string
 export type Sheet =
   | null
   | { t: 'demo' }
+  | { t: 'note' } // the participant's latest notification in full (features.md C3)
   | { t: 'rec'; pid: string; edit?: boolean }
   | { t: 'other'; pid: string; back: boolean }
   | { t: 'add'; seva: boolean }
@@ -23,7 +24,6 @@ type Ctx = {
   refresh: () => Promise<void>;
   act: (body: Record<string, unknown>, done?: string) => Promise<ActionResult>;
   toast: (text: string) => void; toastText: string | null;
-  banner: Notice | null; dismissBanner: () => void;
   sheet: Sheet; setSheet: (s: Sheet) => void;
   signedUp: { p: boolean; t: boolean } | null;
   switchRole: (r: Role) => void; viewAs: (id: string) => void; reset: () => Promise<void>;
@@ -53,12 +53,9 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
   const [demo, setDemo] = useState<DemoPeople | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [toastText, setToastText] = useState<string | null>(null);
-  const [banner, setBanner] = useState<Notice | null>(null);
   const [sheet, setSheet] = useState<Sheet>(null);
   const [report, setReport] = useState<{ cohort: string | null; tile: Tile }>({ cohort: null, tile: 'reg' });
   const toastTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const bannerTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const seen = useRef(new Set<string>());
   const who = useRef({ role, pid, tid });
   who.current = { role, pid, tid };
 
@@ -109,42 +106,26 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
     return res;
   }, [refresh, toast, loadDemo]);
 
-  const dismissBanner = useCallback(() => {
-    if (bannerTimer.current) clearTimeout(bannerTimer.current);
-    setBanner(null);
+  const switchRole = useCallback((r: Role) => {
+    setSheet(null); setRole(r);
+    router.replace(home(r));
   }, []);
 
-  // Simulated push (features.md C3): show each pending notification once, as a banner, for the participant.
-  useEffect(() => {
-    if (role !== 'p' || banner || sheet || !pv || pv.id !== pid) return;
-    const next = pv.notices.find((n) => !seen.current.has(n.id));
-    if (!next) return;
-    seen.current.add(next.id);
-    setBanner(next);
-    post('/api/action', { type: 'ack', pid, ids: [next.id] }).catch(() => {});
-    bannerTimer.current = setTimeout(() => setBanner(null), 6500);
-  }, [pv, role, pid, banner, sheet]);
-
-  const switchRole = useCallback((r: Role) => {
-    dismissBanner(); setSheet(null); setRole(r);
-    router.replace(home(r));
-  }, [dismissBanner]);
-
   const viewAs = useCallback((id: string) => {
-    dismissBanner(); setSheet(null);
+    setSheet(null);
     if (who.current.role === 'p') { setPv(null); setPid(id); router.replace('/p'); }
     else { setTv(null); setTid(id); setReport({ cohort: null, tile: 'reg' }); router.replace('/t'); }
-  }, [dismissBanner]);
+  }, []);
 
   const reset = useCallback(async () => {
     await post('/api/reset').catch(() => {});
-    seen.current.clear(); dismissBanner(); setSheet(null); setReport({ cohort: null, tile: 'reg' });
+    setSheet(null); setReport({ cohort: null, tile: 'reg' });
     await refresh();
     router.replace(home(who.current.role, await loadDemo()));
     toast('Demo reset. Everyone is back where they started.');
-  }, [refresh, toast, dismissBanner, loadDemo]);
+  }, [refresh, toast, loadDemo]);
 
-  const value = useMemo<Ctx>(() => ({ role, pid, tid, pv, tv, demo, error, refresh, act, toast, toastText, banner, dismissBanner, sheet, setSheet, signedUp: demo?.signedUp ?? null, switchRole, viewAs, reset, report, setReport }),
-    [role, pid, tid, pv, tv, demo, error, refresh, act, toast, toastText, banner, dismissBanner, sheet, switchRole, viewAs, reset, report]);
+  const value = useMemo<Ctx>(() => ({ role, pid, tid, pv, tv, demo, error, refresh, act, toast, toastText, sheet, setSheet, signedUp: demo?.signedUp ?? null, switchRole, viewAs, reset, report, setReport }),
+    [role, pid, tid, pv, tv, demo, error, refresh, act, toast, toastText, sheet, switchRole, viewAs, reset, report]);
   return <AppCtx.Provider value={value}>{children}</AppCtx.Provider>;
 }

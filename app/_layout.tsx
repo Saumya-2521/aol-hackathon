@@ -7,7 +7,7 @@ import { StatusBar } from 'expo-status-bar';
 import { View } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { Sheets } from '@/components/Sheets';
-import { Banner, Toast } from '@/components/ui';
+import { Toast } from '@/components/ui';
 import { AppProvider } from '@/lib/app';
 import { colors } from '@/theme';
 
@@ -21,7 +21,6 @@ export default function RootLayout() {
         <View className="flex-1 items-center bg-mist">
           <View className="w-full max-w-[480px] flex-1 bg-ground">
             <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: colors.ground } }} />
-            <Banner />
             <Toast />
             <Sheets />
           </View>

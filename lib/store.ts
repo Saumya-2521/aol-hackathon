@@ -92,7 +92,7 @@ export type Store = {
   steps: Record<string, string>; // participant → item key the teacher chose instead
   hidden: Record<string, string>;
   invitations: Record<string, Invitation>;
-  notices: Record<string, Notice[]>;
+  homeNote: Record<string, Notice>; // the latest notification, shown as the note card on Home until closed or replaced
   unread: Record<string, boolean>;
   sevaDone: Record<string, boolean>;
   autoChecked: Record<string, boolean>;
@@ -123,7 +123,7 @@ function load(): Store {
     steps: {},
     hidden: {},
     invitations: {},
-    notices: {},
+    homeNote: {},
     unread: {},
     sevaDone: {},
     autoChecked: {},

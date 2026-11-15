@@ -13,10 +13,11 @@ const fill = (t: string, v: Record<string, string | number>) => t.replace(/\{(\w
 const fail = (error: string): ActionResult => ({ ok: false, error });
 const OK: ActionResult = { ok: true };
 
-// Notifications (features.md C3). Push is simulated as an in-app banner.
+// Notifications (features.md C3). Push is simulated as the note card at the top of the participant's Home:
+// the latest one stays until the participant closes it or a newer one replaces it. There is no pop-up.
 export function notify(s: Store, pid: string, title: string, text: string, to: Notice['to'] = 'home') {
   if (bannedIn(text, config.banned_phrases).length) return; // never show a text that fails the filter
-  (s.notices[pid] ??= []).push({ id: 'n' + ++s.seq, title, text, to });
+  s.homeNote[pid] = { id: 'n' + ++s.seq, title, text, to };
 }
 
 // The time-based notifications, checked once per person per demo day: at most one automatic notification a day.
@@ -27,7 +28,7 @@ export function ensureAutomatic(s: Store, p: Participant) {
   const tomorrow = addDays(TODAY, N.event_reminder_days_before);
   for (const key of Object.keys(going)) {
     const i = findItem(s, p, key);
-    if (i && i.iso === tomorrow) return notify(s, p.id, 'Event reminder', `Tomorrow: ${i.title}${i.time ? ', ' + i.time : ''} ${i.online ? 'online' : 'in ' + i.city}. See you there.`, 'events');
+    if (i && i.iso === tomorrow) return notify(s, p.id, 'Event reminder', `${p.first_name}, tomorrow is ${i.title}${i.time ? ', ' + i.time : ''} ${i.online ? 'online' : 'in ' + i.city}. Looking forward to seeing you.`, 'events');
   }
   const mates = (cohortOf(s, p.id)?.member_ids ?? []).filter((m) => m !== p.id);
   for (const e of s.events) {
@@ -35,15 +36,15 @@ export function ensureAutomatic(s: Store, p: Participant) {
     const names = mates.filter((m) => s.rsvps[m]?.[key]).map((m) => person(s, m)!.first_name);
     if (!going[key] && e.date >= TODAY && names.length >= N.course_group_going_min_people) {
       const others = names.length - 1;
-      return notify(s, p.id, 'Your course group', `${names[0]} and ${others} ${others === 1 ? 'other' : 'others'} from your course are going to ${e.title}. Join them?`, 'events');
+      return notify(s, p.id, 'Your course group', `${names[0]} and ${others} ${others === 1 ? 'other' : 'others'} from your course are going to ${e.title}. Come along if you’d like, ${p.first_name}.`, 'events');
     }
   }
   const p1 = p.courses_completed.find((c) => c.category === 'part1');
   const months = p1 ? monthsBetween(p1.completed_on) : -1;
   if (N.course_anniversary_months.includes(months)) {
     const days = practiceDays(s, p.id).length;
-    const base = `It’s been ${months} ${months === 1 ? 'month' : 'months'} since your course.`;
-    return notify(s, p.id, 'Course anniversary', days ? `${base} Here’s how far you’ve come: ${days} practice days.` : base, 'practice');
+    const base = `${p.first_name}, today marks ${months} ${months === 1 ? 'month' : 'months'} since your course.`;
+    return notify(s, p.id, 'Course anniversary', days ? `${base} Look how far you’ve come: ${days} practice days. 🙏` : `${base} 🙏`, 'practice');
   }
   const last = lastPractice(s, p.id);
   if (last && daysBetween(last) === N.practice_note_after_days_without_practice) return notify(s, p.id, 'Practice note', fill(ex.practice_note, { first_name: p.first_name }), 'practice');
@@ -51,8 +52,8 @@ export function ensureAutomatic(s: Store, p: Participant) {
 
 function afterPractice(s: Store, p: Participant, first: boolean) {
   const n = streak(s, p.id);
-  if (first && N.first_practice_logged) notify(s, p.id, 'First practice', ex.first_practice, 'practice');
-  else if (N.streak_milestones_days.includes(n)) notify(s, p.id, 'Streak milestone', fill(ex.streak_milestone, { n }), 'practice');
+  if (first && N.first_practice_logged) notify(s, p.id, 'First practice', fill(ex.first_practice, { first_name: p.first_name }), 'practice');
+  else if (N.streak_milestones_days.includes(n)) notify(s, p.id, 'Streak milestone', fill(ex.streak_milestone, { n, first_name: p.first_name }), 'practice');
 }
 
 function deliver(s: Store, p: Participant, teacherId: string, itemKey: string | null, text: string): ActionResult {
@@ -68,7 +69,7 @@ function deliver(s: Store, p: Participant, teacherId: string, itemKey: string | 
   s.invitations[p.id] = { from: firstName(t), item: item && item.kind !== 'practice' ? item : null, text, answer: null };
   s.unread['p' + p.id] = true;
   delete s.hidden[p.id];
-  notify(s, p.id, 'Invitation', item && item.kind !== 'practice' ? `${firstName(t)} has invited you to ${item.title}.` : `${firstName(t)} sent you a note.`, 'home');
+  notify(s, p.id, 'Invitation', item && item.kind !== 'practice' ? `${p.first_name}, ${firstName(t)} thought of you and sent an invitation to ${item.title}.` : `${p.first_name}, ${firstName(t)} wrote you a personal note.`, 'home');
   return OK;
 }
 
@@ -114,12 +115,12 @@ export function runAction(s: Store, a: A): ActionResult {
     case 'join': {
       if (!p) return fail('Missing participant.');
       s.signedUp.p = true;
-      if (N.welcome_on_joining_channel && !N.demo_teacher_sent_only) notify(s, p.id, 'Welcome', fill(ex.welcome, { first_name: p.first_name }), 'home');
+      if (N.welcome_on_joining_channel && !N.demo_teacher_sent_only) notify(s, p.id, 'Welcome', fill(ex.welcome, { first_name: p.first_name, teacher: firstName(teacher(s, p.teacher_id)!) }), 'home');
       return OK;
     }
-    case 'ack': {
+    case 'closeNote': {
       if (!p) return fail('Missing participant.');
-      s.notices[p.id] = (s.notices[p.id] ?? []).filter((n) => !(a.ids ?? []).includes(n.id));
+      if (!a.id || s.homeNote[p.id]?.id === a.id) delete s.homeNote[p.id]; // a newer note that arrived meanwhile stays
       return OK;
     }
     case 'readThread': {
@@ -144,7 +145,7 @@ export function runAction(s: Store, a: A): ActionResult {
         // ASSUMPTION: a reply inside a conversation is not counted towards the 3-day outreach gap; recommendations and invitations are.
         s.threads[p.id].push({ from: 't', senderId: a.teacherId, text, on: TODAY });
         s.unread['p' + p.id] = true;
-        if (N.reply_in_chat) notify(s, p.id, 'Reply', fill(ex.reply_in_chat, { name: firstName(teacher(s, a.teacherId)!) }), 'thread');
+        if (N.reply_in_chat) notify(s, p.id, 'Reply', fill(ex.reply_in_chat, { name: firstName(teacher(s, a.teacherId)!), first_name: p.first_name }), 'thread');
       } else {
         s.threads[p.id].push({ from: 'p', senderId: p.id, text, on: TODAY });
         s.unread['t' + p.id] = true;
@@ -216,7 +217,7 @@ export function runAction(s: Store, a: A): ActionResult {
         s.events.push(e);
         if (N.new_event_nearby) for (const x of s.participants) {
           const i = eventItem(x, e);
-          if (i.online || (i.km != null && i.km <= config.nearby_radius_km)) notify(s, x.id, 'New event nearby', fill(ex.new_event_nearby, { event: title, weekday: weekdayLong(e.date) }), 'events');
+          if (i.online || (i.km != null && i.km <= config.nearby_radius_km)) notify(s, x.id, 'New event nearby', fill(ex.new_event_nearby, { event: title, weekday: weekdayLong(e.date), first_name: x.first_name }), 'events');
         }
       }
       return OK;
@@ -225,7 +226,7 @@ export function runAction(s: Store, a: A): ActionResult {
       const e = s.seva.find((x) => x.id === a.sevaId);
       if (!e) return fail('Seva not found.');
       s.sevaDone[e.id] = true;
-      if (N.seva_thank_you) e.signed_up_ids.forEach((id) => notify(s, id, 'After seva', ex.seva_thank_you, 'volunteer'));
+      if (N.seva_thank_you) e.signed_up_ids.forEach((id) => notify(s, id, 'After seva', fill(ex.seva_thank_you, { first_name: person(s, id)!.first_name }), 'volunteer'));
       return OK;
     }
     default:

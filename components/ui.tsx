@@ -185,17 +185,17 @@ export function Toast() {
   );
 }
 
-const WHERE = { home: '/p', practice: '/p/practice', events: '/p/events', volunteer: '/p/volunteer', thread: '/chat/thread' } as const;
-export function Banner() {
-  const { banner, dismissBanner } = useApp();
-  if (!banner) return null;
+// `NoteCard` (ui-design.md section 4): a sun-tint card with a sun icon and warm text.
+// Teacher's Today: the cheering note. Participant's Home: the latest notification, two lines at most, with a close button; tapping it opens the detail sheet.
+export function NoteCard({ text, sub, onPress, onClose }: { text: string; sub?: string; onPress?: () => void; onClose?: () => void }) {
   return (
-    <SafeAreaView edges={['top']} pointerEvents="box-none" className="absolute left-0 right-0 top-0 px-2.5">
-      <Pressable accessibilityRole="button" onPress={() => { dismissBanner(); router.navigate(WHERE[banner.to]); }}
-        className="mt-1.5 flex-row items-start gap-2.5 rounded-[18px] border border-line bg-card px-3.5 py-3" style={{ shadowColor: colors.ink.DEFAULT, shadowOpacity: 0.18, shadowRadius: 16, shadowOffset: { width: 0, height: 8 }, elevation: 6 }}>
-        <View className="h-[30px] w-[30px] items-center justify-center rounded-[9px] bg-brand"><Icon name="sunrise" size={17} color={colors.card} /></View>
-        <View className="flex-1"><T v="small" className="text-[12px]">{banner.title} · now</T><T>{banner.text}</T></View>
+    <View className="flex-row gap-3 rounded-card bg-sun-tint p-4">
+      <Icon name="sun" size={20} color={colors.sun.deep} />
+      <Pressable disabled={!onPress} onPress={onPress} accessibilityRole={onPress ? 'button' : undefined} accessibilityLabel={onPress ? `Read this note in full: ${text}` : undefined} className="flex-1 gap-1.5 active:opacity-70">
+        <T numberOfLines={onPress ? 2 : undefined}>{text}</T>
+        {sub ? <T v="meta" className="italic">{sub}</T> : null}
       </Pressable>
-    </SafeAreaView>
+      {onClose ? <Pressable accessibilityRole="button" accessibilityLabel="Close this note" onPress={onClose} hitSlop={10} className="self-start active:opacity-60"><Icon name="x" size={16} color={colors.sun.deep} /></Pressable> : null}
+    </View>
   );
 }

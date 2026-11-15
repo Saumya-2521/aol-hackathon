@@ -53,7 +53,7 @@ export function participantView(s: Store, pid: string): ParticipantView | null {
     channel: channelMsgs(s, c.id, pid),
     thread: threadMsgs(s, pid, 'p'),
     threadUnread: !!s.unread['p' + pid],
-    notices: s.notices[pid] ?? [],
+    note: s.homeNote[pid] ?? null,
     guided: { title: g.sessions[0].title, youtubeId: g.sessions[0].youtube_video_id, url: g.sessions[0].source_url, demoSeconds: g.demo_mode_seconds },
   };
 }

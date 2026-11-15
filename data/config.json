@@ -218,17 +218,17 @@
   "reply_in_chat": true,
   "teacher_alert_after_days_without_practice": 3,
   "examples": {
-   "welcome": "Welcome, {first_name}. Your course group is here whenever you have a question. 🙏",
-   "first_practice": "Your first practice is logged. A lovely start. 🌿",
-   "practice_note": "Hi {first_name}, even a short practice today counts. 🌿",
-   "streak_milestone": "{n} days in a row! That's a real habit now. 🎉",
-   "event_note": "There's a {event} this {weekday}, {minutes} min from you. You'd be very welcome.",
-   "course_group_going": "{name} and {n} others from your course are going to {event}. Join them?",
-   "new_event_nearby": "{event} this {weekday} near you. Want a reminder?",
-   "event_reminder": "Tomorrow: {event}, {time} in {place}. See you there.",
-   "seva_thank_you": "Thank you for your seva today. You made the event happen. 💛",
-   "course_anniversary": "It's been {n} month(s) since your course. Here's how far you've come: {practice_days} practice days.",
-   "reply_in_chat": "{name} replied to you."
+   "welcome": "Welcome, {first_name}. We're so glad you're here. Your course group and {teacher} are close by whenever you have a question. 🙏",
+   "first_practice": "{first_name}, your first practice is logged. A lovely way to begin. 🌿",
+   "practice_note": "Hi {first_name}, a few quiet minutes are here for you whenever you'd like. 🌿",
+   "streak_milestone": "{n} days in a row, {first_name}. That's a real habit taking root. 🎉",
+   "event_note": "{first_name}, there's a {event} this {weekday}, {minutes} min from you. You'd be very welcome.",
+   "course_group_going": "{name} and {n} others from your course are going to {event}. Come along if you'd like, {first_name}.",
+   "new_event_nearby": "{first_name}, {event} is happening this {weekday} near you. Would you like a reminder?",
+   "event_reminder": "{first_name}, tomorrow is {event}, {time} in {place}. Looking forward to seeing you.",
+   "seva_thank_you": "Thank you for your seva today, {first_name}. You helped make it happen. 💛",
+   "course_anniversary": "{first_name}, today marks {n} month(s) since your course. Look how far you've come: {practice_days} practice days. 🙏",
+   "reply_in_chat": "{name} replied to you, {first_name}."
   }
  },
  "guided_practice": {

@@ -48,7 +48,7 @@ export type ParticipantView = {
   channel: Msg[];
   thread: Msg[];
   threadUnread: boolean;
-  notices: Notice[];
+  note: Notice | null; // the latest notification, for the note card on Home (features.md C3)
   guided: { title: string; youtubeId: string; url: string; demoSeconds: number };
 };
 

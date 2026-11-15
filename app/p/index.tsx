@@ -1,18 +1,17 @@
-// D1 Home: streak, today's practice, the teacher's invitation, next follow-up, seva nearby, milestones.
+// D1 Home: streak, a note for you (the latest notification), today's practice, next follow-up, seva nearby, milestones.
 import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
 import { DawnHero } from '@/components/DawnHero';
-import { EventCard, whenText, whereText } from '@/components/cards';
-import { Body, Btn, Card, Icon, LinkBtn, Loading, Row, Screen, Section, T, Tick } from '@/components/ui';
+import { EventCard, whereText } from '@/components/cards';
+import { Body, Btn, Card, Icon, LinkBtn, Loading, NoteCard, Row, Screen, Section, T, Tick } from '@/components/ui';
 import { useApp } from '@/lib/app';
 import { colors } from '@/theme';
 
 export default function Home() {
-  const { pv, pid, act } = useApp();
+  const { pv, pid, act, setSheet } = useApp();
   if (!pv) return <Loading />;
-  const inv = pv.invitation;
+  const note = pv.note;
   const seva = pv.seva.filter((s) => !s.full && !s.done).slice(0, 2);
-  const answer = (text: string) => act({ type: 'answer', pid, text }, `Sent to ${inv?.from}`);
   return (
     <Screen logo>
       <Body>
@@ -28,6 +27,9 @@ export default function Home() {
           {pv.days40 > 0 ? <T v="small" c="ink2" className="mt-1 text-[13.5px]">{pv.days40} practice days in the last 40</T> : null}
         </DawnHero>
 
+        {/* A note for you (C3): the latest notification. It stays until closed or replaced; there is no pop-up. Tapping it opens it in full. */}
+        {note ? <NoteCard text={note.text} onPress={() => setSheet({ t: 'note' })} onClose={() => act({ type: 'closeNote', pid, id: note.id })} /> : null}
+
         <Card>
           <Row>
             <Tick done={pv.doneToday} />
@@ -35,19 +37,6 @@ export default function Home() {
             {pv.doneToday ? null : <Btn sm label="Start" onPress={() => router.navigate('/p/practice')} />}
           </Row>
         </Card>
-
-        {inv ? (
-          <Card className="border-accent-tint bg-accent-wash">
-            <View className="flex-row items-center gap-1.5"><Icon name="mail" size={14} color={colors.ink[3]} /><T v="label">From {inv.from}</T></View>
-            {inv.item ? (<><T v="h3">{inv.item.title}</T><T v="meta">{whenText(inv.item)} · {whereText(inv.item)}</T></>) : null}
-            <T>{inv.text}</T>
-            {inv.answer ? (
-              <T v="small">You replied: “{inv.answer}”. Thank you for letting {inv.from} know.</T>
-            ) : (
-              <View className="flex-row flex-wrap gap-2"><Btn sm label="Tell me more" onPress={() => answer('Tell me more')} /><Btn sm v="quiet" label="Not right now" onPress={() => answer('Not right now')} /></View>
-            )}
-          </Card>
-        ) : null}
 
         {pv.nextFollowUp ? (<><Section title="Next follow-up" /><EventCard event={pv.nextFollowUp} /></>) : null}
 

@@ -19,6 +19,7 @@ export function Sheets() {
   const person = 'pid' in sheet ? tv?.people.find((p) => p.id === sheet.pid) : undefined;
   switch (sheet.t) {
     case 'demo': return <DemoMenu />;
+    case 'note': return <NoteSheet />;
     case 'rec': return person ? (
       <SheetFrame onClose={close} title="Next step">
         <RecommendationCard key={recKey(person)} person={person} startEditing={sheet.edit} inSheet />
@@ -38,6 +39,38 @@ export function Sheets() {
       </SheetFrame>
     );
   }
+}
+
+/* The participant's latest notification in full (features.md C3). An invitation is read and answered here. */
+function NoteSheet() {
+  const { pv, pid, act, setSheet } = useApp();
+  const close = () => setSheet(null);
+  const note = pv?.note, inv = pv?.invitation;
+  if (!pv || !note) return null;
+  if (note.title === 'Invitation' && inv) {
+    // The sheet already says who it is from, so the "- Anita" signature is left out here. The stored message is still signed.
+    const body = inv.text.replace(new RegExp(`\\s*[-–—]\\s*${inv.from}\\s*$`), '');
+    const answer = (text: string) => act({ type: 'answer', pid, text }, `Sent to ${inv.from}`);
+    return (
+      <SheetFrame onClose={close} title="A note for you">
+        <View className="flex-row items-center gap-1.5"><Icon name="mail" size={14} color={colors.ink[3]} /><T v="label">From {inv.from}</T></View>
+        {inv.item ? (<><T v="h3">{inv.item.title}</T><T v="meta">{whenText(inv.item)} · {whereText(inv.item)}</T></>) : null}
+        <T>{body}</T>
+        {inv.answer ? (
+          <T v="small">You replied: “{inv.answer}”. Thank you for letting {inv.from} know.</T>
+        ) : (
+          <View className="flex-row flex-wrap gap-2"><Btn sm label="Tell me more" onPress={() => answer('Tell me more')} /><Btn sm v="quiet" label="Not right now" onPress={() => answer('Not right now')} /></View>
+        )}
+        <Btn wide v="quiet" label="Close" onPress={close} />
+      </SheetFrame>
+    );
+  }
+  return (
+    <SheetFrame onClose={close} title={note.title}>
+      <T>{note.text}</T>
+      <Btn wide v="quiet" label="Close" onPress={close} />
+    </SheetFrame>
+  );
 }
 
 function CopyCode({ code }: { code: string }) {

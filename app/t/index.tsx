@@ -2,7 +2,7 @@
 // and the people to reach out to personally. Practice numbers live in Reports only (features.md E2, changed 2026-11-15).
 import { router } from 'expo-router';
 import { Pressable, View } from 'react-native';
-import { Avatar, Body, Btn, Icon, Loading, ProgressBar, Screen, Section, T, type IconName } from '@/components/ui';
+import { Avatar, Body, Btn, Icon, Loading, NoteCard, ProgressBar, Screen, Section, T, type IconName } from '@/components/ui';
 import { useApp } from '@/lib/app';
 import { colors } from '@/theme';
 
@@ -40,13 +40,7 @@ export default function Today() {
         <T v="h1">Good morning, {tv.first}</T>
 
         {/* A warm note for the teacher. The wisdom note appears only when the team has added one to config.teacher_note.wisdom_notes. */}
-        <View className="flex-row gap-3 rounded-card bg-sun-tint p-4">
-          <Icon name="sun" size={20} color={colors.sun.deep} />
-          <View className="flex-1 gap-1.5">
-            <T>{tv.cheer}</T>
-            {tv.wisdom ? <T v="meta" className="italic">{tv.wisdom.text}{tv.wisdom.source ? ` (${tv.wisdom.source})` : ''}</T> : null}
-          </View>
-        </View>
+        <NoteCard text={tv.cheer} sub={tv.wisdom ? `${tv.wisdom.text}${tv.wisdom.source ? ` (${tv.wisdom.source})` : ''}` : undefined} />
 
         <Btn wide v="out" icon="plus" label="New course channel" onPress={() => router.navigate('/new-channel')} />
 
