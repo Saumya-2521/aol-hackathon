@@ -183,7 +183,7 @@ Limits:
 Tabs: **Home · Daily Practice · Events · Volunteer · Chat.** There is no Settings screen in this version.
 
 ### D0. Sign-up
-- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and consent switches: follow-up messages and location for nearby events. (First and last name added 2026-11-15.)
+- Fields: first name, last name, course code from the teacher (joins the course channel), postal code (used for everything "near you"), and one consent switch: location for nearby events (the follow-up messages switch was removed, 2026-11-15). The sign-up screen is shown the first time the participant view opens after the app loads (2026-11-15). (First and last name added 2026-11-15.)
 - **Demo scope:** the screen works but creates no real account. The role switcher picks the persona.
 
 ### D1. Home [P][D]
@@ -240,15 +240,10 @@ Tabs: **Today · People · Reports · Events · Chat.** Layout sketches are in [
 - Remarks can be edited later on the participant's profile. Adding a tag recomputes the recommendation at once.
 
 ### E2. Today [D]
-Changed on 2026-11-15: the long queue of cards became a summary, and each person's recommendation opens from the report (E5).
+Changed on 2026-11-15: kept short and easy to read. The report information (practice groups, practised today, app not opened) was removed from Today and lives only in Reports (E5).
 - **New course channel** button at the top (E1).
-- **Suggested this week**, as summary cards:
-  - **Sadhana**, one card per channel: how many are very regular, building the habit or need support (the groups in E5), how many practised today ("2 of 4"), a note when people haven't opened the app in 5 or more days, and a link to the report.
-  - **Satsang, next up:** the teacher's next event, how many are going and how many of them are from the teacher's own groups, with **Post** to add an event.
-  - **Seva, open:** the next seva opportunity, how full it is, and how many participants tagged `seva` in remarks can be invited, with **Manage**.
-  - **Remarks:** how many participants still have no remarks.
-- **Alerts:** participants with no practice in 3 days (C4), each with "Send a personal note".
-- **Needs a personal check-in:** people whose channel is a teacher call or in person.
+- **This week**, three one-line rows: the teacher's next event, the open seva and how full it is, and how many participants still have no remarks.
+- **Reach out personally:** one list of people whose channel is a teacher call or in person, and participants with no practice in 3 days (C4), each with one button.
 
 ### E3. People and the participant profile [P][D]
 - **List:** each channel's participants, each with a **quick recommendation** line (stage plus next step), so the teacher can act without opening the profile.

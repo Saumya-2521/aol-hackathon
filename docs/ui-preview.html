@@ -180,6 +180,14 @@ label.f{display:flex;flex-direction:column;gap:5px;font-size:13px;font-weight:60
 .okline{color:var(--green-deep);font-weight:600;font-size:14px}
 .prow{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);width:100%}
 .prow:last-child{border-bottom:0}
+.prow>span.avatar{flex:none;display:grid;place-items:center}
+.shortcut{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);width:100%;text-align:left;color:var(--ink3)}
+.shortcut.last{border-bottom:0}
+.shortcut .sico{width:36px;height:36px;border-radius:50%;background:var(--brand-tint);color:var(--brand);display:grid;place-items:center;flex:none}
+.shortcut .stext{flex:1;min-width:0;display:flex;flex-direction:column;gap:1px;color:var(--ink)}
+.shortcut small{font-size:12.5px;font-weight:600;color:var(--ink2)}
+.shortcut b{font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.btn.fab{position:sticky;bottom:4px;align-self:flex-end;margin-top:auto;flex:none;box-shadow:0 8px 18px -6px rgba(60,40,95,.5)}
 .prow>span{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}
 .prow .l1{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .prow .l1 b{font-weight:600}
@@ -484,7 +492,7 @@ function pSignup(p){const c=cohortOf(p);
   return'<div class="signhead">'+logo(54)+'<h1>Join your course group</h1><p class="meta">A few details and you’re in.</p></div>'+
     '<div class="two"><label class="f">First name'+inp('first-'+p.id,p.first)+'</label><label class="f">Last name'+inp('last-'+p.id,p.last)+'</label></div>'+
     '<label class="f">Course code from your teacher'+inp('code-'+p.id,c.join_code)+'</label><label class="f">Postal code'+inp('postal-'+p.id,p.fsa)+'<span class="quiet" style="font-weight:400">Used only to show what’s happening near you.</span></label>'+
-    '<div class="card"><label class="switch"><input type="checkbox" id="f-c1" data-bind="c1" checked><span>Send me follow-up messages from my teacher</span></label><label class="switch"><input type="checkbox" id="f-c2" data-bind="c2" checked><span>Use my area to show nearby events</span></label></div>'+
+    '<div class="card"><label class="switch"><input type="checkbox" id="f-c2" data-bind="c2" checked><span>Use my area to show nearby events</span></label></div>'+
     '<button class="btn pri wide" data-a="join">Join my course group</button><p class="quiet center">Are you a teacher? <button class="link" data-a="swsign" data-v="t">Sign up as a teacher</button></p><p class="quiet center">Demo: this screen creates no real account.</p>'}
 function tSignup(){const t=TT[S.tid],n=t.name.split(' ');
   return'<div class="signhead">'+logo(54)+'<h1>Set up your teacher account</h1><p class="meta">Next, you’ll create a channel for your latest course.</p></div>'+
@@ -512,35 +520,27 @@ function recCard(p){const r=rec(p),g=gapUntil(p),sent=S.sent[p.id],k='draft:'+p.
   return'<article class="card rec '+(g&&!sent?'muted':'')+'"><button class="who" data-a="profile" data-v="'+p.id+'">'+avatar(p)+'<b>'+esc(p.first)+'</b>'+pill(r.st)+'</button>'+
     '<p class="step"><b>'+(r.habit?'Practice habit + ':'')+esc(r.it.title)+'</b>'+(r.it.kind==='practice'?'':'<span>'+esc(whereOf(r.it))+' · '+whenOf(r.it)+'</span>')+'</p><p class="why">'+r.why+'</p>'+mid+(acts?'<div class="acts">'+acts+'</div>':'')+'</article>'}
 const shortRec=(p,r)=>r.ch==='teacher_call'?'Call '+p.first:r.ch==='in_person'?'Say hello in person':r.it.kind==='course'?'Invite to '+r.it.title:(r.habit?'Practice habit + ':'')+r.it.title;
-function tToday(){const ps=mine(),cs=S.cohorts.filter(c=>c.teacher_id===S.tid),T=tfirst(S.tid);
-  const head='<div><p class="quiet">Teacher · '+cs.length+(cs.length===1?' group':' groups')+' · '+ps.length+' participants</p><h1 class="greet">Good morning, '+esc(T)+'</h1></div><button class="btn sec2 wide" data-a="sub" data-v="newchannel">'+ic('plus',16)+' New course channel</button>';
-  const sad=cs.filter(c=>c.member_ids.length).map(c=>{const m=c.member_ids.map(i=>PP[i]),n=k=>m.filter(p=>inB(p,k)).length,d=m.filter(doneToday).length,a=n('app');
-    return'<div class="card"><div class="headrow"><p class="eyebrow">Sadhana · '+esc(c.name)+'</p><button class="link" data-a="report" data-v="'+c.id+'|reg">Report</button></div>'+
-      '<div class="seg3" aria-hidden="true">'+['reg','build','support'].filter(k=>n(k)).map(k=>'<i class="s-'+k+'" style="flex:'+n(k)+'"></i>').join('')+'</div>'+
-      '<div class="legend"><span><b>'+n('reg')+'</b> very regular</span><span><b>'+n('build')+'</b> building</span><span><b>'+n('support')+'</b> need support</span></div>'+
-      '<p class="meta"><b>'+d+' of '+m.length+'</b> practised today</p>'+
-      (a?'<button class="note-chip" data-a="report" data-v="'+c.id+'|app">'+ic('bell',16)+'<span>'+a+(a===1?' hasn’t':' haven’t')+' opened the app in 5+ days</span></button>':'')+'</div>'}).join('');
+function tToday(){const ps=mine(),T=tfirst(S.tid);
+  const sc=(icon,label,text,tab,last)=>'<button class="shortcut'+(last?' last':'')+'" data-a="ttab" data-v="'+tab+'"><span class="sico">'+ic(icon,17)+'</span><span class="stext"><small>'+esc(label)+'</small><b>'+esc(text)+'</b></span>'+ic('next',18)+'</button>';
   const ev=S.events.filter(e=>ownItem(e)&&e.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date))[0];
-  let evc='<p class="meta">Nothing posted yet. Add a satsang or an event for people nearby.</p>';
-  if(ev){const g=D.people.filter(p=>S.rsvp[p.id]?.['e:'+ev.id]),own=g.filter(p=>p.teacher===S.tid).length;evc='<h3>'+esc(ev.title)+'</h3><p class="meta">'+fmt(ev.date)+' · '+esc(ev.time.split(' - ')[0])+' · '+esc(ev.city)+'</p><p class="meta"><b>'+g.length+' going</b>'+(own?' · '+own+' from your groups':'')+'</p>'}
   const se=S.seva.filter(s=>ownItem(s)&&!S.sevaDone[s.id]&&s.date>=TODAY).sort((a,b)=>a.date.localeCompare(b.date))[0];
-  let sec='<p class="meta">No open seva right now. Add one when you need helping hands.</p>';
-  if(se){const n=sevaCount(se.id),inv=ps.filter(p=>S.tags[p.id].includes('seva')&&!S.sevaIds[se.id].includes(p.id)).length;sec='<h3>'+esc(se.title)+' · '+n+' of '+se.spots+'</h3><div class="bar"><i style="width:'+Math.min(100,n/se.spots*100)+'%"></i></div><p class="meta">'+(inv?inv+(inv===1?' participant':' participants')+' tagged seva in your remarks can be invited':'Invite people by skill from Events and seva')+'</p>'}
   const left=ps.filter(p=>!S.tags[p.id].length&&!S.note[p.id]).length;
-  const alerts=ps.filter(p=>!doneToday(p)&&p.lastPractice&&days(p.lastPractice)>=3),direct=ps.filter(p=>{const c=rec(p).ch;return c==='teacher_call'||c==='in_person'});
-  return head+'<div class="sec"><h3>Suggested this week</h3></div>'+sad+
-    '<div class="card"><div class="headrow"><p class="eyebrow">Satsang · next up</p><button class="link" data-a="post">Post</button></div>'+evc+'</div>'+
-    '<div class="card"><div class="headrow"><p class="eyebrow">Seva · open</p><button class="link" data-a="ttab" data-v="events">Manage</button></div>'+sec+'</div>'+
-    '<button class="rowlink" data-a="ttab" data-v="people"><span>'+(left?'Remarks · '+left+' of '+ps.length+' still to add':'Remarks · added for everyone')+'</span>'+ic('next',18)+'</button>'+
-    (alerts.length?'<div class="sec"><h3>A personal note might help</h3><span class="n">'+alerts.length+'</span></div>'+alerts.map(p=>'<div class="card row alert">'+avatar(p)+'<div><b>'+esc(p.first)+'</b><p class="meta">No practice logged in '+days(p.lastPractice)+' days</p></div><button class="btn sm sec2" data-a="note" data-v="'+p.id+'">Send a personal note</button></div>').join(''):'')+
-    (direct.length?'<div class="sec"><h3>Needs a personal check-in</h3><span class="n">'+direct.length+'</span></div>'+direct.map(p=>{const r=rec(p);return'<div class="card row">'+avatar(p)+'<div><b>'+esc(p.first)+'</b><p class="meta">'+(r.ch==='teacher_call'?'A phone call from you':'A hello in person')+'</p></div><button class="btn sm tint" data-a="recsheet" data-v="'+p.id+'">'+actLabel(r)+'</button></div>'}).join(''):'')}
+  const isDirect=p=>{const c=rec(p).ch;return c==='teacher_call'||c==='in_person'};
+  const reach=ps.filter(isDirect).map(p=>{const r=rec(p);return[p,r.ch==='teacher_call'?'A phone call from you':'A hello in person',actLabel(r),'recsheet']})
+    .concat(ps.filter(p=>!isDirect(p)&&!doneToday(p)&&p.lastPractice&&days(p.lastPractice)>=3).map(p=>[p,'No practice · '+days(p.lastPractice)+' days','Write a note','note']));
+  return'<h1 class="greet">Good morning, '+esc(T)+'</h1><button class="btn sec2 wide" data-a="sub" data-v="newchannel">'+ic('plus',16)+' New course channel</button>'+
+    '<div class="sec"><h3>This week</h3></div><div class="card list">'+
+      sc('events',ev?'Next event · '+fmt(ev.date):'Next satsang or event',ev?ev.title:'Nothing posted yet','events')+
+      sc('seva',se?'Open seva · '+sevaCount(se.id)+' of '+se.spots+' signed up':'Open seva',se?se.title:'No open seva right now','events')+
+      sc('people','Remarks',left?left+' of '+ps.length+' still to add':'Added for everyone','people',1)+'</div>'+
+    (reach.length?'<div class="sec"><h3>Reach out personally</h3><span class="n">'+reach.length+'</span></div><div class="card list">'+reach.map(([p,why,label,a])=>'<div class="prow">'+avatar(p)+'<span><b>'+esc(p.first)+'</b><span class="l2">'+esc(why)+'</span></span><button class="btn sm tint" data-a="'+a+'" data-v="'+p.id+'">'+esc(label)+'</button></div>').join('')+'</div>':'')}
 const lastTxt=p=>doneToday(p)?'practised today':!p.lastPractice?'no practice logged yet':days(p.lastPractice)===1?'yesterday':'last on '+fmtS(p.lastPractice);
 function tPeople(){const cs=S.cohorts.filter(c=>c.teacher_id===S.tid),show=cs.filter(c=>S.chan==='all'||c.id===S.chan),one=S.chan!=='all'&&show[0];
   const rows=show.flatMap(c=>c.member_ids.map(i=>{const p=PP[i],r=rec(p);return'<div class="prow"><button class="avatar" data-a="profile" data-v="'+p.id+'" aria-label="Open the profile of '+esc(p.first)+'">'+esc(initials(p))+'</button><button class="pmain" data-a="profile" data-v="'+p.id+'"><b>'+esc(p.first+' '+p.last[0])+'.</b><span class="l2">'+c40(p)+' of 40 days · '+lastTxt(p)+'</span></button><button class="btn sm '+(S.sent[p.id]?'ok':'tint')+'" data-a="recsheet" data-v="'+p.id+'">'+(S.sent[p.id]?ic('check',15)+' Sent':esc(actLabel(r)))+'</button></div>'})
     .concat((c.guests||[]).map(g=>'<div class="prow"><span class="avatar">'+esc(g.name[0])+'</span><span class="pmain"><b>'+esc(g.name)+'</b><span class="l2">Joins with code '+esc(c.join_code)+'</span></span><span class="pill">New</span></div>')));
-  return'<div class="between" style="flex-wrap:nowrap"><div class="chips one"><button class="chip '+(S.chan==='all'?'on':'')+'" data-a="chan" data-v="all">All</button>'+cs.map(c=>'<button class="chip '+(S.chan===c.id?'on':'')+'" data-a="chan" data-v="'+c.id+'">'+esc(c.name)+'</button>').join('')+'</div><button class="btn sm sec2" data-a="sub" data-v="newchannel">'+ic('plus',15)+' Channel</button></div>'+
+  return'<div class="chips one"><button class="chip '+(S.chan==='all'?'on':'')+'" data-a="chan" data-v="all">All</button>'+cs.map(c=>'<button class="chip '+(S.chan===c.id?'on':'')+'" data-a="chan" data-v="'+c.id+'">'+esc(c.name)+'</button>').join('')+'</div>'+
     (one?'<p class="quiet">Join code <b>'+esc(one.join_code)+'</b></p>':'')+
-    (rows.length?'<div class="card list">'+rows.join('')+'</div>':'<p class="quiet center">Nobody here yet.</p>')}
+    (rows.length?'<div class="card list">'+rows.join('')+'</div>':'<p class="quiet center">Nobody here yet.</p>')+'<button class="btn fab" data-a="sub" data-v="newchannel">'+ic('plus',16)+' Channel</button>'}
 function tProfile(p){const r=rec(p),c=cohortOf(p),tl=[];
   p.courses.forEach(x=>tl.push([x.completed_on,x.title+' completed']));p.attended.forEach(x=>tl.push([x.date,x.title+' · attended']));
   D.rsvps.filter(x=>x.participant_id===p.id).forEach(x=>{const e=D.events.find(e=>e.id===x.item_id);tl.push([x.created_on,'RSVP · '+(e?e.title:'follow-up')])});
@@ -682,7 +682,7 @@ document.addEventListener('input',e=>{const el=e.target,k=el.dataset?.bind;if(!k
   if(k.startsWith('note:'))S.note[k.slice(5)]=el.value});
 document.addEventListener('change',e=>{if(e.target.dataset?.change==='rep'){S.rep=e.target.value;render();return}if(e.target.dataset?.change==='who'){if(S.role==='p')S.pid=e.target.value;else S.tid=e.target.value;S.sub=null;S.chan='all';S.rep=null;S.sheet=null;render()}});
 document.addEventListener('keydown',e=>{const a=e.target.dataset?.enter;if(a&&e.key==='Enter'){e.preventDefault();if(A[a](e.target.dataset.v,e.target,e)!==false)render()}});
-reset();render();
+reset();S.sub={t:'signup'};render(); // sign-up is the first screen after loading
 </script>
 </body>
 </html>
