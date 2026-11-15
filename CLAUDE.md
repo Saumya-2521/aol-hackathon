@@ -7,7 +7,8 @@ Success: follow-up feels personal rather than broadcast, and fewer people drift 
 
 ## Read these first
 - `docs/features.md`: the feature spec, open decisions, future enhancements and build order. Build only what is listed there.
-- `docs/ui-draft.md`: screen sketches for the participant app and the teacher view.
+- `docs/ui-design.md`: the UI design in the Art of Living brand colours: tokens, components and every screen. Build screens from it. Mobile only. A clickable preview is in `docs/ui-preview.html`.
+- `docs/ui-draft.md`: the first screen sketches, replaced by `ui-design.md` for visual design.
 - `docs/concept.md`: the agreed design (journey stages, next-step rules, messages, channels, screens, demo script). Follow it.
 - `data/DATA_README.md`: the data files, the personas and the date and time rules.
 - `docs/brief.md` and `docs/team-ideas.pdf`: the team's original brief and notes, for background.

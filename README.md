@@ -4,6 +4,7 @@ A participant app (iOS, Android and web) that helps people stay connected after 
 
 - Problem statement and working rules: [CLAUDE.md](CLAUDE.md)
 - Feature spec, open decisions and future enhancements: [docs/features.md](docs/features.md)
+- UI design and clickable preview: [docs/ui-design.md](docs/ui-design.md), [docs/ui-preview.html](docs/ui-preview.html) (open in a browser)
 - Screen sketches: [docs/ui-draft.md](docs/ui-draft.md)
 - Agreed design and demo script: [docs/concept.md](docs/concept.md)
 - Demo data and personas: [data/DATA_README.md](data/DATA_README.md)
