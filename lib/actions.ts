@@ -22,8 +22,15 @@ export function notify(s: Store, pid: string, title: string, text: string, to: N
 
 // The time-based notifications, checked once per person per demo day: at most one automatic notification a day.
 export function ensureAutomatic(s: Store, p: Participant) {
-  if (N.demo_teacher_sent_only || s.autoChecked[p.id]) return; // demo: no banner until the teacher sends something
+  if (s.autoChecked[p.id]) return;
   s.autoChecked[p.id] = true;
+  // The practice note goes out once, on the day the gap reaches 3 days, never daily (features.md C3).
+  const practiceNote = () => {
+    const last = lastPractice(s, p.id);
+    if (last && daysBetween(last) === N.practice_note_after_days_without_practice) notify(s, p.id, 'Practice note', fill(ex.practice_note, { first_name: p.first_name }), 'practice');
+  };
+  // Demo setting: of the time-based notifications only the practice note is on, so the other personas open with no note.
+  if (N.demo_teacher_sent_only) return practiceNote();
   const going = s.rsvps[p.id] ?? {};
   const tomorrow = addDays(TODAY, N.event_reminder_days_before);
   for (const key of Object.keys(going)) {
@@ -46,8 +53,7 @@ export function ensureAutomatic(s: Store, p: Participant) {
     const base = `${p.first_name}, today marks ${months} ${months === 1 ? 'month' : 'months'} since your course.`;
     return notify(s, p.id, 'Course anniversary', days ? `${base} Look how far you’ve come: ${days} practice days. 🙏` : `${base} 🙏`, 'practice');
   }
-  const last = lastPractice(s, p.id);
-  if (last && daysBetween(last) === N.practice_note_after_days_without_practice) return notify(s, p.id, 'Practice note', fill(ex.practice_note, { first_name: p.first_name }), 'practice');
+  practiceNote();
 }
 
 function afterPractice(s: Store, p: Participant, first: boolean) {
